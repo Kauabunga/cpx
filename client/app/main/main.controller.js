@@ -12,6 +12,8 @@ class MainController {
     this.bicSearchQuery = '';
     this.searchBic = bic.search;
 
+    bic.createSearchIndex();
+
 
     $http.get('/api/things').then(response => {
       this.awesomeThings = response.data;

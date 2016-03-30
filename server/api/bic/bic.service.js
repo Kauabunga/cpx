@@ -54,7 +54,7 @@ export function index(){
                       let bic = _.find(bics, _.matchesProperty('classId', clazz.classId));
                       return _.merge({}, clazz, bic);
                     })
-                      .map(clazz => {
+                    .map(clazz => {
                       return _.omit(clazz, 'id', 'name', 'anzsicId', 'cuId', 'definition', 'important', 'lastUpdateDate', 'lastUpdateUserId');
                     }).value();
                   });

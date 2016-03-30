@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('cpxApp')
-  .service('bic', function ($q, $http, $window, $log) {
+  .service('bic', function ($q, $http, $window, $log, $timeout) {
 
     this.bicStore = {};
     this.bicIndex = undefined;
 
+    $timeout(this.getSearchIndex);
 
     this.search = query => {
       return this.getSearchIndex()
@@ -21,8 +22,10 @@ angular.module('cpxApp')
     };
 
     this.createSearchIndex = () => {
-      return this.getBics()
-        .then(bics => {
+
+      return this.createBicIndex ? this.createBicIndex :
+        this.createBicIndex = this.getBics()
+          .then(bics => {
 
           var idx = lunr(function() {
             this.ref('code');
@@ -35,7 +38,6 @@ angular.module('cpxApp')
 
             this.field('keywordsFlattened');
             this.field('definitionPlainText');
-
           });
 
           idx.pipeline.add(
