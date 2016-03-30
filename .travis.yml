@@ -1,11 +1,20 @@
 language: node_js
 node_js:
-  - 4.2.3
+- 4.2.3
 matrix:
   fast_finish: true
   allow_failures:
-    - node_js: 5.1.1
+  - node_js: 5.1.1
 before_script:
-  - npm install -g bower grunt-cli
-  - bower install
+- npm install -g bower grunt-cli
+- bower install
 services: mongodb
+before_deploy:
+- grunt build
+- ls -ltra
+deploy:
+  app: cpx
+  provider: heroku
+  skip_cleanup: true
+  api_key:
+    secure: HpPXhAZvimcOHug9Wm46f1qfwBR59l1G5pUGgc/b0dTTq1tDizOSrA8EKeEMsvzzU9+BZ82IgZc9lGOu8rltPyzabTeeub4rJaNFzXdKyNbsJJhn8SaCuBqR8otVNyGJt7uu3JSTLyAGdUhbLgyIHZUgVElGf9cMHK/LLlFgsJEB9nwqpexrEj/rdax9yLUlLG0gt9+Qd+8fMATKRmUIK2KROEsWcmGUIQ0v+eBjIM6Ed/F2vbuO003rsLf6/a1NV6t+Ovu9QqxFrvSkrOC6cmYEaAngI+hcxXuiR4vxWHfDKviQ2zgLzGbAIWhwTAcFi+tZeDYg6nwwxXaUAOOLrOvo6H4Fi4eBneYwkWbZLDXuQNnl9C6X5JpwXJUQQPbWKGn/DhrGV/CCCHXHAstDTukpHETBWaXEuW6Ahb+eE5PC7AJXY3iN5K+yXU1ukihIg91HWN7lSWX1e70c8Ynpg4nvcJJPEKtA9aTZW8yKEV4U8kvY7NqvP2EUGvW1N4kfsmlHN+Ws+8OCz9kjMn4pgfG6KWd8mFHFl7WpubaaFv3kt1PgdwHWUt/6Rx3j9fFm9b+eLGX5+OwjVuRVd7g3voLHJBYXc4YzcT33YcFyuYX8wu34+COZi7yRvkYzlz9dfdrPpgwiZsH6nxdeiL4efik/YILIJcKCA5hu0EGmPGI=
