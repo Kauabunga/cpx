@@ -4,9 +4,14 @@
 
 class MainController {
 
-  constructor($http, $scope, socket) {
+  constructor($http, $scope, socket, bic) {
     this.$http = $http;
     this.awesomeThings = [];
+
+
+    this.bicSearchQuery = '';
+    this.searchBic = bic.search;
+
 
     $http.get('/api/things').then(response => {
       this.awesomeThings = response.data;

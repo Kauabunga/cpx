@@ -9,7 +9,10 @@ angular.module('cpxApp', [
   'ngSanitize',
   'btford.socket-io',
   'ui.router',
-  'validation.match'
+  'validation.match',
+
+  'ngStorage',
+  'ngMaterial'
 ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider
