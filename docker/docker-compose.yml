@@ -1,0 +1,14 @@
+cpx:
+#  image: cpx_cpx
+  build: .
+  ports:
+   - "8080:80"
+  volumes:
+   - .:/code
+  links:
+   - mongodb
+
+mongodb:
+  image: mongo
+  ports:
+   - "27017:27017"
