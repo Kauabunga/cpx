@@ -52,7 +52,7 @@ angular.module('cpxApp')
             this.bicStore[bic.code.toString()] = bic;
           });
 
-          return this.bicIndex = idx;
+          return this.bicIndex = idx; //jshint ignore:line
         });
     };
 

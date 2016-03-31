@@ -12,6 +12,7 @@
   "noarg": true,
   "quotmark": "single",
   "undef": true,
+  "-W030": false,
   "unused": true,
   "strict": true,
   "trailing": true,
@@ -20,6 +21,7 @@
     { "start": "start-non-standard", "end": "end-non-standard" }
   ],
   "globals": {
+    "lunr": true,
     "jQuery": true,
     "angular": true,
     "console": true,

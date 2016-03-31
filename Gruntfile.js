@@ -584,7 +584,10 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.server %>',
-          src: ['**/*.{js,json}'],
+          src: [
+            '**/*.{js,json}',
+            '!config/seed/*.json'
+          ],
           dest: '<%= yeoman.dist %>/<%= yeoman.server %>'
         }]
       }
