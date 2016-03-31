@@ -110,7 +110,10 @@ module.exports = function (grunt) {
         }
       },
       express: {
-        files: ['<%= yeoman.server %>/**/*.{js,json}'],
+        files: [
+          '<%= yeoman.server %>/**/*.{js,json}',
+          '!<%= yeoman.server %>/config/seed/*.json'
+        ],
         tasks: ['express:dev', 'wait'],
         options: {
           livereload: true,

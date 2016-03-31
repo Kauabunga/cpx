@@ -6,66 +6,73 @@
 
 import _ from 'lodash';
 import request from 'request-promise';
+var jsonfile = require('bluebird').promisifyAll(require('jsonfile'));
 
 
 const INDUSTRIES_URL = `https://api.businessdescription.co.nz/api/industries`;
 const DIVISIONS_URL = `https://api.businessdescription.co.nz/api/industries/{{industryId}}/divisions`;
 const CLASSES_URL = `https://api.businessdescription.co.nz/api/divisions/{{divisionId}}/classes`;
 const BICS_URL = `https://api.businessdescription.co.nz/api/bics`;
-
+const BICS_SEED_FILENAME =`${__dirname}/../../config/seed/bic.json`;
 
 
 export function index(){
   return Promise.resolve()
     .then(() => {
 
-      let bicsRequest = request(getBicsRequest());
+      //TODO should seed properly and use database
+      return jsonfile.readFileAsync(BICS_SEED_FILENAME)
+      .then(bics => {
+          if(bics && bics.length > 0) { return bics; }
 
-      return request(getIndustriesRequest())
-        .then(industries => {
-          return Promise.all(_(industries).map(industry => {
-            return request(getDivisionsRequest(industry.id))
-              .then(divisions => {
-                return _(divisions).map(division => {
-                  division.industryName = industry.name;
-                  return division;
-                }).value();
-              });
-          }).value())
-          .then(divisions => {
-              return Promise.all(_(divisions).flatten().map(division => {
-                return request(getClassesRequest(division.id))
-                  .then(classes => {
-                    return _(classes).map(clazz => {
-                      clazz.divisionName = division.name;
-                      clazz.industryName = division.industryName;
-                      clazz.industryId = division.industryId;
-                      return clazz;
+          let bicsRequest = request(getBicsRequest());
+
+          return request(getIndustriesRequest())
+            .then(industries => {
+              return Promise.all(_(industries).map(industry => {
+                return request(getDivisionsRequest(industry.id))
+                  .then(divisions => {
+                    return _(divisions).map(division => {
+                      division.industryName = industry.name;
+                      return division;
                     }).value();
                   });
               }).value())
-              .then(classes => {
-                  return bicsRequest.then(bics => {
-                    return _(classes).flatten().map(clazz => {
-                      clazz.className = clazz.name;
-                      clazz.classId = clazz.id;
-                      return clazz;
-                    }).map(clazz => {
-                      let bic = _.find(bics, _.matchesProperty('classId', clazz.classId));
-                      return _.merge({}, clazz, bic);
+                .then(divisions => {
+                  return Promise.all(_(divisions).flatten().map(division => {
+                    return request(getClassesRequest(division.id))
+                      .then(classes => {
+                        return _(classes).map(clazz => {
+                          clazz.divisionName = division.name;
+                          clazz.industryName = division.industryName;
+                          clazz.industryId = division.industryId;
+                          return clazz;
+                        }).value();
+                      });
+                  }).value())
+                    .then(classes => {
+                      return bicsRequest.then(bics => {
+                        return _(classes).flatten().map(clazz => {
+                          clazz.className = clazz.name;
+                          clazz.classId = clazz.id;
+                          return clazz;
+                        }).map(clazz => {
+                          let bic = _.find(bics, _.matchesProperty('classId', clazz.classId));
+                          return _.merge({}, clazz, bic);
+                        })
+                          .map(clazz => {
+                            return _.omit(clazz, 'id', 'name', 'anzsicId', 'cuId', 'definition', 'important', 'lastUpdateDate', 'lastUpdateUserId');
+                          }).value();
+                      });
                     })
-                    .map(clazz => {
-                      return _.omit(clazz, 'id', 'name', 'anzsicId', 'cuId', 'definition', 'important', 'lastUpdateDate', 'lastUpdateUserId');
-                    }).value();
-                  });
-                })
-                .then(bics => {
-                  // TODO save and cache to filesystem / database / seed
-
-                  return bics;
+                    .then(bics => {
+                      //Cache to seed folder
+                      jsonfile.writeFileAsync(BICS_SEED_FILENAME, bics);
+                      return bics;
+                    });
                 });
-          });
-        })
+            });
+        });
     });
 }
 
