@@ -7,7 +7,7 @@ import * as BicService from './bic.service.js';
 
 // Gets a list of Bics
 export function index(req, res) {
-  BicService.index()
+  return BicService.index()
     .then(responseWithResult(res))
     .catch(handleError(res));
 }

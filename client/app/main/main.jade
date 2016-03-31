@@ -1,9 +1,8 @@
 //navbar
 
-.container
 
+md-content
   form.bic-autocomplete-test
-
     md-autocomplete(md-selected-item='main.selectedBic', md-search-text='main.bicSearchQuery', md-autoselect='true'
     md-items='bicItem in main.searchBic(main.bicSearchQuery)', md-min-length='1', md-delay='100'
     md-item-text='bicItem.code + ": " + bicItem.desc', placeholder='Search for a bic', md-match-case-insensitive='true',
@@ -15,15 +14,15 @@
       md-not-found
         | No bic matching "{{main.bicSearchQuery}}" were found.
 
-  .row
-    .col-lg-12
-      h1.page-header Features:
-      ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='thing in main.awesomeThings')
-        li
-          a(href='#', tooltip='{{thing.info}}')
-            | {{thing.name}}
-            button.close(type='button', ng-click='main.deleteThing(thing)') &times;
+md-content
+  h1.page-header Features:
+  ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='thing in main.awesomeThings')
+    li
+      a(href='#', tooltip='{{thing.info}}')
+        | {{thing.name}}
+        button.close(type='button', ng-click='main.deleteThing(thing)') &times;
 
+md-content
   form.thing-form
     label Syncs in realtime across clients
     p.input-group
