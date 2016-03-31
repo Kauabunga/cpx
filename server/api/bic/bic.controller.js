@@ -19,7 +19,8 @@ export function index(req, res) {
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function(err) {
-    res.status(statusCode).send(err);
+    console.error('Bic controller error', err);
+    return res.status(statusCode).send();
   };
 }
 
