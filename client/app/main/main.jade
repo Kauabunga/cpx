@@ -30,4 +30,12 @@ md-content
       span.input-group-btn
         button.btn.btn-primary(type='submit', ng-click='main.addThing()') Add New
 
+md-content
+  label Address Lookup Test
+  div
+    md-autocomplete(md-floating-label='Address', md-items='address in main.addressQuerySearch(main.addressSearchText, false)',
+    md-search-text='main.addressSearchText', md-selected-item='main.address', md-item-text='address.description')
+      md-item-template
+        span(md-highlight-text='main.searchText') {{address.description}}
+
 //footer

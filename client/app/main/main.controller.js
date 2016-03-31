@@ -4,7 +4,7 @@
 
 class MainController {
 
-  constructor($http, $scope, socket, bic) {
+  constructor($http, $scope, socket, bic, addresslookup) {
     this.$http = $http;
     this.awesomeThings = [];
 
@@ -14,6 +14,7 @@ class MainController {
 
     bic.createSearchIndex();
 
+    this.addressQuerySearch = addresslookup.searchAddress;
 
     $http.get('/api/things').then(response => {
       this.awesomeThings = response.data;
@@ -23,6 +24,11 @@ class MainController {
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('thing');
     });
+  }
+
+  test() {
+    console.log("testing: " + this.selectedAddress);
+    console.log("testing: " + this.addressSearchText);
   }
 
   addThing() {
