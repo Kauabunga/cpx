@@ -1,6 +1,4 @@
 
-
-
 'use strict';
 
 
@@ -38,6 +36,7 @@ export function index(){
                     }).value();
                   });
               }).value())
+
                 .then(divisions => {
                   return Promise.all(_(divisions).flatten().map(division => {
                     return request(getClassesRequest(division.id))
@@ -50,6 +49,7 @@ export function index(){
                         }).value();
                       });
                   }).value())
+
                     .then(classes => {
                       return bicsRequest.then(bics => {
                         return _(classes).flatten().map(clazz => {
@@ -60,9 +60,9 @@ export function index(){
                           let bic = _.find(bics, _.matchesProperty('classId', clazz.classId));
                           return _.merge({}, clazz, bic);
                         })
-                          .map(clazz => {
-                            return _.omit(clazz, 'id', 'name', 'anzsicId', 'cuId', 'definition', 'important', 'lastUpdateDate', 'lastUpdateUserId');
-                          }).value();
+                        .map(clazz => {
+                          return _.omit(clazz, 'id', 'name', 'anzsicId', 'cuId', 'definition', 'important', 'lastUpdateDate', 'lastUpdateUserId');
+                        }).value();
                       });
                     })
                     .then(bics => {

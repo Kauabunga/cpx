@@ -4,13 +4,14 @@
 
 class MainController {
 
-  constructor($http, $scope, socket, bic) {
+  constructor($http, $scope, socket, bic, businessnames) {
     this.$http = $http;
     this.awesomeThings = [];
 
 
     this.bicSearchQuery = '';
     this.searchBic = bic.search;
+    this.searchBusinessnames = businessnames.search;
 
     bic.createSearchIndex();
 

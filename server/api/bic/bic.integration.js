@@ -3,7 +3,7 @@
 var app = require('../..');
 import request from 'supertest';
 
-describe.only('Bic API:', function() {
+describe('Bic API:', function() {
 
   describe('GET /api/bics', function() {
     var bics;
