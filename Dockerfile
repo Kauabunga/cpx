@@ -37,18 +37,14 @@ ADD ./docker/docker-webapp.conf /etc/nginx/sites-enabled/webapp.conf
 ADD ./docker/docker-env.conf /etc/nginx/main.d/webapp-env.conf
 
 # Bundle app source
+# TODO test to see if ./dist is there otherwise use . (build branch)
 RUN mkdir /home/app/webapp
+COPY . /home/app/webapp
 WORKDIR "/home/app/webapp"
-
-# Pull down built resources
-RUN git clone https://github.com/Kauabunga/cpx-dist.git .
-
-# Print the directory
 RUN ls -ltra .
 
 # Install app dependencies
-# RUN npm install --production
-
+RUN npm install --production
 
 # Setup permissions
 RUN chmod -R a+rwx /home/app/webapp

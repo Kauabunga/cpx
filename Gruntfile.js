@@ -376,7 +376,7 @@ module.exports = function (grunt) {
             'bower_components/**/*',
             'assets/images/{,*/}*.{webp}',
             'assets/fonts/**/*',
-            'index.html'
+            'index.html',
           ]
         }, {
           expand: true,
@@ -388,6 +388,8 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>',
           src: [
             'package.json',
+            'Dockerfile',
+            'docker/**/*',
             '<%= yeoman.server %>/**/*'
           ]
         }]
