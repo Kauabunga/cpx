@@ -2,6 +2,10 @@
   "name": "cpx",
   "version": "0.0.0",
   "main": "dist/server/app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kauabunga/cpx.git"
+  },
   "dependencies": {
     "babel-runtime": "^5.8.20",
     "bluebird": "^2.9.34",
@@ -109,9 +113,9 @@
   },
   "scripts": {
     "start": "node dist/server",
-    "test": "grunt test --force",
+    "test": "grunt test --force && grunt test:e2e --force",
     "update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update",
-    "release": "grunt build && grunt buildcontrol:local && git push origin build"
+    "release": "bash ./release.sh"
   },
   "private": true
 }
