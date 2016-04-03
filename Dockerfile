@@ -37,19 +37,14 @@ ADD ./docker/docker-webapp.conf /etc/nginx/sites-enabled/webapp.conf
 ADD ./docker/docker-env.conf /etc/nginx/main.d/webapp-env.conf
 
 # Bundle app source
-RUN mkdir /home/app/webapp
-WORKDIR "/home/app/webapp"
-
-# Copy built resources
 # TODO test to see if ./dist is there otherwise use . (build branch)
+RUN mkdir /home/app/webapp
 COPY . /home/app/webapp
-
-# Print the directory
+WORKDIR "/home/app/webapp"
 RUN ls -ltra .
 
 # Install app dependencies
-# RUN npm install --production
-
+RUN npm install --production
 
 # Setup permissions
 RUN chmod -R a+rwx /home/app/webapp
