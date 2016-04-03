@@ -12,7 +12,7 @@ services: mongodb
 before_deploy:
 - git config --global user.email "kauabunga@traivs.com"
 - git config --global user.name "Kauabunga Travis"
-- npm run release
+# - npm run release
 - ls -ltra
 deploy:
   app: cpx
