@@ -115,7 +115,7 @@
     "start": "node dist/server",
     "test": "grunt test --force && grunt test:e2e --force",
     "update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update",
-    "release": "grunt build && grunt buildcontrol:local && git push https://github.com/Kauabunga/cpx.git build"
+    "release": "bash ./release.sh"
   },
   "private": true
 }
