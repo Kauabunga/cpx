@@ -6,7 +6,7 @@
 
 
 FROM phusion/passenger-full:0.9.18
-#FROM phusion/passenger-nodejs:latest
+
 
 # Set correct environment variables.
 ENV HOME /root
@@ -36,21 +36,18 @@ RUN rm /etc/nginx/sites-enabled/default
 ADD ./docker/docker-webapp.conf /etc/nginx/sites-enabled/webapp.conf
 ADD ./docker/docker-env.conf /etc/nginx/main.d/webapp-env.conf
 
-# Build app source
-RUN grunt build
-
 # Bundle app source
 RUN mkdir /home/app/webapp
 WORKDIR "/home/app/webapp"
 
-# If we want to use the source from a local build then use the following snippet
-# COPY ./dist /home/app/webapp
+# Pull down built resources
+RUN git clone https://github.com/Kauabunga/cpx-dist.git .
 
 # Print the directory
 RUN ls -ltra .
 
 # Install app dependencies
-RUN npm install --production
+# RUN npm install --production
 
 
 # Setup permissions

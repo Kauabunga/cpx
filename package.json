@@ -110,7 +110,8 @@
   "scripts": {
     "start": "node dist/server",
     "test": "grunt test --force",
-    "update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update"
+    "update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update",
+    "release": "npm version patch && grunt build"
   },
   "private": true
 }
