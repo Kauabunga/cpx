@@ -10,7 +10,7 @@ before_script:
 - bower install
 services: mongodb
 before_deploy:
-- grunt build
+- npm run release
 - ls -ltra
 deploy:
   app: cpx
