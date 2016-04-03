@@ -40,8 +40,9 @@ ADD ./docker/docker-env.conf /etc/nginx/main.d/webapp-env.conf
 RUN mkdir /home/app/webapp
 WORKDIR "/home/app/webapp"
 
-# Pull down built resources
-RUN git clone https://github.com/Kauabunga/cpx-dist.git .
+# Copy built resources
+# TODO test to see if ./dist is there otherwise use . (build branch)
+COPY . /home/app/webapp
 
 # Print the directory
 RUN ls -ltra .
