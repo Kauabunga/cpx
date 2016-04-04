@@ -3,11 +3,7 @@
 var proxyquire = require('proxyquire').noPreserveCache();
 
 var businessnamesCtrlStub = {
-  index: 'businessnamesCtrl.index',
-  show: 'businessnamesCtrl.show',
-  create: 'businessnamesCtrl.create',
-  update: 'businessnamesCtrl.update',
-  destroy: 'businessnamesCtrl.destroy'
+  search: 'businessnamesCtrl.search'
 };
 
 var routerStub = {
@@ -34,61 +30,11 @@ describe('Businessnames API Router:', function() {
     businessnamesIndex.should.equal(routerStub);
   });
 
-  describe('GET /api/businessnamess', function() {
+  describe('GET /api/businessnamess/search', function() {
 
-    it('should route to businessnames.controller.index', function() {
+    it('should route to businessnames.controller.search', function() {
       routerStub.get
-        .withArgs('/', 'businessnamesCtrl.index')
-        .should.have.been.calledOnce;
-    });
-
-  });
-
-  describe('GET /api/businessnamess/:id', function() {
-
-    it('should route to businessnames.controller.show', function() {
-      routerStub.get
-        .withArgs('/:id', 'businessnamesCtrl.show')
-        .should.have.been.calledOnce;
-    });
-
-  });
-
-  describe('POST /api/businessnamess', function() {
-
-    it('should route to businessnames.controller.create', function() {
-      routerStub.post
-        .withArgs('/', 'businessnamesCtrl.create')
-        .should.have.been.calledOnce;
-    });
-
-  });
-
-  describe('PUT /api/businessnamess/:id', function() {
-
-    it('should route to businessnames.controller.update', function() {
-      routerStub.put
-        .withArgs('/:id', 'businessnamesCtrl.update')
-        .should.have.been.calledOnce;
-    });
-
-  });
-
-  describe('PATCH /api/businessnamess/:id', function() {
-
-    it('should route to businessnames.controller.update', function() {
-      routerStub.patch
-        .withArgs('/:id', 'businessnamesCtrl.update')
-        .should.have.been.calledOnce;
-    });
-
-  });
-
-  describe('DELETE /api/businessnamess/:id', function() {
-
-    it('should route to businessnames.controller.destroy', function() {
-      routerStub.delete
-        .withArgs('/:id', 'businessnamesCtrl.destroy')
+        .withArgs('/:query', 'businessnamesCtrl.search')
         .should.have.been.calledOnce;
     });
 

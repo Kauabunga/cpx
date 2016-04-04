@@ -2,10 +2,15 @@
   "name": "cpx",
   "version": "0.0.0",
   "main": "dist/server/app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kauabunga/cpx.git"
+  },
   "dependencies": {
     "babel-runtime": "^5.8.20",
     "bluebird": "^2.9.34",
     "body-parser": "^1.13.3",
+    "cheerio": "^0.20.0",
     "composable-middleware": "^0.3.0",
     "compression": "^1.5.2",
     "connect-mongo": "^0.8.1",
@@ -14,6 +19,7 @@
     "express": "^4.13.3",
     "express-jwt": "^3.0.0",
     "express-session": "^1.11.3",
+    "he": "^0.5.0",
     "jade": "^1.11.0",
     "jsonfile": "^2.2.3",
     "jsonwebtoken": "^5.0.0",
@@ -62,7 +68,7 @@
     "grunt-nodemon": "^0.4.0",
     "grunt-angular-templates": "^0.5.4",
     "grunt-dom-munger": "^3.4.0",
-    "grunt-protractor-runner": "^2.0.0",
+    "grunt-protractor-runner": "^3.1.0",
     "grunt-injector": "^0.6.0",
     "grunt-karma": "~0.12.0",
     "grunt-build-control": "^0.6.0",
@@ -107,8 +113,9 @@
   },
   "scripts": {
     "start": "node dist/server",
-    "test": "grunt test --force",
-    "update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update"
+    "test": "grunt test --force && grunt test:e2e --force",
+    "update-webdriver": "node node_modules/protractor/bin/webdriver-manager update && node node_modules/protractor/bin/webdriver-manager update --standalone",
+    "release": "bash ./release.sh"
   },
   "private": true
 }

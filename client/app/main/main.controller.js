@@ -3,13 +3,13 @@
 (function() {
 
 class MainController {
-
-  constructor($http, $scope, socket, bic, addresslookup) {
+  constructor($http, $scope, socket, bic, businessnames, addresslookup) {
     this.$http = $http;
     this.awesomeThings = [];
-    
+
     this.bicSearchQuery = '';
     this.searchBic = bic.search;
+    this.searchBusinessnames = businessnames.search;
 
     bic.createSearchIndex();
 

@@ -5,7 +5,7 @@ md-content
   form.bic-autocomplete-test
     md-autocomplete(md-selected-item='main.selectedBic', md-search-text='main.bicSearchQuery', md-autoselect='true'
     md-items='bicItem in main.searchBic(main.bicSearchQuery)', md-min-length='1', md-delay='100'
-    md-item-text='bicItem.code + ": " + bicItem.desc', placeholder='Search for a bic', md-match-case-insensitive='true',
+    md-item-text='bicItem.name+ ": " + bicItem.desc', placeholder='Search for a bic', md-match-case-insensitive='true',
     md-menu-class="autocomplete-bic-template")
       md-item-template
         span.bic-autocomplete-item
@@ -13,6 +13,20 @@ md-content
           span.bic-item-definition {{bicItem.definitionPlainText}}
       md-not-found
         | No bic matching "{{main.bicSearchQuery}}" were found.
+
+md-content
+  form.businessnames-autocomplete-test
+    md-autocomplete(md-selected-item='main.selectedBusinessname', md-search-text='main.businessnameSearchQuery', md-autoselect='true'
+    md-items='businessnameItem in main.searchBusinessnames(main.businessnameSearchQuery)', md-min-length='1', md-delay='100'
+    md-item-text='businessnameItem.name + " (" + businessnameItem.businessNumber + ")"', placeholder='Search for a business name', md-match-case-insensitive='true',
+    md-menu-class="autocomplete-businessname-template")
+      md-item-template
+        span.businessname-autocomplete-item
+          strong.businessname-item-title(md-highlight-text='main.businessnameSearchQuery', md-highlight-flags='^i') {{businessnameItem.name}} ({{businessnameItem.businessNumber}})
+          span.businessname-item-definition {{businessnameItem.address}}
+      md-not-found
+        | No businessname matching "{{main.businessnameSearchQuery}}" were found.
+
 
 md-content
   h1.page-header Features:

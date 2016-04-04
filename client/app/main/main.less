@@ -8,6 +8,7 @@ span.bic-item-definition {}
 
 
 
+.autocomplete-businessname-template li,
 .autocomplete-bic-template li {
   border-bottom: 1px solid #ccc;
   height: auto;
@@ -15,12 +16,19 @@ span.bic-item-definition {}
   padding-bottom: 8px;
   white-space: normal;
 }
+.autocomplete-businessname-template li:last-child,
 .autocomplete-bic-template li:last-child {
   border-bottom-width: 0;
 }
 .autocomplete-bic-template .bic-autocomplete-item,
 .autocomplete-bic-template .bic-item-title,
 .autocomplete-bic-template .bic-item-definition {
+  display: block;
+  line-height: 2;
+}
+.autocomplete-businessname-template .businessname-autocomplete-item,
+.autocomplete-businessname-template .businessname-item-title,
+.autocomplete-businessname-template .businessname-item-definition {
   display: block;
   line-height: 2;
 }
