@@ -13,8 +13,8 @@ const DIVISIONS_URL = `https://api.businessdescription.co.nz/api/industries/{{in
 const CLASSES_URL = `https://api.businessdescription.co.nz/api/divisions/{{divisionId}}/classes`;
 const BICS_URL = `https://api.businessdescription.co.nz/api/bics?filter[include]=cu&filter[include]=anzsic&filter[include]=bicrefs&filter[include]=historyBic`;
 const BICS_SEED_FILENAME =`${__dirname}/../../config/seed/bic.json`;
-const ACC_LEVIES_PDF_2015_2016 = `${__dirname}/../../config/seed/acc_levies.pdf`;
-const ACC_LEVIES_JSON_2015_2016 = `${__dirname}/../../config/seed/acc_levies.json`;
+const ACC_LEVIES_PDF_2015_2016 = `${__dirname}/../../config/seed/acc_levies_2015_2016.pdf`;
+const ACC_LEVIES_JSON_2015_2016 = `${__dirname}/../../config/seed/acc_levies_2015_2016.json`;
 
 
 function parseLevies(){
