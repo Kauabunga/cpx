@@ -13,8 +13,13 @@ export function search(query){
   return Promise.resolve()
     .then(() => {
       return request(getBusinessnamesRequest(query))
-      .then(parseBusinessnamesFromResponse);
+      .then(parseBusinessnamesFromResponse)
+      .then(filterRemovedBusinessnames);
     });
+}
+
+function filterRemovedBusinessnames(businessnames){
+  return _(businessnames).filter(businessname => {return businessname.status && businessname.status.toLowerCase() !== 'removed';}).value();
 }
 
 function parseBusinessnamesFromResponse(response){
