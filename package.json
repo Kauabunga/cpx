@@ -68,7 +68,7 @@
     "grunt-nodemon": "^0.4.0",
     "grunt-angular-templates": "^0.5.4",
     "grunt-dom-munger": "^3.4.0",
-    "grunt-protractor-runner": "^2.0.0",
+    "grunt-protractor-runner": "^3.1.0",
     "grunt-injector": "^0.6.0",
     "grunt-karma": "~0.12.0",
     "grunt-build-control": "^0.6.0",
@@ -114,7 +114,7 @@
   "scripts": {
     "start": "node dist/server",
     "test": "grunt test --force && grunt test:e2e --force",
-    "update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update",
+    "update-webdriver": "node node_modules/protractor/bin/webdriver-manager update && node node_modules/protractor/bin/webdriver-manager update --standalone",
     "release": "bash ./release.sh"
   },
   "private": true
