@@ -22,7 +22,7 @@ CMD ["/sbin/my_init"]
 
 
 ENV NODE_ENV production
-ENV PORT 8080
+ENV PORT 80
 ENV IP 127.0.0.1
 ENV HOST_NAME cpx.herokuapp.com
 ENV MONGODB_URI mongodb://mongodb/cpx
