@@ -7,7 +7,7 @@
   "curly": true,
   "eqeqeq": true,
   "immed": true,
-  "latedef": true,
+  "latedef": false,
   "newcap": true,
   "noarg": true,
   "quotmark": "single",
@@ -36,6 +36,7 @@
     "expect": true,
     "browser": true,
     "element": true,
-    "by": true
+    "by": true,
+    "google": true
   }
 }

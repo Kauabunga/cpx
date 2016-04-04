@@ -1,72 +1,69 @@
 'use strict';
 
 angular.module('cpxApp')
-  .service('addresslookup', function ($http, $q, $timeout) {
+  .service('addresslookup', function ($http, $q, $window) {
     var self = this;
-
     self.searchAddress = searchAddress;
 
-    function initService() {
-      try {
-        self.autoCompleteService = new google.maps.places.AutocompleteService();
-      } catch (error) {
-        $timeout(function () {
-          try {
-            if (!self.autoCompleteService) {
-              self.autoCompleteService = new google.maps.places.AutocompleteService();
-            }
-          } catch (err) {
-          }
-        }, 1000);
-      }
-    }
+    var googleMapsPromise;
+
+    (function init() {
+      googleMapsPromise =  $q(function(resolve, reject) {
+        var script = $window.document.createElement('script');
+        script.src = 'https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCatE8RgWKWgGhnp49Q7l9KtbPzXeAoc94';
+        script.async = 'async';
+
+        script.addEventListener('load', function() {
+          resolve(new google.maps.places.AutocompleteService());
+        }, false);
+
+        script.addEventListener('error', function() {
+          reject();
+        }, false);
+
+        $window.document.body.appendChild(script);
+      });
+    })();
 
     /**
      * Performs an address lookup based on a search query.
-     *
      * An optional parameter limits the search to only return addresses in New Zealand.
-     * Unfortunately the API does not provide this service, so this is achieved by simply filtering the returned
-     * data. Because of this, the returned data may be empty until many characters are entered.
-     * E.g. searching "The Terrace" only returns data when "The T" is entered.
-     * Without using the filter, data would begin being returned when you type in "T".
-     * 
+     *
      * @param query
      * @param limitToNewZealand
      * @returns {*}
        */
-    function searchAddress(query, limitToNewZealand) {
+    function searchAddress(query, limitToNewZealand, errorFunction) {
       var options = {
-        input: query,
-        types: ['(cities)', 'geocode'],
-        componentRestrictions: {country: 'nz'} // This value is not used by the getQueryPredictions method
+        input: query
+        //types: ['(cities)', 'geocode'],
       };
 
-      return autocomplete(options, limitToNewZealand);
+      if (limitToNewZealand) {
+        options.componentRestrictions = {country: 'nz'};
+      }
+
+      errorFunction = errorFunction || _.identity;
+
+      return autocomplete(options, errorFunction);
     }
 
-    function autocomplete(options, limitToNewZealand){
-      var deferred = $q.defer();
-
-      if (!self.autoCompleteService) {
-        initService();
-      }
-
-      if (self.autoCompleteService) {
-        self.autoCompleteService.getQueryPredictions(options, function (results, status) {
-          if (status === "OK") {
-            if (limitToNewZealand) {
-              results = _.remove(results, function(val) { return val.description.indexOf("New Zealand") > -1});
-            }
-
-            deferred.resolve(results);
-          } else {
-            deferred.resolve([]);
-          }
-        });
-      } else {
-        deferred.resolve([]);
-      }
-
-      return deferred.promise;
+    function autocomplete(options, errorFunction){
+      return $q((resolve, reject) => {
+        googleMapsPromise
+          .then(function(service) {
+            service.getPlacePredictions(options, function (results, status) {
+              if (status === 'OK') {
+                resolve(results);
+              } else {
+                errorFunction(status);
+                return reject(status);
+              }
+            });
+          }, function() {
+            errorFunction('Error initialising address lookup service');
+            reject('Error initialising address lookup service');
+          });
+      });
     }
   });

@@ -7,8 +7,7 @@ class MainController {
   constructor($http, $scope, socket, bic, addresslookup) {
     this.$http = $http;
     this.awesomeThings = [];
-
-
+    
     this.bicSearchQuery = '';
     this.searchBic = bic.search;
 
@@ -24,11 +23,6 @@ class MainController {
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('thing');
     });
-  }
-
-  test() {
-    console.log("testing: " + this.selectedAddress);
-    console.log("testing: " + this.addressSearchText);
   }
 
   addThing() {
