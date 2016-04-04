@@ -10,7 +10,7 @@ var jsonfile = require('bluebird').promisifyAll(require('jsonfile'));
 const INDUSTRIES_URL = `https://api.businessdescription.co.nz/api/industries`;
 const DIVISIONS_URL = `https://api.businessdescription.co.nz/api/industries/{{industryId}}/divisions`;
 const CLASSES_URL = `https://api.businessdescription.co.nz/api/divisions/{{divisionId}}/classes`;
-const BICS_URL = `https://api.businessdescription.co.nz/api/bics`;
+const BICS_URL = `https://api.businessdescription.co.nz/api/bics?filter[include]=cu&filter[include]=anzsic&filter[include]=bicrefs&filter[include]=historyBic`;
 const BICS_SEED_FILENAME =`${__dirname}/../../config/seed/bic.json`;
 
 
@@ -20,7 +20,9 @@ export function index(){
 
       //TODO should seed properly and use database
       return jsonfile.readFileAsync(BICS_SEED_FILENAME)
+      .catch(err => {return {};})
       .then(bics => {
+
           if(bics && bics.length > 0) { return bics; }
 
           let bicsRequest = request(getBicsRequest());
@@ -52,17 +54,22 @@ export function index(){
 
                     .then(classes => {
                       return bicsRequest.then(bics => {
-                        return _(classes).flatten().map(clazz => {
+
+                        console.log('Fetched /api/bics length', bics.length);
+
+                        let classesFormatted = _(classes).flatten().map(clazz => {
                           clazz.className = clazz.name;
                           clazz.classId = clazz.id;
                           return clazz;
-                        }).map(clazz => {
-                          let bic = _.find(bics, _.matchesProperty('classId', clazz.classId));
-                          return _.merge({}, clazz, bic);
+                        }).value();
+
+                        return _(bics).map(bic => {
+                          return _.merge({}, bic, _.find(classesFormatted, _.matchesProperty('id', bic.classId)));
                         })
                         .map(clazz => {
                           return _.omit(clazz, 'id', 'name', 'anzsicId', 'cuId', 'definition', 'important', 'lastUpdateDate', 'lastUpdateUserId');
                         }).value();
+
                       });
                     })
                     .then(bics => {
@@ -72,6 +79,10 @@ export function index(){
                     });
                 });
             });
+        })
+        .then(bics => {
+          console.log('Service bics length', bics.length);
+          return bics;
         });
     });
 }
