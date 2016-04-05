@@ -17,13 +17,13 @@ class MainController {
 
 
     this.getCalculationCacheKey = () => {
-      try { return this.selectedBic.cu.code + this.earnings + this.cover; }
+      try { return this.selectedBic.cu + this.earnings + this.cover; }
       catch(err){ return ''; }
     };
 
     this.calculationWatcher = ($scope) => {
 
-      if(! this.selectedBic || ! this.selectedBic.cu || ! this.selectedBic.cu.code ||
+      if(! this.selectedBic || ! this.selectedBic.cu ||
         ! this.earnings || ! this.cover){ return undefined; }
 
       this.calculationCache = this.calculationCache || {};
@@ -31,8 +31,7 @@ class MainController {
       let calculationCacheKey = this.getCalculationCacheKey();
 
       return this.calculationCache[calculationCacheKey] ? this.calculationCache[calculationCacheKey] : this.calculationCache[calculationCacheKey] = {
-        //cu: _.get(this, 'selectedBic.cu'),
-        cuCode: this.selectedBic.cu.code,
+        cuCode: this.selectedBic.cu,
         earnings: this.earnings,
         cover: this.cover
       };
