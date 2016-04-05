@@ -6,7 +6,7 @@ angular.module('cpxApp')
     this.bicStore = {};
     this.bicIndex = undefined;
 
-    $timeout(this.getSearchIndex);
+    //$timeout(this.getSearchIndex, 2000);
 
     this.search = query => {
       return this.getSearchIndex()

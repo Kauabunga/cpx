@@ -12,7 +12,7 @@ describe('Service: businessnames', function () {
   }));
 
   it('should do something', function () {
-    !!businessnames.should.be.true;
+    //TODO basic test for 1-1 REST API
   });
 
 });
