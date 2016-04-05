@@ -41,6 +41,7 @@ export function index(req, res) {
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function(err) {
+    console.error('Error in levy controller', err);
     res.status(statusCode).send(err);
   };
 }
