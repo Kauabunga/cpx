@@ -17,12 +17,8 @@ class MainController {
 
 
     this.getCalculationCacheKey = () => {
-      try {
-        return this.selectedBic.cu.code + this.earnings + this.cover;
-      }
-      catch(err){
-        return '';
-      }
+      try { return this.selectedBic.cu.code + this.earnings + this.cover; }
+      catch(err){ return ''; }
     };
 
     this.calculationWatcher = ($scope) => {
@@ -45,6 +41,7 @@ class MainController {
     $scope.$watch(this.calculationWatcher, (params) => {
       $log.debug('calculationWatcher params', params);
       let calculationCacheKey = this.getCalculationCacheKey();
+      this.cpxLevyRate = '';
       if(params){
         return levy.calculate(params)
         .then(calculation => {
