@@ -6,9 +6,9 @@ angular.module('cpxApp')
     this.bicStore = {};
     this.bicIndex = undefined;
 
-    //$timeout(this.getSearchIndex, 2000);
+    const searchType = 'searchServer';
 
-    this.search = query => {
+    this.searchLocal = query => {
       return this.getSearchIndex()
         .then(index => {
           return _(index.search(query)).map(result => {
@@ -16,6 +16,12 @@ angular.module('cpxApp')
           }).value();
         });
     };
+
+    this.searchServer = query => {
+      return $http.get(`/api/bics/search/${query}`).then(response => response.data);
+    };
+
+    this.search = this[searchType];
 
     this.getSearchIndex = () => {
       return this.bicIndex ? $q.when(this.bicIndex) : this.createSearchIndex();

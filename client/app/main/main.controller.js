@@ -13,8 +13,6 @@ class MainController {
     this.searchBic = bic.search;
     this.searchBusinessnames = businessnames.search;
 
-    bic.createSearchIndex();
-
 
     this.getCalculationCacheKey = () => {
       try { return this.selectedBic.cu + this.earnings + this.cover; }

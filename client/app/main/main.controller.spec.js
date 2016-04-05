@@ -15,8 +15,6 @@ describe('Controller: MainController', function() {
   // Initialize the controller and a mock scope
   beforeEach(inject(function(_$httpBackend_, $controller, $rootScope, $state) {
     $httpBackend = _$httpBackend_;
-
-    $httpBackend.expectGET('/api/bics').respond(500, '');
     $httpBackend.expectGET('/api/things').respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
 
 

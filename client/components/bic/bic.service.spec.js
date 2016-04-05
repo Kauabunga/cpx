@@ -22,9 +22,8 @@ describe('Service: bic', function () {
 
 
   it('should find a result', function (done) {
-    bic.search('plant growing')
+    bic.searchLocal('plant growing')
     .then(results => {
-
         results.length.should.equal(1);
         done();
       })
@@ -35,7 +34,7 @@ describe('Service: bic', function () {
 
   it('should not find a result', function (done) {
 
-    bic.search('wowowow growing')
+    bic.searchLocal('wowowow growing')
       .then(results => {
 
         results.length.should.equal(0);

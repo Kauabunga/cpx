@@ -5,9 +5,15 @@ import _ from 'lodash';
 import * as BicService from '../../components/bic/bic.service.js';
 
 
-// Gets a list of Bics
 export function index(req, res) {
   return BicService.index()
+    .then(responseWithResult(res))
+    .catch(handleError(res));
+}
+
+export function search(req, res) {
+  if(! req.params.query ){return res.status(400).send();}
+  return BicService.search(req.params.query)
     .then(responseWithResult(res))
     .catch(handleError(res));
 }
