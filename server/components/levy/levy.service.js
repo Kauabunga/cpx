@@ -23,7 +23,96 @@ export function calculateLevyExternal({cuCode, earnings, cover}){
 }
 
 
-export function calculateLevyInteral(){}
+export function calculateLevyInternal({cuCode, earnings, cover}){
+
+  //TODO implement http://www.acc.co.nz/for-business/tax-agents-accountants-and-advisors/levies-and-invoicing/bus00080
+
+  //TODO do we want to attempt to do this on the client?
+
+  //TODO validate numeric earnings/cover parameters
+
+
+  return getLevyRates()
+    .then(levyRates => {
+      let cuLevyRates = levyRates[cuCode];
+      const WORKING_SAFER_LEVY = 0.08;
+
+
+      let hunderedsOfEarnings = Math.ceil(parseFloat(earnings) / 100);
+      let hunderedsOfCover = Math.ceil(parseFloat(cover) / 100);
+
+
+      let currentWorkAccountLevy = cuLevyRates.empOrSep * hunderedsOfCover;
+      let residualWorkAccountLevy = (cuLevyRates.rclWs - WORKING_SAFER_LEVY) * hunderedsOfEarnings;
+
+      let currentEarnersAccountLevy = cuLevyRates.cpxStd * hunderedsOfCover * 1.25;
+      let residualEarnersAccountLevy = cuLevyRates.cpxStd * hunderedsOfEarnings;
+
+      let workingSaferLevy = WORKING_SAFER_LEVY * hunderedsOfEarnings;
+
+
+      let cpxLevyRate = currentWorkAccountLevy +
+                        //residualWorkAccountLevy +
+                        currentEarnersAccountLevy +
+                        //residualEarnersAccountLevy +
+                        workingSaferLevy;
+
+      return {
+        workLevyCurrent: {
+          cpx: currentWorkAccountLevy
+        },
+        earnersLevyCurrent: {
+          cpx: currentEarnersAccountLevy
+        },
+        workingSaferLevy: {
+          cpx: workingSaferLevy
+        },
+        totalWithoutGST: {
+          cpx: cpxLevyRate
+        }
+      }
+    });
+
+  //{
+  //  coverAmount: {cp: '44444.0', cpx: '55555.0', cpxLlwc: '55555.0'},
+////  workLevyCurrent: {cp: '822.21', cpx: '1097.44', cpxLlwc: '1041.73'},
+  //  healthAndSafetyDiscount: {cp: '0.0', cpx: '0.0', cpxLlwc: '0.0'},
+  //  netWorkLevyCurrent: {cp: '822.21', cpx: '1097.44', cpxLlwc: '1041.73'},
+////  earnersLevyCurrent: {cp: '672.22', cpx: '842.58', cpxLlwc: '842.58'},
+  //  netTotalWorkLevy: {cp: '1494.43', cpx: '1940.02', cpxLlwc: '1884.31'},
+  //  earnersLevyResidual: {cp: '0.0', cpx: '0.0', cpxLlwc: '0.0'},
+////  workingSaferLevy: {cp: '44.44', cpx: '44.44', cpxLlwc: '44.44'},
+  //  workLevyResidual: {cp: '0.0', cpx: '0.0', cpxLlwc: '0.0'},
+  //  totalOtherLevies: {cp: '44.44', cpx: '44.44', cpxLlwc: '44.44'},
+  //  totalWithoutGST: {cp: '1538.8700000000001', cpx: '1984.46', cpxLlwc: '1928.75'},
+  //  totalWithGST: {cp: '1769.7', cpx: '2282.13', cpxLlwc: '2218.06'}
+  //}
+
+  //Levy name
+  //What the levy covers
+  //How it is calculated
+
+  //The current portion of the Work Account levy
+  //Covers medical, rehabilitation and lost earnings compensation costs for injuries that happen at work
+  //The classification unit levy rate x each $100 of agreed level of lost earnings cover
+
+  //The residual portion of the Work Account levy
+  //Provides funds for the ongoing costs of work injuries that occurred before 1 July 1999 and non-work injuries to earners before 1 July 1992. This levy is spread across all levy payers
+  //The classification unit residual portion levy rate x each $100 of liable earnings
+
+  //The current portion of the Earner’s Account levy
+  //Covers medical, rehabilitation and lost earnings compensation costs for any injury sustained outside work. This is paid by every employee and self-employed person in New Zealand
+  //The Earner’s current portion levy rate x each $100 of agreed level of lost earnings cover x 1.25
+
+  //The residual portion of the Earners’ levy
+  //The continuing cost of non-work injuries to earners that happened between 1 July 1992 and 30 June 1999
+  //The Earner’s residual portion levy rate x each $100 of liable earnings
+
+  //The Working Safer levy
+  //This levy is collected on behalf of the Department Ministry of Business, Innovation and Employment to support the activities of WorkSafe New Zealand.
+  //$0.08 x each $100 of liable earnings
+
+}
 
 export function getLevyRates(){
   return jsonfile.readFileAsync(ACC_LEVIES_JSON_2015_2016)
@@ -71,7 +160,19 @@ export function getLevyRates(){
               currentIndex = 1;
             }
             else if (currentIndex > 0 && currentIndex <= 6) {
-              currentLevy[currentIndexPropertyMap[currentIndex++]] = item.text;
+
+              //We don't care about the description
+              if(currentIndex === 1){
+
+              }
+              else if(currentIndex === 2){
+                currentLevy[currentIndexPropertyMap[currentIndex]] = item.text;
+              }
+              else {
+                currentLevy[currentIndexPropertyMap[currentIndex]] = parseFloat(item.text.replace(/\$/g, ''));
+              }
+              currentIndex++;
+
             }
           }
           catch(err){ reject(err); }
@@ -128,9 +229,6 @@ function getBaseExternalCpxForm({cuCode, earnings, cover} = {}) {
 function formatSalary(salary = 0){
   return numeral(salary).format('$0,0');
 }
-
-
-
 
 function parseExternalLevyCalculation(body){
   try {
