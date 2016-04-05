@@ -24,6 +24,7 @@ export function search(query){
 function getIndex(){}
 function generateIndex(){}
 
+
 export function index(){
   return Promise.resolve()
     .then(() => {
@@ -38,6 +39,7 @@ export function index(){
 
           return request(getIndustriesRequest())
             .then(industries => {
+
               return Promise.all(_(industries).map(industry => {
                 return request(getDivisionsRequest(industry.id))
                   .then(divisions => {
@@ -75,9 +77,15 @@ export function index(){
                         return _(bics).map(bic => {
                           return _.merge({}, bic, _.find(classesFormatted, _.matchesProperty('id', bic.classId)));
                         })
-                        .map(clazz => {
-                          return _.omit(clazz, 'id', 'name', 'anzsicId', 'cuId', 'definition', 'important', 'lastUpdateDate', 'lastUpdateUserId');
-                        }).value();
+                        .map(bic => {
+                          return _.omit(bic, 'id', 'name', 'anzsicId', 'cuId', 'definition', 'important', 'lastUpdateDate', 'lastUpdateUserId');
+                        })
+                        .map(bic => {
+                          bic.cu = bic.cu.code;
+                          bic.anzsic = bic.anzsic.code;
+                          return bic;
+                        })
+                        .value();
 
                       });
                     })

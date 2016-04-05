@@ -35,6 +35,8 @@ angular.module('cpxApp')
             this.field('industryName');
             this.field('divisionName');
             this.field('className');
+            this.field('cu');
+            this.field('anzsic');
 
             this.field('keywordsFlattened');
             this.field('definitionPlainText');
