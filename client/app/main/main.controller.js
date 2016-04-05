@@ -41,13 +41,18 @@ class MainController {
       $log.debug('calculationWatcher params', params);
       let calculationCacheKey = this.getCalculationCacheKey();
       this.cpxLevyRate = '';
+
       if(params){
+        this.isValidCalculation = true;
         return levy.calculate(params)
         .then(calculation => {
             if(calculationCacheKey === this.getCalculationCacheKey()){
               this.cpxLevyRate = calculation.totalWithoutGST.cpx;
             }
           });
+      }
+      else {
+        this.isValidCalculation = false;
       }
     });
 

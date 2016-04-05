@@ -40,7 +40,9 @@ md-content(layout-padding)
       label Cover
       input(type='number', ng-model='main.cover')
 
-    label(ng-show='main.cpxLevyRate') CPX Levy rate: {{main.cpxLevyRate}}
+    div
+      label(ng-show='main.cpxLevyRate && main.isValidCalculation') CPX Levy rate: {{main.cpxLevyRate}}
+      md-progress-circular(ng-show='! main.cpxLevyRate && main.isValidCalculation')
 
 md-content
   h1.page-header Features:
