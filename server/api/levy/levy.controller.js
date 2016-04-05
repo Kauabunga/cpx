@@ -1,22 +1,9 @@
-/**
- * Using Rails-like standard naming convention for endpoints.
- * GET     /api/levys              ->  index
- * POST    /api/levys              ->  create
- * GET     /api/levys/:id          ->  show
- * PUT     /api/levys/:id          ->  update
- * DELETE  /api/levys/:id          ->  destroy
- */
 
 'use strict';
 
 import _ from 'lodash';
 import * as LevyService from '../../components/levy/levy.service.js';
 
-
-/**
- * /calculate/:cuCode/:earnings/:cover
- *
- */
 export function calculate(req, res){
   let cuCode = req.params.cuCode;
   let earnings = req.params.earnings;
@@ -29,9 +16,6 @@ export function calculate(req, res){
     .catch(handleError(res));
 }
 
-/**
- *
- */
 export function index(req, res) {
   return LevyService.getLevyRates()
     .then(responseWithResult(res))
