@@ -1,23 +1,12 @@
 navbar
 
 
-md-content
-  form.bic-autocomplete-test
-    md-autocomplete(md-selected-item='main.selectedBic', md-search-text='main.bicSearchQuery', md-autoselect='true'
-    md-items='bicItem in main.searchBic(main.bicSearchQuery)', md-min-length='1', md-delay='100'
-    md-item-text='bicItem.name+ ": " + bicItem.desc', placeholder='Search for a bic', md-match-case-insensitive='true',
-    md-menu-class="autocomplete-bic-template")
-      md-item-template
-        span.bic-autocomplete-item
-          strong.bic-item-title(md-highlight-text='main.bicSearchQuery', md-highlight-flags='^i') {{bicItem.code}}: {{bicItem.desc}}
-          span.bic-item-definition {{bicItem.definitionPlainText}}
-      md-not-found
-        | No bic matching "{{main.bicSearchQuery}}" were found.
 
-md-content
+
+md-content(layout-padding)
   form.businessnames-autocomplete-test
     md-autocomplete(md-selected-item='main.selectedBusinessname', md-search-text='main.businessnameSearchQuery', md-autoselect='true'
-    md-items='businessnameItem in main.searchBusinessnames(main.businessnameSearchQuery)', md-min-length='1', md-delay='100'
+    md-items='businessnameItem in main.searchBusinessnames(main.businessnameSearchQuery)', md-min-length='1', md-delay='150'
     md-item-text='businessnameItem.name + " (" + businessnameItem.businessNumber + ")"', placeholder='Search for a business name', md-match-case-insensitive='true',
     md-menu-class="autocomplete-businessname-template")
       md-item-template
@@ -27,6 +16,31 @@ md-content
       md-not-found
         | No businessname matching "{{main.businessnameSearchQuery}}" were found.
 
+
+md-content(layout-padding)
+
+  h2 Calculate your CPX Levy rate
+  form.bic-autocomplete-test
+    md-autocomplete(md-selected-item='main.selectedBic', md-search-text='main.bicSearchQuery', md-autoselect='true'
+    md-items='bicItem in main.searchBic(main.bicSearchQuery)', md-min-length='1', md-delay='150'
+    md-item-text='bicItem.code + ": " + bicItem.desc', placeholder='Search for a bic', md-match-case-insensitive='true',
+    md-menu-class="autocomplete-bic-template")
+      md-item-template
+        span.bic-autocomplete-item
+          strong.bic-item-title(md-highlight-text='main.bicSearchQuery', md-highlight-flags='^i') {{bicItem.code}}: {{bicItem.desc}}
+          span.bic-item-definition {{bicItem.definitionPlainText}}
+      md-not-found
+        | No bic matching "{{main.bicSearchQuery}}" were found.
+
+    md-input-container
+      label Earnings
+      input(type='number', ng-model='main.earnings')
+
+    md-input-container
+      label Cover
+      input(type='number', ng-model='main.cover')
+
+    label(ng-show='main.cpxLevyRate') CPX Levy rate: {{main.cpxLevyRate}}
 
 md-content
   h1.page-header Features:
@@ -43,5 +57,7 @@ md-content
       input.form-control(type='text', placeholder='Add a new thing here.', ng-model='main.newThing')
       span.input-group-btn
         button.btn.btn-primary(type='submit', ng-click='main.addThing()') Add New
+
+
 
 //footer

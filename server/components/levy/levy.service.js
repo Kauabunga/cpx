@@ -15,6 +15,11 @@ const ACC_LEVIES_JSON_2015_2016 = `${__dirname}/../../config/seed/acc_levies_201
 
 
 
+export function calculate(params){
+  return calculateLevyExternal(params);
+}
+
+
 export function calculateLevyExternal({cuCode, earnings, cover}){
 
   return request(getLevyRequest({cuCode, earnings, cover}))
