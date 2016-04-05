@@ -52,30 +52,30 @@ describe('Service: bic', function () {
 function getDummyBicsResponse(){
   return [
     {
-      "code": "A011110",
-      "desc": "Ornamental plant growing",
-      "definitionPlainText": "This includes growing ornamental plants for sale. Excludes hiring and tending ornamental plants.",
-      "classId": "555bc5e225a9732ca20a1273",
-      "cu": {"code": "01110", "desc": "Nursery production", "id": "555b1da725a9732ca20a1000"},
-      "anzsic": {"code": "A011100", "desc": "Nursery Production (Under Cover)", "id": "555b206c25a9732ca20a1257"},
-      "bicrefs": [{
-        "desc": "Hiring and tending ornamental plants use #$0",
-        "order": 0,
-        "integrated": false,
-        "refs": [{
-          "id": "555c7ba77aaceec91e3f2b9e",
-          "type": "bic",
-          "desc": "L663950 Plant hiring and tending (of ornamental plants)"
+      'code': 'A011110',
+      'desc': 'Ornamental plant growing',
+      'definitionPlainText': 'This includes growing ornamental plants for sale. Excludes hiring and tending ornamental plants.',
+      'classId': '555bc5e225a9732ca20a1273',
+      'cu': {'code': '01110', 'desc': 'Nursery production', 'id': '555b1da725a9732ca20a1000'},
+      'anzsic': {'code': 'A011100', 'desc': 'Nursery Production (Under Cover)', 'id': '555b206c25a9732ca20a1257'},
+      'bicrefs': [{
+        'desc': 'Hiring and tending ornamental plants use #$0',
+        'order': 0,
+        'integrated': false,
+        'refs': [{
+          'id': '555c7ba77aaceec91e3f2b9e',
+          'type': 'bic',
+          'desc': 'L663950 Plant hiring and tending (of ornamental plants)'
         }],
-        "id": "556fb3d82c8535844998d367",
-        "bicId": "555c7ba67aaceec91e3f23c4",
-        "allRefsFoundDesc": true
+        'id': '556fb3d82c8535844998d367',
+        'bicId': '555c7ba67aaceec91e3f23c4',
+        'allRefsFoundDesc': true
       }],
-      "divisionId": "555c6bd38af667b6bbf11119",
-      "divisionName": "Nursery and Floriculture Production",
-      "industryName": "Agriculture, Forestry and Fishing",
-      "industryId": "555bb0e425a9732ca20a1000",
-      "className": "Nursery production"
+      'divisionId': '555c6bd38af667b6bbf11119',
+      'divisionName': 'Nursery and Floriculture Production',
+      'industryName': 'Agriculture, Forestry and Fishing',
+      'industryId': '555bb0e425a9732ca20a1000',
+      'className': 'Nursery production'
     }
   ];
 }
