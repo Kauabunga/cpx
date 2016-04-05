@@ -3,8 +3,6 @@
 import _ from 'lodash';
 import * as LevyService from './levy.service.js';
 
-import cheerio from 'cheerio';
-
 const COALMINING_CU = '11010';
 
 function getBasicLevyCalculation(){
