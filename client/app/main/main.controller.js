@@ -16,13 +16,23 @@ class MainController {
     bic.createSearchIndex();
 
 
-    const calculationWatcher = ($scope) => {
+    this.getCalculationCacheKey = () => {
+      try {
+        return this.selectedBic.cu.code + this.earnings + this.cover;
+      }
+      catch(err){
+        return '';
+      }
+    };
+
+    this.calculationWatcher = ($scope) => {
 
       if(! this.selectedBic || ! this.selectedBic.cu || ! this.selectedBic.cu.code ||
         ! this.earnings || ! this.cover){ return undefined; }
 
       this.calculationCache = this.calculationCache || {};
-      let calculationCacheKey = this.selectedBic.cu.code + this.earnings + this.cover;
+
+      let calculationCacheKey = this.getCalculationCacheKey();
 
       return this.calculationCache[calculationCacheKey] ? this.calculationCache[calculationCacheKey] : this.calculationCache[calculationCacheKey] = {
         //cu: _.get(this, 'selectedBic.cu'),
@@ -32,13 +42,16 @@ class MainController {
       };
     };
 
-    $scope.$watch(calculationWatcher, (params) => {
+    $scope.$watch(this.calculationWatcher, (params) => {
       $log.debug('calculationWatcher params', params);
+      let calculationCacheKey = this.getCalculationCacheKey();
       if(params){
-        levy.calculate(params)
+        return levy.calculate(params)
         .then(calculation => {
-            this.cpxLevyRate = calculation.totalWithoutGST.cpx;
-          })
+            if(calculationCacheKey === this.getCalculationCacheKey()){
+              this.cpxLevyRate = calculation.totalWithoutGST.cpx;
+            }
+          });
       }
     });
 
