@@ -17,7 +17,6 @@ const ACC_LEVIES_JSON_2015_2016 = `${__dirname}/../../config/seed/acc_levies_201
 
 export function calculateLevyExternal({cuCode, earnings, cover}){
 
-  //TODO calculate levies using POST
   return request(getLevyRequest({cuCode, earnings, cover}))
     .then(parseExternalLevyCalculation);
 }
