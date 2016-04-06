@@ -10,8 +10,8 @@ before_script:
 - bower install
 services: mongodb
 before_deploy:
-- git config --global user.email "kauabunga@traivs.com"
-- git config --global user.name "Kauabunga Travis"
+# - git config --global user.email "kauabunga@traivs.com"
+# - git config --global user.name "Kauabunga Travis"
 # - npm run release
 - ls -ltra
 deploy:
