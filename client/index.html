@@ -55,7 +55,6 @@
       <script src="bower_components/angular-cookies/angular-cookies.js"></script>
       <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
       <script src="bower_components/lodash/dist/lodash.compat.js"></script>
-      <script src="bower_components/angular-socket-io/socket.js"></script>
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <script src="bower_components/angular-validation-match/dist/angular-validation-match.min.js"></script>
       <script src="bower_components/ngstorage/ngStorage.js"></script>
@@ -67,8 +66,10 @@
       <script src="bower_components/lunr.js/lunr.js"></script>
       <script src="bower_components/api-check/dist/api-check.js"></script>
       <script src="bower_components/angular-formly/dist/formly.js"></script>
+      <script src="bower_components/SHA-1/sha1.js"></script>
+      <script src="bower_components/angulartics/src/angulartics.js"></script>
+      <script src="bower_components/angulartics-google-analytics/lib/angulartics-google-analytics.js"></script>
       <!-- endbower -->
-      <script src="socket.io-client/socket.io.js"></script>
     <!-- endbuild -->
     <!-- build:js(.tmp) app/app.js -->
       <script src="app/app.js"></script>
@@ -76,7 +77,7 @@
       <script src="app/admin/admin.module.js"></script>
       <script src="components/auth/auth.module.js"></script>
       <script src="components/util/util.module.js"></script>
-      <script src="components/auth/interceptor.service.js"></script>
+      <script src="components/auth/router.decorator.js"></script>
       <script src="app/admin/admin.controller.js"></script>
       <script src="app/account/account.js"></script>
       <script src="app/admin/admin.router.js"></script>
@@ -86,17 +87,18 @@
       <script src="components/addresslookup/addresslookup.service.js"></script>
       <script src="app/account/settings/settings.controller.js"></script>
       <script src="components/auth/auth.service.js"></script>
+      <script src="components/auth/interceptor.service.js"></script>
       <script src="app/account/login/login.controller.js"></script>
-      <script src="components/auth/router.decorator.js"></script>
       <script src="components/auth/user.service.js"></script>
       <script src="components/bic/bic.service.js"></script>
       <script src="components/businessnames/businessnames.service.js"></script>
+      <script src="components/cpx-elegibility/cpx-elegibility.directive.js"></script>
+      <script src="components/cpx-welcome/cpx-welcome.directive.js"></script>
       <script src="components/footer/footer.directive.js"></script>
       <script src="components/levy/levy.service.js"></script>
       <script src="components/mongoose-error/mongoose-error.directive.js"></script>
       <script src="components/navbar/navbar.controller.js"></script>
       <script src="components/navbar/navbar.directive.js"></script>
-      <script src="components/socket/socket.service.js"></script>
       <script src="app/account/signup/signup.controller.js"></script>
       <script src="components/util/util.service.js"></script>
       <!-- endinjector -->

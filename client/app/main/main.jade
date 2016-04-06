@@ -42,23 +42,7 @@ md-content(layout-padding)
 
     div
       label(ng-show='main.cpxLevyRate && main.isValidCalculation') CPX Levy rate: {{main.cpxLevyRate}}
-      md-progress-circular(ng-show='! main.cpxLevyRate && main.isValidCalculation')
-
-md-content
-  h1.page-header Features:
-  ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='thing in main.awesomeThings')
-    li
-      a(href='#', tooltip='{{thing.info}}')
-        | {{thing.name}}
-        button.close(type='button', ng-click='main.deleteThing(thing)') &times;
-
-md-content
-  form.thing-form
-    label Syncs in realtime across clients
-    p.input-group
-      input.form-control(type='text', placeholder='Add a new thing here.', ng-model='main.newThing')
-      span.input-group-btn
-        button.btn.btn-primary(type='submit', ng-click='main.addThing()') Add New
+      md-progress-circular(ng-show='! main.cpxLevyRate && main.isValidCalculation', md-mode='indeterminate')
 
 md-content
   label Address Lookup Test
