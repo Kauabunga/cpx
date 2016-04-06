@@ -1,13 +1,16 @@
 #!/bin/bash
 set -e # exit with nonzero exit code if anything fails
 
-
+echo "Building application"
 grunt build
-#grunt buildcontrol:local
 
-#if [ "$GH_TOKEN" = "" ]
-#then
-#   git push https://github.com/Kauabunga/cpx.git build
-#else
-#   git push --force --quiet "https://${GH_TOKEN}@github.com/Kauabunga/cpx.git" build > /dev/null
-#fi
+echo "Fetching latest build branch"
+git fetch https://github.com/Kauabunga/cpx.git build
+
+echo "Pushing compiled application to build branch"
+if [ "$GH_TOKEN" = "" ]
+then
+   grunt buildcontrol:local && git push https://github.com/Kauabunga/cpx.git build || echo "Release buildcontrol local failed"
+else
+   grunt buildcontrol:local && git push --force --quiet "https://${GH_TOKEN}@github.com/Kauabunga/cpx.git" build > /dev/null || echo "Release buildcontrol local travis failed"
+fi

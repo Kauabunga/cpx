@@ -421,7 +421,8 @@ module.exports = function (grunt) {
         options: {
           remote: '../',
           branch: 'build',
-          tag: pkg.version
+          push: false,
+          force: false
         }
       },
       openshift: {
