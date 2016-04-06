@@ -6,7 +6,7 @@ import * as BicService from './bic.service.js';
 
 describe.only('Bic Service', function() {
 
-  this.timeout(20000);
+  this.timeout(25000);
 
   it('should perform a fuzzy search', function(done) {
     return BicService.search('farming')

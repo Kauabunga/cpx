@@ -2,7 +2,7 @@
 
 describe('Service: bic', function () {
 
-  this.timeout(10000);
+  this.timeout(25000);
 
   // load the service's module
   beforeEach(module('cpxApp'));

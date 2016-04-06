@@ -16,7 +16,7 @@ function getBasicLevyCalculation(){
 
 describe('Levy Service', function() {
 
-  this.timeout(10000);
+  this.timeout(25000);
 
   it('should calculate my levy externally', function(done) {
     return LevyService.calculateLevyExternal(getBasicLevyCalculation())
