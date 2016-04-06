@@ -118,7 +118,7 @@
   },
   "scripts": {
     "start": "node dist/server",
-    "test": "grunt test && grunt test:e2e",
+    "test": "grunt test:coverage && grunt test:e2e",
     "update-webdriver": "node node_modules/protractor/bin/webdriver-manager update && node node_modules/protractor/bin/webdriver-manager update --standalone",
     "release": "bash ./release.sh"
   },
