@@ -7,16 +7,17 @@ angular.module('cpxApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'btford.socket-io',
   'ui.router',
   'validation.match',
 
   'ngStorage',
-  'ngMaterial'
+  'ngMaterial',
+  'formly',
+  'angulartics',
+  'angulartics.google.analytics'
 ])
   .config(function($urlRouterProvider, $locationProvider) {
-    $urlRouterProvider
-      .otherwise('/');
+    $urlRouterProvider.otherwise('/');
 
     $locationProvider.html5Mode(true);
   });

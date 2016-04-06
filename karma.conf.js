@@ -23,7 +23,6 @@ module.exports = function(config) {
       'client/bower_components/angular-cookies/angular-cookies.js',
       'client/bower_components/angular-sanitize/angular-sanitize.js',
       'client/bower_components/lodash/dist/lodash.compat.js',
-      'client/bower_components/angular-socket-io/socket.js',
       'client/bower_components/angular-ui-router/release/angular-ui-router.js',
       'client/bower_components/angular-validation-match/dist/angular-validation-match.min.js',
       'client/bower_components/ngstorage/ngStorage.js',
@@ -35,6 +34,9 @@ module.exports = function(config) {
       'client/bower_components/lunr.js/lunr.js',
       'client/bower_components/api-check/dist/api-check.js',
       'client/bower_components/angular-formly/dist/formly.js',
+      'client/bower_components/SHA-1/sha1.js',
+      'client/bower_components/angulartics/src/angulartics.js',
+      'client/bower_components/angulartics-google-analytics/lib/angulartics-google-analytics.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'node_modules/socket.io-client/socket.io.js',

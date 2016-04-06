@@ -5,7 +5,6 @@ describe('Controller: MainController', function() {
   // load the controller's module
   beforeEach(module('cpxApp'));
   beforeEach(module('stateMock'));
-  beforeEach(module('socketMock'));
 
   var scope;
   var MainController;
@@ -15,8 +14,6 @@ describe('Controller: MainController', function() {
   // Initialize the controller and a mock scope
   beforeEach(inject(function(_$httpBackend_, $controller, $rootScope, $state) {
     $httpBackend = _$httpBackend_;
-    $httpBackend.expectGET('/api/things').respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
-
 
     scope = $rootScope.$new();
     state = $state;
@@ -25,9 +22,8 @@ describe('Controller: MainController', function() {
     });
   }));
 
-  it('should attach a list of things to the controller', function(done) {
-    $httpBackend.flush();
-    MainController.awesomeThings.length.should.equal(4);
-    done();
-  });
+  //it('should attach a list of things to the controller', function() {
+  //  $httpBackend.flush();
+  //  MainController.awesomeThings.length.should.equal(4);
+  //});
 });
