@@ -8,3 +8,4 @@ dist
 npm-debug.log
 
 client/app/app.constant.js
+coverage

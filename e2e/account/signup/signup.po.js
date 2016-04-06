@@ -12,7 +12,6 @@ var SignupPage = function() {
   form.password = form.element(by.model('vm.user.password'));
   form.confirmPassword = form.element(by.model('vm.user.confirmPassword'));
   form.submit = form.element(by.css('.btn-register'));
-  form.oauthButtons = require('../../components/oauth-buttons/oauth-buttons.po').oauthButtons;
 
   this.signup = function(data) {
     for (var prop in data) {

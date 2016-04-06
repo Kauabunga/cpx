@@ -6,7 +6,7 @@ import * as BusinessnamesService from './businessnames.service.js';
 
 describe('Businessnames Service', function() {
 
-  this.timeout(10000);
+  this.timeout(25000);
 
   it('should return a business name', function(done) {
     return BusinessnamesService.search('solnet')

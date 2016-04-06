@@ -40,15 +40,6 @@ describe('Login View', function() {
     page.form.submit.getText().should.eventually.equal('Login');
   });
 
-  it('should include oauth buttons with correct classes applied', function() {
-    page.form.oauthButtons.facebook.getText().should.eventually.equal('Connect with Facebook');
-    page.form.oauthButtons.facebook.getAttribute('class').should.eventually.contain('btn-block');
-    page.form.oauthButtons.google.getText().should.eventually.equal('Connect with Google+');
-    page.form.oauthButtons.google.getAttribute('class').should.eventually.contain('btn-block');
-    page.form.oauthButtons.twitter.getText().should.eventually.equal('Connect with Twitter');
-    page.form.oauthButtons.twitter.getAttribute('class').should.eventually.contain('btn-block');
-  });
-
   describe('with local auth', function() {
 
     it('should login a user and redirecting to "/"', function() {

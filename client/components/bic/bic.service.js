@@ -6,9 +6,9 @@ angular.module('cpxApp')
     this.bicStore = {};
     this.bicIndex = undefined;
 
-    $timeout(this.getSearchIndex);
+    const searchType = 'searchServer';
 
-    this.search = query => {
+    this.searchLocal = query => {
       return this.getSearchIndex()
         .then(index => {
           return _(index.search(query)).map(result => {
@@ -16,6 +16,12 @@ angular.module('cpxApp')
           }).value();
         });
     };
+
+    this.searchServer = query => {
+      return $http.get(`/api/bics/search/${query}`).then(response => response.data);
+    };
+
+    this.search = this[searchType];
 
     this.getSearchIndex = () => {
       return this.bicIndex ? $q.when(this.bicIndex) : this.createSearchIndex();
@@ -35,6 +41,8 @@ angular.module('cpxApp')
             this.field('industryName');
             this.field('divisionName');
             this.field('className');
+            this.field('cu');
+            this.field('anzsic');
 
             this.field('keywordsFlattened');
             this.field('definitionPlainText');
