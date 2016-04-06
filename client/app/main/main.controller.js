@@ -4,13 +4,12 @@
 
 class MainController {
 
-  constructor($http, $scope, bic, businessnames, $log, $timeout, levy) {
-    this.$http = $http;
-
+  constructor($http, $scope, bic, businessnames, $log, $timeout, addresslookup, levy) {
 
     this.bicSearchQuery = '';
     this.searchBic = bic.search;
     this.searchBusinessnames = businessnames.search;
+    this.addressQuerySearch = addresslookup.searchAddress;
 
 
     this.getCalculationCacheKey = () => {

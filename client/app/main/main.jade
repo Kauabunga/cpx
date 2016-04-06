@@ -44,6 +44,12 @@ md-content(layout-padding)
       label(ng-show='main.cpxLevyRate && main.isValidCalculation') CPX Levy rate: {{main.cpxLevyRate}}
       md-progress-circular(ng-show='! main.cpxLevyRate && main.isValidCalculation', md-mode='indeterminate')
 
-
+md-content
+  label Address Lookup Test
+  div
+    md-autocomplete(md-floating-label='Address', md-items='address in main.addressQuerySearch(main.addressSearchText, true)',
+    md-search-text='main.addressSearchText', md-selected-item='main.address', md-item-text='address.description')
+      md-item-template
+        span(md-highlight-text='main.searchText') {{address.description}}
 
 //footer
