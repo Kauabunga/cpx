@@ -10,7 +10,7 @@
 'use strict';
 
 import _ from 'lodash';
-import * as BusinessnamesService from './businessnames.service.js';
+import * as BusinessnamesService from '../../components/businessnames/businessnames.service.js';
 
 
 

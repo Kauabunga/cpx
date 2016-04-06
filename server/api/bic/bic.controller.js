@@ -2,7 +2,7 @@
 'use strict';
 
 import _ from 'lodash';
-import * as BicService from './bic.service.js';
+import * as BicService from '../../components/bic/bic.service.js';
 
 
 // Gets a list of Bics
@@ -11,7 +11,6 @@ export function index(req, res) {
     .then(responseWithResult(res))
     .catch(handleError(res));
 }
-
 
 
 
