@@ -16,6 +16,6 @@ then
    grunt buildcontrol:local &&
    echo "Release buildcontrol local success" || echo "Release buildcontrol local failed"
 else
-   ( grunt buildcontrol:local > /dev/null || git push --force --quiet "https://${GH_TOKEN}@github.com/Kauabunga/cpx.git" build > /dev/null ) &&
-   echo "Release buildcontrol local travis success" || echo "Release buildcontrol local travis failed"
+   ( ( grunt buildcontrol:local > /dev/null || git push --force --quiet "https://${GH_TOKEN}@github.com/Kauabunga/cpx.git" build > /dev/null ) &&
+   echo "Release buildcontrol local travis success" ) || echo "Release buildcontrol local travis failed"
 fi
