@@ -24,6 +24,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/levy/levy.socket').register(socket);
   require('../api/bic/bic.socket').register(socket);
   require('../api/businessnames/businessnames.socket').register(socket);
   require('../api/thing/thing.socket').register(socket);

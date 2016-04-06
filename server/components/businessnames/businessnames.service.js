@@ -32,8 +32,14 @@ var BUSINESSNAMES_URL = 'https://www.business.govt.nz/companies/app/ui/pages/com
 
 function search(query) {
   return _Promise.resolve().then(function () {
-    return (0, _requestPromise2['default'])(getBusinessnamesRequest(query)).then(parseBusinessnamesFromResponse);
+    return (0, _requestPromise2['default'])(getBusinessnamesRequest(query)).then(parseBusinessnamesFromResponse).then(filterRemovedBusinessnames);
   });
+}
+
+function filterRemovedBusinessnames(businessnames) {
+  return (0, _lodash2['default'])(businessnames).filter(function (businessname) {
+    return businessname.status && businessname.status.toLowerCase() !== 'removed';
+  }).value();
 }
 
 function parseBusinessnamesFromResponse(response) {

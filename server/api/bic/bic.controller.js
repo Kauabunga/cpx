@@ -9,19 +9,25 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 exports.index = index;
+exports.search = search;
 
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _bicServiceJs = require('./bic.service.js');
+var _componentsBicBicServiceJs = require('../../components/bic/bic.service.js');
 
-var BicService = _interopRequireWildcard(_bicServiceJs);
-
-// Gets a list of Bics
+var BicService = _interopRequireWildcard(_componentsBicBicServiceJs);
 
 function index(req, res) {
   return BicService.index().then(responseWithResult(res))['catch'](handleError(res));
+}
+
+function search(req, res) {
+  if (!req.params.query) {
+    return res.status(400).send();
+  }
+  return BicService.search(req.params.query).then(responseWithResult(res))['catch'](handleError(res));
 }
 
 function handleError(res, statusCode) {

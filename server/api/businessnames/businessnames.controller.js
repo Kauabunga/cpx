@@ -22,9 +22,9 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _businessnamesServiceJs = require('./businessnames.service.js');
+var _componentsBusinessnamesBusinessnamesServiceJs = require('../../components/businessnames/businessnames.service.js');
 
-var BusinessnamesService = _interopRequireWildcard(_businessnamesServiceJs);
+var BusinessnamesService = _interopRequireWildcard(_componentsBusinessnamesBusinessnamesServiceJs);
 
 // Gets a single Businessnames from the DB
 

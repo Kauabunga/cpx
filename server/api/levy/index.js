@@ -1,12 +1,12 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./bic.controller');
+var controller = require('./levy.controller');
 
 var router = express.Router();
 
-router.get('/search/:query', controller.search);
 router.get('/', controller.index);
+router.get('/calculate/:cuCode/:earnings/:cover', controller.calculate);
 
 module.exports = router;
 //# sourceMappingURL=index.js.map
