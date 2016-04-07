@@ -1,8 +1,6 @@
 'use strict';
 
 angular.module('cpxApp', [
-  'cpxApp.auth',
-  'cpxApp.admin',
   'cpxApp.constants',
   'ngCookies',
   'ngResource',
