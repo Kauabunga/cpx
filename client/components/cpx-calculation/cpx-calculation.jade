@@ -1,0 +1,33 @@
+
+
+
+
+h1 Calculate your CPX Levy rate
+
+form.bic-autocomplete-test
+
+  div
+    label Earnings
+    input(type='number', ng-model='earnings')
+
+  md-autocomplete(md-selected-item='selectedBic', md-search-text='bicSearchQuery', md-autoselect='true'
+  md-items='bicItem in searchBic(bicSearchQuery)', md-min-length='1', md-delay='150'
+  md-item-text='bicItem.code + ": " + bicItem.desc', placeholder='Search for a bic', md-match-case-insensitive='true',
+  md-menu-class="autocomplete-bic-template")
+    md-item-template
+      span.bic-autocomplete-item
+        strong.bic-item-title(md-highlight-text='bicSearchQuery', md-highlight-flags='^i') {{bicItem.code}}: {{bicItem.desc}}
+        span.bic-item-definition {{bicItem.definitionPlainText}}
+    md-not-found
+      | No bic matching "{{bicSearchQuery}}" were found.
+
+
+  md-slider-container
+    label Cover
+    md-slider(flex='', min='0', max='100000', step="500" ng-model='cover', aria-label='red')
+    input(type='number', ng-model='cover')
+
+
+  div
+    label(ng-show='cpxLevyRate && isValidCalculation') CPX Levy rate: {{cpxLevyRate}}
+    md-progress-circular(ng-show='! cpxLevyRate && isValidCalculation', md-mode='indeterminate')

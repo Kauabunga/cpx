@@ -1,0 +1,8 @@
+
+div.fade-in(ng-class='{"fade-in-active": loaded}')
+
+  cpx-welcome(model='model', fields='welcomeFields', namespace='welcome')
+
+  cpx-elegibility(ng-if='isElegibilityActive()' model='model', fields='elegibilityFields', namespace='elegibility')
+
+  cpx-calculation(ng-if='isElegibilityComplete()' model='model', fields='calculationFields', namespace='calculation')

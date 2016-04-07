@@ -1,0 +1,4 @@
+div.formly-radio-container
+  label {{::to.label}}
+  md-radio-group(ng-model='model[options.key]')
+    md-radio-button(ng-repeat='radio in ::to.options track by $index' value='{{::radio}}') {{::radio}}
