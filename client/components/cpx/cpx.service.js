@@ -38,7 +38,10 @@ angular.module('cpxApp')
     }
 
     function resetCurrentForm(){
-      return $sessionStorage[CPX_SESSION_STORAGE_KEY] = {};
+      _(getFlow()).forEach(step => {
+        return $sessionStorage[CPX_SESSION_STORAGE_KEY][step] = {};
+      });
+      return $sessionStorage[CPX_SESSION_STORAGE_KEY];
     }
 
     function completeStep(stepName){
