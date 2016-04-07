@@ -1,8 +1,14 @@
 
 div.fade-in(ng-class='{"fade-in-active": loaded}')
 
-  cpx-welcome(model='model', fields='welcomeFields', namespace='welcome')
+  cpx-step(name='welcome')
+    cpx-welcome(model='model', fields='welcomeFields', namespace='welcome',
+    ng-class='{"is-active": isWelcomeActive() }' )
 
-  cpx-elegibility(ng-if='isElegibilityActive()' model='model', fields='elegibilityFields', namespace='elegibility')
+  cpx-step(name='elegibility' ng-if='isElegibilityDisplayed()')
+    cpx-elegibility(model='model', fields='elegibilityFields', namespace='elegibility',
+    ng-class='{"is-active": isElegibilityActive() }' )
 
-  cpx-calculation(ng-if='isElegibilityComplete()' model='model', fields='calculationFields', namespace='calculation')
+  cpx-step(name='calculation' ng-if='isCalculationDisplayed()')
+    cpx-calculation(model='model', fields='calculationFields', namespace='calculation',
+    ng-class='{"is-active": isCalculationActive() }' )

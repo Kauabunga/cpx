@@ -6,9 +6,25 @@ form {
 }
 
 cpx,
-cpx-calculation,
+cpx-step,
 cpx-welcome,
+cpx-calculation,
 cpx-elegibility {
   display: block;
+}
+
+cpx-step {
+  .step-container-inner {
+    padding-top: 80px;
+  }
+}
+
+
+cpx-calculation,
+cpx-elegibility {
+  &.is-active {
+    min-height: 100%;
+    position: absolute;
+  }
 }
 

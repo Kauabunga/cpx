@@ -6,18 +6,22 @@ angular.module('cpxApp')
     this.getCurrentModel = getCurrentModel;
 
     this.welcome = {
-      isComplete: isComplete('welcome')
+      isComplete: isComplete('welcome'),
+      isActive: () => { return ! this.welcome.isComplete(); },
     };
 
     this.elegibility = {
       getFields: getElegibilityFields,
-      isActive: this.welcome.isComplete,
+      isDisplayed: this.welcome.isComplete,
+      isActive: () => { return this.welcome.isComplete() && ! this.elegibility.isComplete() },
       isComplete: isComplete('elegibility')
     };
 
     this.calculation = {
       getFields: getCalculationFields,
-      isActive: () => { false; }
+      isDisplayed: this.elegibility.isComplete,
+      isActive: () => { return this.welcome.isComplete() && this.elegibility.isComplete() },
+      isComplete: isComplete('calculation')
     };
 
 

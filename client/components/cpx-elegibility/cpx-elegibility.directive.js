@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cpxApp')
-  .directive('cpxElegibility', function ($log, cpx) {
+  .directive('cpxElegibility', function ($log, cpx, $timeout, smoothScroll) {
     return {
       templateUrl: 'components/cpx-elegibility/cpx-elegibility.html',
       restrict: 'E',

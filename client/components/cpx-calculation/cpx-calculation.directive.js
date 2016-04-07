@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cpxApp')
-  .directive('cpxCalculation', function ($log, bic, levy) {
+  .directive('cpxCalculation', function ($log, bic, levy, $timeout, cpx, smoothScroll) {
     return {
       templateUrl: 'components/cpx-calculation/cpx-calculation.html',
       restrict: 'E',

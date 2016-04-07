@@ -37,6 +37,7 @@ module.exports = function(config) {
       'client/bower_components/SHA-1/sha1.js',
       'client/bower_components/angulartics/src/angulartics.js',
       'client/bower_components/angulartics-google-analytics/lib/angulartics-google-analytics.js',
+      'client/bower_components/ngSmoothScroll/lib/angular-smooth-scroll.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'node_modules/socket.io-client/socket.io.js',
