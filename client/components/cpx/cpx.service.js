@@ -33,8 +33,12 @@ angular.module('cpxApp')
       isComplete: isComplete('calculation')
     };
 
+    function scrollToStep(stepName){
+      return smoothScroll(document.getElementById(`step-${stepName}`));
+    }
+
     function stepBack(currentStepName){
-      return smoothScroll(document.getElementById(`step-${getFlow()[getFlow().indexOf(currentStepName) - 1]}`));
+      return scrollToStep(getFlow()[getFlow().indexOf(currentStepName) - 1]);
     }
 
     function resetCurrentForm(){
@@ -46,17 +50,31 @@ angular.module('cpxApp')
 
     function completeStep(stepName){
       getCurrentModel()[stepName] = getCurrentModel()[stepName] || {};
-      return getCurrentModel()[stepName].complete = true;
+
+      let stepModel = getCurrentModel()[stepName];
+      if(stepModel.complete){
+        //We have already completed this step - scroll to the next section
+        return scrollToStep(getNextStep(stepName));
+      }
+      else {
+        return stepModel.complete = true;
+      }
     }
 
     function uncompleteStep(stepName){
       let flow = getFlow();
       let stepIndex = flow.indexOf(stepName);
-      _(getFlow()).forEach((step, index) => {
+      _(flow).forEach((step, index) => {
         if(index >= stepIndex){
           getCurrentModel()[stepName].complete = false;
         }
       })
+    }
+
+    function getNextStep(stepName){
+      let flow = getFlow();
+      let stepIndex = flow.indexOf(stepName);
+      return flow[++stepIndex];
     }
 
     function getFlow(){
