@@ -19,9 +19,11 @@ angular.module('cpxApp')
           scope.getElegibilityModel = getElegibilityModel;
         }
 
-        function next($event) {
-          $log.debug(scope.model);
-          return getElegibilityModel().complete = true;
+        function next(form) {
+          $log.debug('elegibility next click', scope.model, form.$valid);
+          if(form.$valid){
+            return cpx.completeStep(scope.namespace);
+          }
         }
 
         function getElegibilityModel(){

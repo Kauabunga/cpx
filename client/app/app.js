@@ -9,7 +9,9 @@ angular.module('cpxApp', [
   'validation.match',
 
   'ngStorage',
+  'ngAnimate',
   'ngMaterial',
+  'ngMessages',
   'formly',
   'angulartics',
   'angulartics.google.analytics',

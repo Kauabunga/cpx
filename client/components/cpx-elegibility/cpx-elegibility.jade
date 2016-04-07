@@ -1,6 +1,6 @@
 
 
 
-formly-form(model='getElegibilityModel()', fields='fields')
+form(name='form' ng-submit='next(form)', novalidate)
 
-  md-button(ng-click='next($event)') Next
+  formly-form(form='form', model='getElegibilityModel()', fields='fields')

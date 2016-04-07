@@ -1,5 +1,10 @@
 
-.step-container-outer.fade-in(ng-class='{"fade-in-active": loaded}')
+
+
+
+.step-container-outer(id='{{"step-" + name}}')
   .step-container-inner
+    md-button.step-back-arrow.md-icon-button(ng-if='! hideBack', ng-click='stepBack(name)')
+      md-icon(md-font-set="material-icons") keyboard_arrow_up
 
     ng-transclude

@@ -1,6 +1,5 @@
 
 
-
 form {
   padding: 20px;
 }
@@ -9,22 +8,40 @@ cpx,
 cpx-step,
 cpx-welcome,
 cpx-calculation,
-cpx-elegibility {
+cpx-elegibility,
+ng-form {
   display: block;
+
 }
 
 cpx-step {
-  .step-container-inner {
-    padding-top: 80px;
-  }
+  max-width: 600px;
 }
-
 
 cpx-calculation,
 cpx-elegibility {
   &.is-active {
     min-height: 100%;
     position: absolute;
+    max-width: 600px;
   }
 }
 
+
+
+//TODO allow ng-leave animation to work correctly with absolute positioning
+cpx-step.ng-enter,
+//cpx-step.ng-leave
+{
+  transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+}
+
+cpx-step.ng-enter,
+cpx-step.ng-leave.ng-leave-active {
+  opacity: 0;
+}
+
+cpx-step.ng-leave,
+cpx-step.ng-enter.ng-enter-active {
+  opacity: 1;
+}

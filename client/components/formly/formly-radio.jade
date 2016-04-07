@@ -1,4 +1,12 @@
+
+
 div.formly-radio-container
-  label {{::to.label}}
-  md-radio-group(ng-model='model[options.key]')
-    md-radio-button(ng-repeat='radio in ::to.options track by $index' value='{{::radio}}') {{::radio}}
+  label(ng-if='::to.label') {{::to.label}}
+  md-radio-group(ng-model='model[options.key]', ng-required='to.required')
+    md-radio-button(ng-repeat='radio in ::to.options track by $index' value='{{::radio.value}}') {{::radio.label}}
+
+
+
+  //TODO pull our into error formly component http://angular-formly.com/#/example/advanced/validation-on-form-submit
+  ng-messages(for='form[options.name].$error' ng-if='form.$submitted || options.formControl.$touched' role="alert")
+    ng-message(when='required') I am required

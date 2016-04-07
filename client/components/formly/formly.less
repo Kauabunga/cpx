@@ -1,0 +1,30 @@
+
+
+ng-messages,
+ng-message {
+  display: block;
+}
+
+.formly-field {
+  display: block;
+}
+
+.formly-field.ng-enter,
+.formly-field.ng-leave {
+  transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+}
+
+.formly-field.ng-enter,
+.formly-field.ng-leave.ng-leave-active {
+  opacity: 0;
+  max-height: 0;
+}
+
+.formly-field.ng-leave,
+.formly-field.ng-enter.ng-enter-active {
+  opacity: 1;
+  max-height: 500px;
+}
+
+
+

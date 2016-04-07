@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cpxApp')
-  .directive('cpxWelcome', function ($log) {
+  .directive('cpxWelcome', function ($log, cpx) {
     return {
       templateUrl: 'components/cpx-welcome/cpx-welcome.html',
       restrict: 'E',
@@ -19,7 +19,7 @@ angular.module('cpxApp')
         }
 
         function start($event){
-          return getWelcomeModel().complete = true;
+          return cpx.completeStep(scope.namespace);
         }
 
         function getWelcomeModel(){

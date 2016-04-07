@@ -7,7 +7,8 @@ angular.module('cpxApp')
       restrict: 'E',
       transclude: true,
       scope: {
-        name: '@'
+        name: '@',
+        hideBack: '@'
       },
       link: function (scope, element, attrs) {
 
@@ -16,13 +17,9 @@ angular.module('cpxApp')
         return init();
 
         function init(){
-
-          $timeout(() => {
-
-            scrollIfNotComplete();
-
-            $timeout(() => { scope.loaded = true; });
-          });
+          scope.undo = cpx.uncompleteStep;
+          scope.stepBack = cpx.stepBack.bind(scope.name);
+          $timeout(scrollIfNotComplete);
         }
 
         function scrollIfNotComplete(){

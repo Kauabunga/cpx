@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('cpxApp')
-  .controller('CpxCtrl', function ($scope, $window, $timeout, $state) {
+  .controller('CpxCtrl', function ($scope, $window, $timeout, $state, cpx) {
 
     $scope.reset = () => {
-      $window.sessionStorage.clear();
-      $timeout(() => { $window.location.reload(); });
+      cpx.resetCurrentForm();
     }
   });

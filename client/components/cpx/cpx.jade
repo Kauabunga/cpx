@@ -1,11 +1,11 @@
 
 div.fade-in(ng-class='{"fade-in-active": loaded}')
 
-  cpx-step(name='welcome')
+  cpx-step(name='welcome', hide-back='true')
     cpx-welcome(model='model', fields='welcomeFields', namespace='welcome',
     ng-class='{"is-active": isWelcomeActive() }' )
 
-  cpx-step(name='elegibility' ng-if='isElegibilityDisplayed()')
+  cpx-step(name='elegibility' ng-if='isElegibilityDisplayed()', hide-back='true')
     cpx-elegibility(model='model', fields='elegibilityFields', namespace='elegibility',
     ng-class='{"is-active": isElegibilityActive() }' )
 
