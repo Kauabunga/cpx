@@ -8,7 +8,7 @@ angular.module('cpxApp')
       link: function (scope, element, attrs) {
 
         return init();
-
+        
         function init(){
           scope.model = cpx.getCurrentModel();
 
