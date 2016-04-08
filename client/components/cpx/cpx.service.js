@@ -272,20 +272,45 @@ angular.module('cpxApp')
             label: 'Your Cover'
           }
         },
+
         {
-          type: 'paragraph',
+          type: 'group',
           templateOptions: {
-            label: 'What industry do you work in?'
-          }
-        },
-        {
-          key: 'business',
-          type: 'autocomplete',
-          templateOptions: {
-            placeholder: 'Describe and select your business or role',
-            search: bic.search,
-            itemText: 'desc',
-            itemTemplate: 'desc'
+            fields: [
+              {
+                type: 'label',
+                templateOptions: {
+                  label: 'What industry do you work in?'
+                }
+              },
+              {
+                key: 'business',
+                type: 'autocomplete',
+                templateOptions: {
+                  placeholder: 'Describe and select your business or role',
+                  search: bic.search,
+                  itemText: 'desc',
+                  itemTemplate: 'desc'
+                }
+              },
+              {
+                type: 'button',
+                hideExpression: 'model.showCategories',
+                templateOptions: {
+                  label: 'Click here to browser some categories',
+                  click: function($event, model, form){
+                    return model.showCategories = true;
+                  }
+                }
+              },
+              {
+                type: 'html',
+                hideExpression: ' ! model.showCategories',
+                templateOptions: {
+                  label: '<em>TODO show categories</em>'
+                }
+              }
+            ]
           }
         },
 
@@ -295,7 +320,7 @@ angular.module('cpxApp')
           templateOptions: {
             fields: [
               {
-                type: 'paragraph',
+                type: 'label',
                 templateOptions: {
                   label: 'What were your earnings for the last year?'
                 }
@@ -309,7 +334,8 @@ angular.module('cpxApp')
                   type: 'number',
                   placeholder: '$00,000',
                   step: 500,
-                  min: 28000
+                  min: 28000,
+                  max: 9999999
                 }
               }
             ]
@@ -321,36 +347,51 @@ angular.module('cpxApp')
           templateOptions: {
             fields: [
               {
-                type: 'paragraph',
+                type: 'label',
+                hideExpression: 'model.earnings >= 100000',
                 templateOptions: {
                   label: 'How much do you want to be covered for?'
                 }
               },
               {
                 key: 'cover',
+                hideExpression: 'model.earnings >= 100000',
                 type: 'slider',
-                hideExpression: 'model.earnings > 100000',
                 templateOptions: {
                   step: 500,
                   tabindex: -1
                 },
                 expressionProperties: {
-                  'templateOptions.min': 'model.earnings',
-                  'templateOptions.max': 'model.earnings > 100000 ? model.earnings : 100000'
+                  'templateOptions.min': 'model.earnings > 100000 ? 100000 : model.earnings',
+                  'templateOptions.max': '100000'
                 }
               },
               {
                 key: 'cover',
                 type: 'input',
-
+                hideExpression: 'model.earnings >= 100000',
                 templateOptions: {
                   type: 'number',
                   placeholder: '$00,000',
                   step: 500
                 },
                 expressionProperties: {
-                  'templateOptions.min': 'model.earnings',
-                  'templateOptions.max': 'model.earnings > 100000 ? model.earnings : 100000'
+                  'templateOptions.min': 'model.earnings > 100000 ? 100000 : model.earnings',
+                  'templateOptions.max': '100000'
+                }
+              },
+              {
+                type: 'label',
+                hideExpression: 'model.earnings <= 100000',
+                templateOptions: {
+                  label: 'Because you earn more than the maximum cover you\'re coverage will be $100,000'
+                }
+              },
+              {
+                type: 'label',
+                hideExpression: 'model.earnings !== 100000',
+                templateOptions: {
+                  label: 'Because you earn the maximum cover you\'re coverage will be $100,000'
                 }
               }
             ]
@@ -360,7 +401,7 @@ angular.module('cpxApp')
         {
           key: 'calculation',
           type: 'cpx-calculation',
-          hideExpression: ' ! model.business || ! model.earnings || ! model.cover',
+          hideExpression: '(! model.business || ! model.earnings || (! model.cover && model.earnings <= 100000 ))',
           templateOptions: {
             //TODO define input params e.g. model.business, model.earnings, model.cover
             //TODO Define content within component
@@ -387,6 +428,12 @@ angular.module('cpxApp')
           type: 'title',
           templateOptions: {
             label: 'Your Policy'
+          }
+        },
+        {
+          type: 'paragraph',
+          templateOptions: {
+            label: 'TODO policy screen'
           }
         }
       ]

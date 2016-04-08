@@ -1,7 +1,8 @@
 
 
 div.formly-radio-container(class='{{::to.class}}')
-  label(ng-if='::to.label') {{::to.label}}
+  label(ng-if='::to.label')
+    strong {{::to.label}}
   md-radio-group(ng-model='model[options.key]', ng-required='to.required')
     md-radio-button(ng-repeat='radio in ::to.options track by $index' value='{{::radio.value}}') {{::radio.label}}
 
