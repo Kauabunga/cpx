@@ -22,7 +22,13 @@ angular.module('cpxApp')
 
           scope.isCalculationActive = cpx.calculation.isActive;
           scope.isCalculationDisplayed = cpx.calculation.isDisplayed;
+          scope.isCalculationComplete = cpx.calculation.isComplete;
           scope.calculationFields = cpx.calculation.getFields();
+
+          scope.isPolicyActive = cpx.policy.isActive;
+          scope.isPolicyDisplayed = cpx.policy.isDisplayed;
+          scope.isPolicyComplete = cpx.policy.isComplete;
+          scope.policyFields = cpx.policy.getFields();
 
           $timeout(() => {
             //TODO smarten this up - each section should fade in automatically while still not rendering if not yet required

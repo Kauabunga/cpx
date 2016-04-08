@@ -1,6 +1,7 @@
 
 div.fade-in(ng-class='{"fade-in-active": loaded}')
 
+  //TODO define this with ng-repeat over steps
 
   div
     cpx-step(name='welcome', hide-back='true',
@@ -17,4 +18,11 @@ div.fade-in(ng-class='{"fade-in-active": loaded}')
     cpx-step(name='calculation' ng-if='isCalculationDisplayed()',
     model='model', fields='calculationFields',
     ng-class='{"is-active": isCalculationActive() }')
+
+  div
+    cpx-step(name='policy' ng-if='isPolicyDisplayed()',
+    model='model', fields='policyFields',
+    ng-class='{"is-active": isPolicyActive() }')
+
+
 

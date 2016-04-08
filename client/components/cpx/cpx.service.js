@@ -33,9 +33,22 @@ angular.module('cpxApp')
     this.calculation = {
       getFields: getCalculationFields,
       isDisplayed: this.elegibility.isComplete,
-      isActive: () => { return this.welcome.isComplete() && this.elegibility.isComplete() },
+      isActive: () => { return this.welcome.isComplete() && this.elegibility.isComplete() && ! this.calculation.isComplete() },
       isComplete: isComplete('calculation')
     };
+
+    this.policy = {
+      getFields: getPolicyFields,
+      isDisplayed: this.calculation.isComplete,
+      isActive: () => { return this.welcome.isComplete() && this.elegibility.isComplete() && this.calculation.isComplete() },
+      isComplete: isComplete('policy')
+    };
+
+
+
+
+
+
 
     function scrollToStep(stepName){
       return smoothScroll(document.getElementById(`step-${stepName}`));
@@ -112,10 +125,10 @@ angular.module('cpxApp')
 
 <p>If you choose CPX it will replace your <a href="https://google.com/search?q=standard%20CoverPlus%20product" target="_blank">standard Cover Plus product</a>.</p>
 
-<p>The application will take you through three steps:</p>
+<p>This application will take you through three steps:</p>
 <ol>
-    <li>Eligibility assessment</li>
-    <li>Estimate your cover</li>
+    <li>Ensure you are eligible</li>
+    <li>Estimate your cover amount</li>
     <li>Apply for CPX</li>
 </ol>
 `
@@ -124,7 +137,7 @@ angular.module('cpxApp')
         {
           type: 'button',
           templateOptions: {
-            label: 'Start my application',
+            label: 'Get started',
             type: 'submit'
           }
         }
@@ -142,7 +155,7 @@ angular.module('cpxApp')
         {
           type: 'title',
           templateOptions: {
-            label: 'Eligibility'
+            label: 'Your Eligibility'
           }
         },
         {
@@ -173,7 +186,7 @@ angular.module('cpxApp')
           type: 'radio',
           hideExpression: 'model.selfEmployed !== "no" || model.hoursThreshold !== "no"',
           templateOptions: {
-            label: 'Do you earn more than $XXX per week?',
+            label: 'Do you earn more than $XXX per week or $XX,XXX per year?',
             options: [{value:'yes', label:'Yes'}, {value:'no', label:'No'}],
             class: 'horizontal'
           },
@@ -190,19 +203,19 @@ angular.module('cpxApp')
               {
                 type: 'title',
                 templateOptions: {
-                  label: 'Have a look at these other options.'
+                  label: 'Check out these other options.'
                 }
               },
               {
                 type: 'paragraph',
                 templateOptions: {
-                  label: 'At the moment, CPX is a product available to Self Employed people that have worked over 30 hours per week or earn more than $XXX per week.'
+                  label: 'Currently, CPX is a product available to Self Employed people that have worked over 30 hours per week or earn more than $XXX per week.'
                 }
               },
               {
                 type: 'paragraph',
                 templateOptions: {
-                  label: 'You might be interested in trying these other options:'
+                  label: 'You might be interested in having a look at these other options:'
                 }
               },
               {
@@ -262,14 +275,14 @@ angular.module('cpxApp')
         {
           type: 'paragraph',
           templateOptions: {
-            label: 'What is your Business industry?'
+            label: 'What industry do you work in?'
           }
         },
         {
           key: 'business',
           type: 'autocomplete',
           templateOptions: {
-            placeholder: 'Search for your business',
+            placeholder: 'Describe and select your business or role',
             search: bic.search,
             itemText: 'desc',
             itemTemplate: 'desc'
@@ -344,6 +357,7 @@ angular.module('cpxApp')
           hideExpression: ' ! model.business || ! model.earnings || ! model.cover',
           templateOptions: {
             //TODO define input params e.g. model.business, model.earnings, model.cover
+            //TODO Define content within component
           }
         },
 
@@ -359,6 +373,17 @@ angular.module('cpxApp')
         }
 
       ];
+    }
+
+    function getPolicyFields(){
+      return [
+        {
+          type: 'title',
+          templateOptions: {
+            label: 'Your Policy'
+          }
+        }
+      ]
     }
 
 
