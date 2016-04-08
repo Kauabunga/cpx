@@ -166,14 +166,12 @@ export function getLevyRates(){
             else if (currentIndex > 0 && currentIndex <= 6) {
 
               //We don't care about the description
-              if(currentIndex === 1){
-
-              }
+              if(currentIndex === 1){}
               else if(currentIndex === 2){
                 currentLevy[currentIndexPropertyMap[currentIndex]] = item.text;
               }
               else {
-                currentLevy[currentIndexPropertyMap[currentIndex]] = parseFloat(item.text.replace(/\$/g, ''));
+                currentLevy[currentIndexPropertyMap[currentIndex]] = parseFloat(item.text.replace(/\$/g, '')).toFixed(2);
               }
               currentIndex++;
 
@@ -234,6 +232,10 @@ function formatSalary(salary = 0){
   return numeral(salary).format('$0,0');
 }
 
+function formayLevy(levy = 0){
+  return numeral(levy).format('$0,0.00');
+}
+
 function parseExternalLevyCalculation(body){
   try {
     let $ = cheerio.load(body);
@@ -244,8 +246,12 @@ function parseExternalLevyCalculation(body){
           .map(money => {return _.get(money, 'attribs.value');})
           .tail()
           .reduce((result, value, key)=> {
-            //result[getColumnNameFromIndex(key)] = parseFloat(value);
+
+            result[getColumnNameFromIndex(key) + 'Currency'] = formayLevy(parseFloat(value).toFixed(2));
+            result[getColumnNameFromIndex(key) + 'Display'] = parseFloat(value).toFixed(2);
             result[getColumnNameFromIndex(key)] = value;
+
+
             return result;
           }, {});
       }

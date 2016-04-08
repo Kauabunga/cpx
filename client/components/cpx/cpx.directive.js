@@ -13,15 +13,16 @@ angular.module('cpxApp')
           scope.model = cpx.getCurrentModel();
 
           scope.isWelcomeActive = cpx.welcome.isActive;
+          scope.welcomeFields = cpx.welcome.getFields();
 
           scope.isElegibilityActive = cpx.elegibility.isActive;
           scope.isElegibilityDisplayed = cpx.elegibility.isDisplayed;
           scope.isElegibilityComplete = cpx.elegibility.isComplete;
-
           scope.elegibilityFields = cpx.elegibility.getFields();
 
           scope.isCalculationActive = cpx.calculation.isActive;
           scope.isCalculationDisplayed = cpx.calculation.isDisplayed;
+          scope.calculationFields = cpx.calculation.getFields();
 
           $timeout(() => {
             //TODO smarten this up - each section should fade in automatically while still not rendering if not yet required

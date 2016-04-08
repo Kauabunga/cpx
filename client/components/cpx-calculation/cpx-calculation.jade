@@ -1,9 +1,11 @@
 
 
 
-h1 Cover
+
 
 form.bic-autocomplete-test
+
+  h1 Cover
 
   label What is your Business industry
   md-autocomplete(md-selected-item='selectedBic', md-search-text='bicSearchQuery', md-autoselect='true'
@@ -29,7 +31,6 @@ form.bic-autocomplete-test
     label How much you want to be covered
     md-slider(flex='', min='0', max='100000', step="500" ng-model='cover', aria-label='red')
     input(type='number', ng-model='cover')
-
 
   div
     label(ng-show='cpxLevyRate && isValidCalculation') CPX Levy rate: {{cpxLevyRate}}

@@ -6,24 +6,18 @@ form {
 
 cpx,
 cpx-step,
-cpx-welcome,
-cpx-calculation,
-cpx-elegibility,
 ng-form {
-  display: block;
-
+//  display: block;
+  display: inline-block;
 }
 
 cpx-step {
   max-width: 600px;
-}
-
-cpx-calculation,
-cpx-elegibility {
   &.is-active {
-    min-height: 100%;
+    min-height: ~"calc(100%)";
+//    min-height: 100%;
+
     position: absolute;
-    max-width: 600px;
   }
 }
 

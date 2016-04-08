@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cpxApp')
-  .service('cpx', function ($log, $sessionStorage, smoothScroll) {
+  .service('cpx', function ($log, $sessionStorage, smoothScroll, bic) {
 
     const CPX_SESSION_STORAGE_KEY = '_cpx';
 
@@ -15,6 +15,7 @@ angular.module('cpxApp')
     this.flow = getFlow();
 
     this.welcome = {
+      getFields: getWelcomeFields,
       isComplete: isComplete('welcome'),
       isActive: () => { return ! this.welcome.isComplete(); }
     };
@@ -94,16 +95,37 @@ angular.module('cpxApp')
       }
     }
 
-    function getCalculationFields(){
+    function getWelcomeFields(){
       return [
         {
-          type: 'title',
+          type: 'html',
           templateOptions: {
-            label: 'Calculation'
+            label: `
+<h1>Welcome to CPX</h1>
+
+<p>Ensure you know exactly how much you'll receive each week if you are injured and can't work.</p>
+
+<p>If you choose CPX it will replace your standard CoverPlus product.</p>
+
+<p>The application will take you through three steps:</p>
+<ol>
+    <li>Eligibility assessment</li>
+    <li>Estimate your cover</li>
+    <li>Apply for CPX</li>
+</ol>
+`
+          }
+        },
+        {
+          type: 'button',
+          templateOptions: {
+            label: 'Start my application',
+            type: 'submit'
           }
         }
       ];
     }
+
 
     function getElegibilityFields(){
       return [
@@ -216,5 +238,98 @@ angular.module('cpxApp')
 
       ];
     }
+
+
+
+    function getCalculationFields(){
+      return [
+        {
+          type: 'title',
+          templateOptions: {
+            label: 'Your Cover'
+          }
+        },
+        {
+          type: 'paragraph',
+          templateOptions: {
+            label: 'What is your Business industry?'
+          }
+        },
+        {
+          key: 'business',
+          type: 'autocomplete',
+          templateOptions: {
+            placeholder: 'Search for your business',
+            search: bic.search,
+            itemText: 'desc',
+            itemTemplate: 'desc'
+          }
+        },
+
+        {
+          type: 'group',
+          hideExpression: ' ! model.business ',
+          templateOptions: {
+            fields: [
+              {
+                type: 'paragraph',
+                templateOptions: {
+                  label: 'What were your earnings for the last year?'
+                }
+              },
+              {
+                key: 'earnings',
+                type: 'input',
+                templateOptions: {
+                  type: 'number',
+                  placeholder: '$00,000'
+                }
+              }
+            ]
+          }
+        },
+        {
+          type: 'group',
+          hideExpression: ' ! model.business || ! model.earnings ',
+          templateOptions: {
+            fields: [
+              {
+                type: 'paragraph',
+                templateOptions: {
+                  label: 'How much do you want to be covered for?'
+                }
+              },
+              {
+                key: 'cover',
+                type: 'slider',
+                templateOptions: {
+                  min: 0,
+                  max: 100000,
+                  step: 500
+                }
+              },
+              {
+                key: 'cover',
+                type: 'input',
+                templateOptions: {
+                  type: 'number',
+                  placeholder: '$00,000'
+                }
+              }
+            ]
+          }
+        },
+
+        {
+          type: 'cpx-calculation',
+          hideExpression: ' ! model.business || ! model.earnings || ! model.cover',
+          templateOptions: {
+            //TODO define input params e.g. model.business, model.earnings, model.cover
+          }
+        }
+
+      ];
+    }
+
 
   });

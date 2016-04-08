@@ -1,0 +1,33 @@
+
+@row-height: 50px;
+
+.formly-field-cpx-calculation {
+
+  padding-top: 50px;
+
+  width: 400px;
+  max-width: 100%;
+
+  .calculation-row {
+    min-height: @row-height;
+  }
+
+  .calculation-column {
+
+    > * {
+      line-height: @row-height;
+      align-self: center;
+    }
+
+
+    border-right: 1px solid #777;
+    border-bottom: 1px solid #777;
+    &.border-left {
+      border-left: 1px solid #777;
+    }
+    &.border-top {
+      border-top: 1px solid #777;
+    }
+  }
+
+}

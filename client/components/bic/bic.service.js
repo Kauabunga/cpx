@@ -8,6 +8,8 @@ angular.module('cpxApp')
 
     const searchType = 'searchServer';
 
+    $timeout(() => { return this.search('preload search');});
+
     this.searchLocal = query => {
       return this.getSearchIndex()
         .then(index => {
@@ -22,7 +24,7 @@ angular.module('cpxApp')
     };
 
     this.search = this[searchType];
-
+    
     this.getSearchIndex = () => {
       return this.bicIndex ? $q.when(this.bicIndex) : this.createSearchIndex();
     };

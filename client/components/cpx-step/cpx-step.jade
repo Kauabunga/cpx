@@ -4,7 +4,12 @@
 
 .step-container-outer(id='{{"step-" + name}}')
   .step-container-inner
-    md-button.step-back-arrow.md-icon-button(ng-if='! hideBack', ng-click='stepBack(name)')
+
+    //md-button.step-back-arrow.md-icon-button(ng-if='! hideBack', ng-click='stepBack(name)')
       md-icon(md-font-set="material-icons") keyboard_arrow_up
 
-    ng-transclude
+
+    form(name='form' ng-submit='submit(form)', novalidate)
+
+      formly-form(form='form', model='getModel(name)', fields='fields')
+

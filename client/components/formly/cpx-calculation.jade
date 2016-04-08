@@ -1,0 +1,27 @@
+
+
+
+.calculation-row(flex layout='row')
+  .calculation-column(flex='33' layout='column')
+    md-progress-circular(ng-show='! calculation' md-mode='indeterminate')
+  .calculation-column.border-top(flex='33' layout='column')
+    label Cover Plus
+  .calculation-column.border-top(flex='33' layout='column')
+    label Cover Plus Extra
+
+
+.calculation-row(flex layout='row')
+  .calculation-column.border-left(flex='33' layout='column')
+    label Cover Amount
+  .calculation-column(flex='33' layout='column')
+    label {{model.cover}}
+  .calculation-column(flex='33' layout='column')
+    label {{model.cover}}
+
+.calculation-row(flex layout='row')
+  .calculation-column.border-left(flex='33' layout='column')
+    label Levy Cost
+  .calculation-column(flex='33' layout='column')
+    label {{calculation.totalWithoutGST.cpCurrency}}
+  .calculation-column(flex='33' layout='column')
+    label {{calculation.totalWithoutGST.cpxCurrency}}
