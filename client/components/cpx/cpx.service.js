@@ -384,14 +384,14 @@ angular.module('cpxApp')
                 type: 'label',
                 hideExpression: 'model.earnings <= 100000',
                 templateOptions: {
-                  label: 'Because you earn more than the maximum cover you\'re coverage will be $100,000'
+                  label: 'Because you earn more than the maximum amount your coverage will be $100,000'
                 }
               },
               {
                 type: 'label',
                 hideExpression: 'model.earnings !== 100000',
                 templateOptions: {
-                  label: 'Because you earn the maximum cover you\'re coverage will be $100,000'
+                  label: 'Because you earn the maximum amount your coverage will be $100,000'
                 }
               }
             ]
