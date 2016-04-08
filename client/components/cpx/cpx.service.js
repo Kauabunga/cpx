@@ -321,10 +321,20 @@ angular.module('cpxApp')
         },
 
         {
+          key: 'calculation',
           type: 'cpx-calculation',
           hideExpression: ' ! model.business || ! model.earnings || ! model.cover',
           templateOptions: {
             //TODO define input params e.g. model.business, model.earnings, model.cover
+          }
+        },
+
+
+        {
+          type: 'button',
+          templateOptions: {
+            //type: 'submit',
+            label: 'Select policy type'
           }
         }
 

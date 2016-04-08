@@ -24,7 +24,7 @@ angular.module('cpxApp')
     };
 
     this.search = this[searchType];
-    
+
     this.getSearchIndex = () => {
       return this.bicIndex ? $q.when(this.bicIndex) : this.createSearchIndex();
     };
