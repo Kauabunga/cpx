@@ -97,7 +97,7 @@ angular.module('cpxApp')
     }
 
     function getFlow(){
-      return ['welcome', 'elegibility', 'calculation'];
+      return ['welcome', 'elegibility', 'calculation', 'policy'];
     }
 
     function getCurrentModel () {
@@ -329,22 +329,28 @@ angular.module('cpxApp')
               {
                 key: 'cover',
                 type: 'slider',
+                hideExpression: 'model.earnings > 100000',
                 templateOptions: {
-                  min: 28000,
-                  max: 100000,
                   step: 500,
                   tabindex: -1
+                },
+                expressionProperties: {
+                  'templateOptions.min': 'model.earnings',
+                  'templateOptions.max': 'model.earnings > 100000 ? model.earnings : 100000'
                 }
               },
               {
                 key: 'cover',
                 type: 'input',
+
                 templateOptions: {
                   type: 'number',
                   placeholder: '$00,000',
-                  step: 500,
-                  min: 28000,
-                  max: 100000
+                  step: 500
+                },
+                expressionProperties: {
+                  'templateOptions.min': 'model.earnings',
+                  'templateOptions.max': 'model.earnings > 100000 ? model.earnings : 100000'
                 }
               }
             ]
@@ -368,7 +374,7 @@ angular.module('cpxApp')
           hideExpression: ' ! model.business || ! model.earnings || ! model.cover',
           templateOptions: {
             type: 'submit',
-            label: 'Select policy type'
+            label: 'Choose your policy'
           }
         }
 

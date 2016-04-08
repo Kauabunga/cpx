@@ -15,4 +15,7 @@ angular.module('cpxApp')
     formlyValidationMessages.addStringMessage('min', 'This value is too small');
     formlyValidationMessages.addStringMessage('max', 'This value is too large');
 
+    formlyValidationMessages.addTemplateOptionValueMessage('min', 'min', 'The min value allowed is', '', 'Too small');
+    formlyValidationMessages.addTemplateOptionValueMessage('max', 'max', 'The max value allowed is', '', 'Too big');
+
 });
