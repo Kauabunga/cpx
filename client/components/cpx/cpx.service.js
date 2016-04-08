@@ -192,18 +192,25 @@ angular.module('cpxApp')
         },
 
         {
-          type: 'html',
+          type: 'group',
           hideExpression: 'model.selfEmployed !== "yes" && model.hoursThreshold !== "yes" && model.earnThreshold !== "yes"',
           templateOptions: {
-            label: '<h3>Great! You are Eligibile for CPX.</h3>'
-          }
-        },
-        {
-          type: 'button',
-          hideExpression: 'model.selfEmployed !== "yes" && model.hoursThreshold !== "yes" && model.earnThreshold !== "yes"',
-          templateOptions: {
-            type: 'submit',
-            label: 'Calculate your coverage now.'
+            fields: [
+              {
+                type: 'html',
+                templateOptions: {
+                  label: '<h3>Great! You are Eligibile for CPX.</h3>'
+                }
+              },
+              {
+                type: 'button',
+                templateOptions: {
+                  type: 'submit',
+                  label: 'Calculate your coverage now.'
+                }
+              }
+
+            ]
           }
         }
 
