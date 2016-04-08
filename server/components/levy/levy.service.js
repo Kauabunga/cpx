@@ -233,7 +233,7 @@ function formatSalary(salary = 0){
 }
 
 function formayLevy(levy = 0){
-  return numeral(levy).format('$0,0.00');
+  return numeral(levy).format('$0,0');
 }
 
 function parseExternalLevyCalculation(body){
@@ -247,7 +247,7 @@ function parseExternalLevyCalculation(body){
           .tail()
           .reduce((result, value, key)=> {
 
-            result[getColumnNameFromIndex(key) + 'Currency'] = formayLevy(parseFloat(value).toFixed(2));
+            result[getColumnNameFromIndex(key) + 'Currency'] = formayLevy(parseFloat(value).toFixed(0));
             result[getColumnNameFromIndex(key) + 'Display'] = parseFloat(value).toFixed(2);
             result[getColumnNameFromIndex(key)] = value;
 
