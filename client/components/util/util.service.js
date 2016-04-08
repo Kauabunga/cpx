@@ -17,6 +17,10 @@ function UtilService($window) {
       return (angular.isFunction(cb)) ? cb : angular.noop;
     },
 
+    currencyFormat(currency) {
+      return numeral(currency).format('$0,0');
+    },
+
     /**
      * Parse a given url with the use of an anchor element
      *

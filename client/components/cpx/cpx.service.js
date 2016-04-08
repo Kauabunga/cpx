@@ -10,6 +10,9 @@ angular.module('cpxApp')
     this.completeStep = completeStep;
     this.uncompleteStep = uncompleteStep;
     this.resetCurrentForm = resetCurrentForm;
+    this.scrollToStep = scrollToStep;
+
+    $log.debug('Init model', getCurrentModel());
 
     //TODO move this into complete schema definition
     this.flow = getFlow();
@@ -52,6 +55,7 @@ angular.module('cpxApp')
     function completeStep(stepName){
       getCurrentModel()[stepName] = getCurrentModel()[stepName] || {};
 
+      $log.debug(`Completing step ${stepName}`);
       let stepModel = getCurrentModel()[stepName];
       if(stepModel.complete){
         //We have already completed this step - scroll to the next section
@@ -67,7 +71,8 @@ angular.module('cpxApp')
       let stepIndex = flow.indexOf(stepName);
       _(flow).forEach((step, index) => {
         if(index >= stepIndex){
-          getCurrentModel()[stepName].complete = false;
+          $log.debug(`CPX Uncompleting ${step}`);
+          getCurrentModel()[step].complete = false;
         }
       })
     }
@@ -105,7 +110,7 @@ angular.module('cpxApp')
 
 <p>Ensure you know exactly how much you'll receive each week if you are injured and can't work.</p>
 
-<p>If you choose CPX it will replace your standard CoverPlus product.</p>
+<p>If you choose CPX it will replace your <a href="https://google.com/search?q=standard%20CoverPlus%20product" target="_blank">standard Cover Plus product</a>.</p>
 
 <p>The application will take you through three steps:</p>
 <ol>
@@ -129,6 +134,11 @@ angular.module('cpxApp')
 
     function getElegibilityFields(){
       return [
+        {
+          key: 'elegibility',
+          type: 'cpx-elegibility',
+          templateOptions: {}
+        },
         {
           type: 'title',
           templateOptions: {
@@ -180,7 +190,7 @@ angular.module('cpxApp')
               {
                 type: 'title',
                 templateOptions: {
-                  label: 'Try these other options.'
+                  label: 'Have a look at these other options.'
                 }
               },
               {
@@ -281,8 +291,12 @@ angular.module('cpxApp')
                 key: 'earnings',
                 type: 'input',
                 templateOptions: {
+                  //TODO use text type and parse/validate what ever the user enters
+                  //Mobile - keep using number
                   type: 'number',
-                  placeholder: '$00,000'
+                  placeholder: '$00,000',
+                  step: 500,
+                  min: 28000
                 }
               }
             ]
@@ -303,9 +317,10 @@ angular.module('cpxApp')
                 key: 'cover',
                 type: 'slider',
                 templateOptions: {
-                  min: 0,
+                  min: 28000,
                   max: 100000,
-                  step: 500
+                  step: 500,
+                  tabindex: -1
                 }
               },
               {
@@ -313,7 +328,10 @@ angular.module('cpxApp')
                 type: 'input',
                 templateOptions: {
                   type: 'number',
-                  placeholder: '$00,000'
+                  placeholder: '$00,000',
+                  step: 500,
+                  min: 28000,
+                  max: 100000
                 }
               }
             ]
@@ -332,8 +350,10 @@ angular.module('cpxApp')
 
         {
           type: 'button',
+          //hideExpression: ' ! model.calculation',
+          hideExpression: ' ! model.business || ! model.earnings || ! model.cover',
           templateOptions: {
-            //type: 'submit',
+            type: 'submit',
             label: 'Select policy type'
           }
         }

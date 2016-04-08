@@ -1,4 +1,7 @@
 
 
-input(type='{{::to.type || "text"}}', placeholder='{{::to.placeholder}}' ng-model='model[options.key]')
+input(type='{{::to.type || "text"}}', step='{{::to.step}}'
+placeholder='{{::to.placeholder}}'
+min='{{::to.min}}' max='{{::to.max}}'
+ng-model='model[options.key]')
 

@@ -50,7 +50,9 @@ angular.module('cpxApp')
         }
 
         function submit(form) {
+
           $log.debug('form submit', scope.model, form.$valid);
+
           if(form.$valid) {
 
             //We want to reset the submitted state here so that error messages are not shown if the user tails back

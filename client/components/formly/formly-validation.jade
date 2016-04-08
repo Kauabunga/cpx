@@ -1,0 +1,6 @@
+
+
+formly-transclude
+
+ng-messages(for='fc.$error', ng-if='form.$submitted || options.formControl.$touched')
+    ng-message(when='{{ ::name }}', ng-repeat='(name, message) in ::options.validation.messages') {{ message(fc.$viewValue, fc.$modelValue, this)}}

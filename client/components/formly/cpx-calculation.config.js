@@ -6,18 +6,19 @@ angular.module('cpxApp')
   formlyConfigProvider.setType({
     name: 'cpx-calculation',
     templateUrl: 'components/formly/cpx-calculation.html',
-    controller: ['$scope', '$log', 'cpx', 'levy', cpxCalculationController]
+    controller: ['$scope', '$log', 'cpx', 'levy', 'Util', cpxCalculationController]
   });
 });
 
 
-function cpxCalculationController($scope, $log, cpx, levy){
+function cpxCalculationController($scope, $log, cpx, levy, Util){
 
   return init();
 
   function init(){
     $log.debug(`cpx-calculation $scope`, $scope);
     $scope.$watch(calculationWatcher, calculation);
+    $scope.currencyFormat = Util.currencyFormat;
   }
 
   function getCalculationCacheKey() {
@@ -34,8 +35,9 @@ function cpxCalculationController($scope, $log, cpx, levy){
 
     let calculationCacheKey = getCalculationCacheKey();
 
-    return $scope.calculationCache[calculationCacheKey] ? $scope.calculationCache[calculationCacheKey] :
-      $scope.calculationCache[calculationCacheKey] = {
+    return $scope.calculationCache[calculationCacheKey] ?
+        $scope.calculationCache[calculationCacheKey] :
+        $scope.calculationCache[calculationCacheKey] = {
         cuCode: $scope.model.business.cu,
         earnings: $scope.model.earnings,
         cover: $scope.model.cover
@@ -47,23 +49,33 @@ function cpxCalculationController($scope, $log, cpx, levy){
     $log.debug(`cpx-calculation calculation`, params);
 
     let calculationCacheKey = getCalculationCacheKey();
-    $scope.calculation = undefined;
 
     if(params){
-      $scope.isValidCalculation = true;
+
+      if($scope.currentCpCalculationEarnings !== params.earnings){
+        $scope.cpCalculation = undefined;
+      }
+
+      if($scope.currentCpxCalculationCover !== params.cover){
+        $scope.cpxCalculation = undefined;
+      }
+
       return levy.calculate(params)
         .then(calculation => {
           if(calculationCacheKey === getCalculationCacheKey()){
-            $scope.calculation = calculation;
+
+            $scope.cpCalculation = calculation.totalWithoutGST.cpCurrency;
+            $scope.cpxCalculation = calculation.totalWithoutGST.cpxCurrency;
+
+            $scope.currentCpCalculationEarnings = params.earnings;
+            $scope.currentCpxCalculationCover = params.cover;
           }
         });
     }
     else {
-      $scope.isValidCalculation = false;
+      $scope.cpCalculation = undefined;
+      $scope.cpxCalculation = undefined;
     }
 
   }
-
-
-
 }

@@ -14,20 +14,16 @@ ng-form {
 cpx-step {
   max-width: 600px;
   &.is-active {
-    min-height: ~"calc(100%)";
-//    min-height: 100%;
-
+    min-height: 100%;
     position: absolute;
   }
 }
 
 
 
-//TODO allow ng-leave animation to work correctly with absolute positioning
-cpx-step.ng-enter,
-//cpx-step.ng-leave
+cpx-step.ng-enter
 {
-  transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+  transition: opacity cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
 }
 
 cpx-step.ng-enter,
@@ -39,3 +35,19 @@ cpx-step.ng-leave,
 cpx-step.ng-enter.ng-enter-active {
   opacity: 1;
 }
+
+
+cpx-step.ng-leave{
+  transition: max-height cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+  max-height: 800px;
+  opacity: 1;
+}
+cpx-step.ng-leave.ng-leave-active {
+  max-height: 0;
+  opacity: 0;
+}
+cpx-step.ng-leave
+cpx-step.ng-leave.ng-leave-active {
+  position:absolute;
+}
+

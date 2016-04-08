@@ -1,3 +1,6 @@
 
 md-slider-container
-  md-slider(min='{{to.min}}', max='{{to.max}}', aria-label='{{to.aria || options.key}}' step="{{to.step}}" ng-model='model[options.key]')
+  md-slider(min='{{to.min}}', max='{{to.max}}',
+  aria-label='{{to.aria || options.key}}'
+  tabindex='{{to.tabindex}}'
+  step="{{to.step}}" ng-model='model[options.key]')

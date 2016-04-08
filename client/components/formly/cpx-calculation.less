@@ -3,10 +3,12 @@
 
 .formly-field-cpx-calculation {
 
-  padding-top: 50px;
+  padding: 50px 0;
 
-  width: 400px;
   max-width: 100%;
+  @media(min-width: @screen-xs-min){
+    width: 400px;
+  }
 
   .calculation-row {
     min-height: @row-height;

@@ -2,6 +2,7 @@
 
 angular.module('cpxApp', [
   'cpxApp.constants',
+  'cpxApp.util',
   'ngCookies',
   'ngResource',
   'ngSanitize',
