@@ -119,6 +119,7 @@ angular.module('cpxApp')
           templateOptions: {
             label: 'Are you Self Employed?',
             options: [{value:'yes', label:'Yes'}, {value:'no', label:'No'}],
+            class: 'horizontal',
             required: true
           }
         },
@@ -128,7 +129,8 @@ angular.module('cpxApp')
           hideExpression: 'model.selfEmployed !== "no"',
           templateOptions: {
             label: 'Do you work over 30 hours per week?',
-            options: [{value:'yes', label:'Yes'}, {value:'no', label:'No'}]
+            options: [{value:'yes', label:'Yes'}, {value:'no', label:'No'}],
+            class: 'horizontal'
           },
           expressionProperties: {
             'templateOptions.required': 'model.selfEmployed === "no"'
@@ -140,7 +142,8 @@ angular.module('cpxApp')
           hideExpression: 'model.selfEmployed !== "no" || model.hoursThreshold !== "no"',
           templateOptions: {
             label: 'Do you earn more than $XXX per week?',
-            options: [{value:'yes', label:'Yes'}, {value:'no', label:'No'}]
+            options: [{value:'yes', label:'Yes'}, {value:'no', label:'No'}],
+            class: 'horizontal'
           },
           expressionProperties: {
             'templateOptions.required': 'model.selfEmployed === "no" && model.hoursThreshold === "no"'
@@ -189,11 +192,18 @@ angular.module('cpxApp')
         },
 
         {
+          type: 'html',
+          hideExpression: 'model.selfEmployed !== "yes" && model.hoursThreshold !== "yes" && model.earnThreshold !== "yes"',
+          templateOptions: {
+            label: '<h3>Great! You are Eligibile for CPX.</h3>'
+          }
+        },
+        {
           type: 'button',
-          hideExpression: 'model.selfEmployed === "no" && model.hoursThreshold === "no" && model.earnThreshold === "no"',
+          hideExpression: 'model.selfEmployed !== "yes" && model.hoursThreshold !== "yes" && model.earnThreshold !== "yes"',
           templateOptions: {
             type: 'submit',
-            label: 'Next'
+            label: 'Calculate your coverage now.'
           }
         }
 

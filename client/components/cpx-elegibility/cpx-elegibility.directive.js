@@ -21,7 +21,11 @@ angular.module('cpxApp')
 
         function next(form) {
           $log.debug('elegibility next click', scope.model, form.$valid);
-          if(form.$valid){
+          if(form.$valid) {
+
+            //We want to reset the submitted state here so that error messages are not shown if the user tails back
+            form.$submitted = false;
+
             return cpx.completeStep(scope.namespace);
           }
         }

@@ -1,10 +1,20 @@
 
-@radio-field-height: 140px;
+@radio-field-height: 90px;
+
 
 .formly-radio-container {
   label {
     display: block;
     margin-bottom: 16px;
+  }
+
+  &.horizontal {
+    md-radio-group {
+      display: flex;
+    }
+    md-radio-button {
+      margin: 0 10px !important;
+    }
   }
 }
 
@@ -16,3 +26,4 @@
 .formly-field-radio.ng-enter.ng-enter-active {
   max-height: @radio-field-height;
 }
+
