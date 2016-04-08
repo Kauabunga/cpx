@@ -19,7 +19,9 @@ angular.module('cpxApp')
         function init(){
           scope.undo = cpx.uncompleteStep;
           scope.stepBack = cpx.stepBack.bind(scope.name);
-          $timeout(scrollIfNotComplete);
+
+          //Add a timeout to the scroll so the user can register their click
+          $timeout(scrollIfNotComplete, 150);
         }
 
         function scrollIfNotComplete(){
