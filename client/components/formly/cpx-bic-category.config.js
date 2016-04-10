@@ -31,6 +31,12 @@ function cpxBicCategoryController($scope, $log, cpx, levy, Util, bic, $q, $timeo
     $scope.selectIndustry = selectIndustry;
     $scope.selectDivision = selectDivision;
     $scope.selectClass = selectClass;
+
+    $scope.getCurrentLength = getCurrentLength;
+
+    $scope.isIndustryActive = isIndustryActive;
+    $scope.isDivisionActive = isDivisionActive;
+    $scope.isClassActive = isClassActive;
   }
 
   function selectIndustry(industry){
@@ -49,8 +55,35 @@ function cpxBicCategoryController($scope, $log, cpx, levy, Util, bic, $q, $timeo
     $log.debug('selected clazz', clazz);
     $scope.model[$scope.to.businessKey] = {
       cu: clazz.cu,
-      desc: clazz.className
+      desc: clazz.className,
+      classId: clazz.classId
     };
+  }
+
+  function isIndustryActive(industryId){
+    return $scope.industryFilterId === industryId;
+  }
+
+  function isDivisionActive(divisionId){
+    return $scope.divisionFilterId === divisionId;
+  }
+
+  function isClassActive(classId){
+    return $scope.model[$scope.to.businessKey].classId === classId;
+  }
+
+  function getCurrentLength(){
+    switch($scope.selectedIndex) {
+      case 1: {
+        return $scope.divisionsLength
+      }
+      case 2: {
+        return $scope.classesLength;
+      }
+      default: {
+        return 6;
+      }
+    }
   }
 
   function createIndustryOnDemand(industries){
@@ -72,7 +105,11 @@ function cpxBicCategoryController($scope, $log, cpx, levy, Util, bic, $q, $timeo
 
     return {
       getItemAtIndex: index => getDivisions()[index],
-      getLength: () => getDivisions().length
+      getLength: () => {
+        let divisions = getDivisions();
+        $scope.divisionsLength = divisions.length;
+        return divisions.length;
+      }
     }
   }
 
@@ -92,7 +129,11 @@ function cpxBicCategoryController($scope, $log, cpx, levy, Util, bic, $q, $timeo
 
     return {
       getItemAtIndex: index => getClasses()[index],
-      getLength: () => getClasses().length
+      getLength: () => {
+        let classes = getClasses();
+        $scope.classesLength = classes.length;
+        return classes.length;
+      }
     }
   }
 

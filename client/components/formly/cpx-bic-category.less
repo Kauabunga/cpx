@@ -1,16 +1,36 @@
 
 @category-tabs-height: 300px;
+@md-tabs-label-height: 48px;
+@list-item-height: 48px;
+
+@list-item-repeat-extra: 2;
+@list-item-extra-rows: 0;
 
 .formly-field-cpx-bic-category {
 
-
   md-tabs,
   md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
-    min-height: @category-tabs-height + 48px;
-  }
+    height: @category-tabs-height + @md-tabs-label-height;
+    min-height: 0;
+    transition: height 0.3s ease;
+    margin-bottom: 20px;
 
-  .bic-category-repeat-container {
-    min-height: @category-tabs-height;
+    .bic-category-repeat-container {
+      height: @category-tabs-height;
+      transition: height 0.3s ease;
+    }
+
+    .loop(@counter) when (@counter > 0) {
+      .loop((@counter - 1));
+      &.repeat-length-@{counter} {
+        height: ((@list-item-height + @list-item-repeat-extra) * ( @counter + @list-item-extra-rows )) + @md-tabs-label-height;
+        .bic-category-repeat-container {
+          height: ((@list-item-height + @list-item-repeat-extra) * ( @counter + @list-item-extra-rows ));
+        }
+      }
+    }
+
+    .loop(6);
   }
 
   md-list-item:first-child {
@@ -20,6 +40,10 @@
     }
   }
   md-list-item {
+    height: @list-item-height;
+    &.is-active {
+      background-color: #bbb;
+    }
     button {
       margin: 0;
       border-top-width: 0;
