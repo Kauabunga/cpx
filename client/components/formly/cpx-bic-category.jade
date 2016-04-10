@@ -1,0 +1,23 @@
+
+
+
+
+md-tabs(md-selected='selectedIndex' md-dynamic-height)
+
+  md-tab(label='Industries')
+    md-virtual-repeat-container.bic-category-repeat-container
+      md-list-item.bic-category-repeat.industry-repeat(md-virtual-repeat='industry in industryOnDemand'
+      md-on-demand flex ng-click='selectIndustry(industry)')
+        div {{industry.industryName}}
+
+  md-tab(label='Divisions')
+    md-virtual-repeat-container.bic-category-repeat-container
+      md-list-item.bic-category-repeat.division-repeat(md-virtual-repeat='division in divisionOnDemand'
+      md-on-demand flex ng-click='selectDivision(division)')
+        div {{division.divisionName}}
+
+  md-tab(label='Classes')
+    md-virtual-repeat-container.bic-category-repeat-container
+      md-list-item.bic-category-repeat.class-repeat(md-virtual-repeat='class in classOnDemand'
+      md-on-demand flex ng-click='selectClass(class)')
+        div {{class.className}}

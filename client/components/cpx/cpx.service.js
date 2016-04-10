@@ -113,6 +113,27 @@ angular.module('cpxApp')
       }
     }
 
+    function getCpxForm(){
+      return {
+        welcome: {
+          fields:getWelcomeFields(),
+          isComplete: isComplete('welcome')
+        },
+        elegibility: {
+          fields: getElegibilityFields(),
+          isComplete: isComplete('elegibility')
+        },
+        calculation: {
+          fields: getCalculationFields(),
+          isComplete: isComplete('calculation')
+        },
+        policy: {
+          fields: getPolicyFields(),
+          isComplete: isComplete('policy')
+        }
+      }
+    }
+
     function getWelcomeFields(){
       return [
         {
@@ -297,17 +318,17 @@ angular.module('cpxApp')
                 type: 'button',
                 hideExpression: 'model.showCategories',
                 templateOptions: {
-                  label: 'Click here to browser some categories',
+                  label: 'Click here to browse bic categories',
                   click: function($event, model, form){
                     return model.showCategories = true;
                   }
                 }
               },
               {
-                type: 'html',
+                type: 'cpx-bic-category',
                 hideExpression: ' ! model.showCategories',
                 templateOptions: {
-                  label: '<em>TODO show categories</em>'
+                  businessKey: 'business'
                 }
               }
             ]

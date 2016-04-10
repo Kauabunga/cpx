@@ -67,17 +67,25 @@ function cpxCalculationController($scope, $log, cpx, levy, Util){
 
     if(params){
 
-      if($scope.currentCpCalculationEarnings !== params.earnings){
+      if($scope.currentCuCalculation !== params.cuCode){
         $scope.cpCalculation = undefined;
-      }
-
-      if($scope.currentCpxCalculationCover !== params.cover){
         $scope.cpxCalculation = undefined;
       }
+      else {
+        if($scope.currentCpCalculationEarnings !== params.earnings){
+          $scope.cpCalculation = undefined;
+        }
+        if($scope.currentCpxCalculationCover !== params.cover){
+          $scope.cpxCalculation = undefined;
+        }
+      }
 
+      //TODO debounce this if there is already a calculation running
       return levy.calculate(params)
         .then(calculation => {
           if(calculationCacheKey === getCalculationCacheKey()){
+
+            $scope.currentCuCalculation = params.cuCode;
 
             $scope.cpCalculation = calculation.totalWithoutGST.cpCurrency;
             $scope.cpxCalculation = calculation.totalWithoutGST.cpxCurrency;
@@ -91,6 +99,7 @@ function cpxCalculationController($scope, $log, cpx, levy, Util){
       cpx.uncompleteStep('calculation');
       $scope.cpCalculation = undefined;
       $scope.cpxCalculation = undefined;
+      $scope.currentCuCalculation = undefined;
     }
 
   }

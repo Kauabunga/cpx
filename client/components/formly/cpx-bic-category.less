@@ -1,0 +1,29 @@
+
+@category-tabs-height: 300px;
+
+.formly-field-cpx-bic-category {
+
+
+  md-tabs,
+  md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
+    min-height: @category-tabs-height + 48px;
+  }
+
+  .bic-category-repeat-container {
+    min-height: @category-tabs-height;
+  }
+
+  md-list-item:first-child {
+    button {
+      border-top-width: 1px;
+
+    }
+  }
+  md-list-item {
+    button {
+      margin: 0;
+      border-top-width: 0;
+    }
+  }
+
+}

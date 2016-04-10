@@ -76,4 +76,31 @@ angular.module('cpxApp')
         .then(response => {return response.data;});
     };
 
+    this.getBicIndustries = () => {
+      return this.bicIndustries ? this.bicIndustries : this.bicIndustries = this.getBics()
+      .then(bics  => {
+        return _(bics).uniq('industryId').map(bic => {
+          return _.pick(bic, 'industryId', 'industryName');
+        }).value();
+      });
+    };
+
+    this.getBicDivisions = () => {
+      return this.bicDivisions ? this.bicDivisions : this.bicDivisions = this.getBics()
+      .then(bics  => {
+        return _(bics).uniq('divisionId').map(bic => {
+          return _.pick(bic, 'industryId', 'divisionId', 'divisionName');
+        }).value();
+      });
+    };
+
+    this.getBicClasses = () => {
+      return this.bicClasses ? this.bicClasses : this.bicClasses = this.getBics()
+      .then(bics  => {
+        return _(bics).uniq('classId').map(bic => {
+          return _.pick(bic, 'cu', 'industryId', 'divisionId', 'classId', 'className');
+        }).value();
+      });
+    };
+
   });
