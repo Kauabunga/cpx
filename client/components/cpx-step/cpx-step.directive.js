@@ -8,6 +8,7 @@ angular.module('cpxApp')
       transclude: true,
       scope: {
         name: '@',
+        title: '@',
         model: '=',
         fields: '=',
         hideBack: '@'

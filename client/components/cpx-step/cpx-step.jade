@@ -3,6 +3,10 @@
 
 
 .step-container-outer(id='{{"step-" + name}}')
+
+  .step-container-title
+    h1 {{title}}
+
   .step-container-inner
 
     //md-button.step-back-arrow.md-icon-button(ng-if='! hideBack', ng-click='stepBack(name)')

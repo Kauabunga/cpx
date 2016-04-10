@@ -85,6 +85,7 @@ angular.module('cpxApp')
       _(flow).forEach((step, index) => {
         if(index >= stepIndex){
           $log.debug(`CPX Uncompleting ${step}`);
+          getCurrentModel()[step] = getCurrentModel()[step] || {};
           getCurrentModel()[step].complete = false;
         }
       })
@@ -117,6 +118,7 @@ angular.module('cpxApp')
       return {
         welcome: {
           fields:getWelcomeFields(),
+          title: 'Welcome to CPX',
           isComplete: isComplete('welcome')
         },
         elegibility: {
@@ -140,8 +142,6 @@ angular.module('cpxApp')
           type: 'html',
           templateOptions: {
             label: `
-<h1>Welcome to CPX</h1>
-
 <p>Ensure you know exactly how much you'll receive each week if you are injured and can't work.</p>
 
 <p>If you choose CPX it will replace your <a href="https://google.com/search?q=standard%20CoverPlus%20product" target="_blank">standard Cover Plus product</a>.</p>
@@ -168,17 +168,6 @@ angular.module('cpxApp')
 
     function getElegibilityFields(){
       return [
-        {
-          key: 'elegibility',
-          type: 'cpx-elegibility',
-          templateOptions: {}
-        },
-        {
-          type: 'title',
-          templateOptions: {
-            label: 'Your Eligibility'
-          }
-        },
         {
           key: 'selfEmployed',
           type: 'radio',
@@ -278,6 +267,12 @@ angular.module('cpxApp')
 
             ]
           }
+        },
+
+        {
+          key: 'elegibility',
+          type: 'cpx-elegibility',
+          templateOptions: {}
         }
 
       ];
@@ -287,13 +282,6 @@ angular.module('cpxApp')
 
     function getCalculationFields(){
       return [
-        {
-          type: 'title',
-          templateOptions: {
-            label: 'Your Cover'
-          }
-        },
-
         {
           type: 'group',
           templateOptions: {
@@ -306,6 +294,7 @@ angular.module('cpxApp')
               },
               {
                 key: 'business',
+                hideExpression: 'model.showCategories',
                 type: 'autocomplete',
                 templateOptions: {
                   placeholder: 'Describe and select your business or role',
@@ -318,9 +307,19 @@ angular.module('cpxApp')
                 type: 'button',
                 hideExpression: 'model.showCategories',
                 templateOptions: {
-                  label: 'Click here to browse bic categories',
+                  label: 'I can\'t find my industry',
                   click: function($event, model, form){
                     return model.showCategories = true;
+                  }
+                }
+              },
+              {
+                type: 'button',
+                hideExpression: '! model.showCategories',
+                templateOptions: {
+                  label: 'Click here to search for your industry bic categories',
+                  click: function($event, model, form){
+                    return model.showCategories = false;
                   }
                 }
               },
@@ -446,15 +445,12 @@ angular.module('cpxApp')
     function getPolicyFields(){
       return [
         {
-          type: 'title',
+          type: 'html',
           templateOptions: {
-            label: 'Your Policy'
-          }
-        },
-        {
-          type: 'paragraph',
-          templateOptions: {
-            label: 'TODO policy screen'
+            label: `<h3>There are two CPX policy types:</h3>
+            <p><b>Standard</b> policy allows you to receive a weekly compensation for 100% of your annual income during the period you are injured.</p>
+            <p><b>Lower Level of Weekly Compensation (LLWC)</b> policy allows you to pay lower ACC levies, but in the event of an injury, you'll receive a progressively decreasing weekly compensation.</p>
+            `
           }
         }
       ]

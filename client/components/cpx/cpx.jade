@@ -5,22 +5,26 @@ div.fade-in(ng-class='{"fade-in-active": loaded}')
 
   div
     cpx-step(name='welcome', hide-back='true',
+    title='Welcome to Cover Plus Extra',
     model='model', fields='welcomeFields')
 
 
   div
     cpx-step(name='elegibility' ng-if='isElegibilityDisplayed()', hide-back='true',
+    title='Your Elegibility',
     model='model', fields='elegibilityFields',
     ng-class='{"is-active": isElegibilityActive() }')
 
 
   div
     cpx-step(name='calculation' ng-if='isCalculationDisplayed()',
+    title='Your Calculation',
     model='model', fields='calculationFields',
     ng-class='{"is-active": isCalculationActive() }')
 
   div
     cpx-step(name='policy' ng-if='isPolicyDisplayed()',
+    title='Your Policy',
     model='model', fields='policyFields',
     ng-class='{"is-active": isPolicyActive() }')
 

@@ -4,19 +4,19 @@
 
 md-tabs(md-selected='selectedIndex', class='repeat-length-{{getCurrentLength()}}')
 
-  md-tab(label='Industries')
+  md-tab(label='#1')
     md-virtual-repeat-container.bic-category-repeat-container
       md-list-item.bic-category-repeat.industry-repeat(md-virtual-repeat='industry in industryOnDemand'
       md-on-demand flex ng-click='selectIndustry(industry)', ng-class='{"is-active": isIndustryActive(industry.industryId)}')
         div {{industry.industryName}}
 
-  md-tab(label='Divisions')
+  md-tab(label='#2')
     md-virtual-repeat-container.bic-category-repeat-container
       md-list-item.bic-category-repeat.division-repeat(md-virtual-repeat='division in divisionOnDemand'
       md-on-demand flex ng-click='selectDivision(division)', ng-class='{"is-active": isDivisionActive(division.divisionId)}')
         div {{division.divisionName}}
 
-  md-tab(label='Classes')
+  md-tab(label='#3')
     md-virtual-repeat-container.bic-category-repeat-container
       md-list-item.bic-category-repeat.class-repeat(md-virtual-repeat='class in classOnDemand'
       md-on-demand flex ng-click='selectClass(class)', ng-class='{"is-active": isClassActive(class.classId)}')
