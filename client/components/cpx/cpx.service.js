@@ -4,6 +4,7 @@ angular.module('cpxApp')
   .service('cpx', function ($log, $sessionStorage, smoothScroll, bic, $timeout) {
 
     const CPX_SESSION_STORAGE_KEY = '_cpx';
+    let cpxFormCache;
 
     this.getCurrentModel = getCurrentModel;
     this.stepBack = stepBack;
@@ -11,44 +12,11 @@ angular.module('cpxApp')
     this.uncompleteStep = uncompleteStep;
     this.resetCurrentForm = resetCurrentForm;
     this.scrollToStep = scrollToStep;
+    this.getCpxForm = getCpxForm;
 
     $log.debug('Init model', getCurrentModel());
 
-    //TODO move this into complete schema definition
     this.flow = getFlow();
-
-    this.welcome = {
-      getFields: getWelcomeFields,
-      isComplete: isComplete('welcome'),
-      isActive: () => { return ! this.welcome.isComplete(); }
-    };
-
-    this.elegibility = {
-      getFields: getElegibilityFields,
-      isDisplayed: this.welcome.isComplete,
-      isActive: () => { return this.welcome.isComplete() && ! this.elegibility.isComplete() },
-      isComplete: isComplete('elegibility')
-    };
-
-    this.calculation = {
-      getFields: getCalculationFields,
-      isDisplayed: this.elegibility.isComplete,
-      isActive: () => { return this.welcome.isComplete() && this.elegibility.isComplete() && ! this.calculation.isComplete() },
-      isComplete: isComplete('calculation')
-    };
-
-    this.policy = {
-      getFields: getPolicyFields,
-      isDisplayed: this.calculation.isComplete,
-      isActive: () => { return this.welcome.isComplete() && this.elegibility.isComplete() && this.calculation.isComplete() },
-      isComplete: isComplete('policy')
-    };
-
-
-
-
-
-
 
     function scrollToStep(stepName){
       return smoothScroll(document.getElementById(`step-${stepName}`));
@@ -62,7 +30,7 @@ angular.module('cpxApp')
       _(getFlow()).forEach(step => {
         return $sessionStorage[CPX_SESSION_STORAGE_KEY][step] = {};
       });
-      return $sessionStorage[CPX_SESSION_STORAGE_KEY];
+      return $sessionStorage[CPX_SESSION_STORAGE_KEY] = {};
     }
 
     function completeStep(stepName){
@@ -96,12 +64,19 @@ angular.module('cpxApp')
 
     function getNextStep(stepName){
       let flow = getFlow();
-      let stepIndex = flow.indexOf(stepName);
-      return flow[++stepIndex];
+      let stepIndex = flow.indexOf(stepName) + 1;
+      return stepIndex < flow.length ? flow[stepIndex] : undefined;
+    }
+
+    function getPreviousStep(stepName){
+      let flow = getFlow();
+      let stepIndex = flow.indexOf(stepName) - 1;
+      return stepIndex >= 0 ? flow[stepIndex] : undefined;
     }
 
     function getFlow(){
-      return ['welcome', 'elegibility', 'calculation', 'policy'];
+      //TODO cache this
+      return _.map(getCpxForm(), step => step.name);
     }
 
     function getCurrentModel () {
@@ -117,26 +92,86 @@ angular.module('cpxApp')
       }
     }
 
+
+    //  isActive: () => { return this.welcome.isComplete() && this.elegibility.isComplete() && this.calculation.isComplete() && this.policy.isComplete(); },
+
+    function isActive(namespace){
+      return () => {
+        let flow = getFlow();
+        let stepIndex = flow.indexOf(namespace);
+        let previousStep = getPreviousStep(namespace);
+
+        let isActive = ! isComplete(namespace)();
+        for(let i = stepIndex; i >= 0; i--){
+
+          if(previousStep && ! isComplete(previousStep)()){
+            isActive = false;
+          }
+
+          previousStep = getPreviousStep(previousStep)
+        }
+        return isActive;
+      }
+    }
+
+    function isDisplayed(namespace){
+      return () => {
+        return isComplete(getPreviousStep(namespace))();
+      };
+    }
+
+
     function getCpxForm(){
-      return {
-        welcome: {
-          fields:getWelcomeFields(),
+      return cpxFormCache ? cpxFormCache : cpxFormCache = [
+        {
+          name: 'welcome',
           title: 'Welcome to CPX',
+          fields: getWelcomeFields(),
+          isDisplayed: () => { return true; },
+          isActive: isActive('welcome') ,
           isComplete: isComplete('welcome')
         },
-        elegibility: {
+        {
+          name: 'elegibility',
+          title: 'Elegibility',
           fields: getElegibilityFields(),
+          isDisplayed: isDisplayed('elegibility'),
+          isActive: isActive('elegibility'),
           isComplete: isComplete('elegibility')
         },
-        calculation: {
+        {
+          name: 'calculation',
+          title: 'Calculation',
           fields: getCalculationFields(),
+          isDisplayed: isDisplayed('calculation'),
+          isActive: isActive('calculation'),
           isComplete: isComplete('calculation')
         },
-        policy: {
+        {
+          name: 'policy',
+          title: 'Policy',
           fields: getPolicyFields(),
+          isDisplayed: isDisplayed('policy'),
+          isActive: isActive('policy'),
           isComplete: isComplete('policy')
+        },
+        {
+          name: 'apply',
+          title: 'Apply',
+          fields: getApplyFields(),
+          isDisplayed: isDisplayed('apply'),
+          isActive: isActive('apply'),
+          isComplete: isComplete('apply')
+        },
+        {
+          name: 'details',
+          title: 'Details',
+          fields: getDetailsFields(),
+          isDisplayed: isDisplayed('details'),
+          isActive: isActive('details'),
+          isComplete: isComplete('details')
         }
-      }
+      ]
     }
 
     function getWelcomeFields(){
@@ -457,9 +492,88 @@ angular.module('cpxApp')
             `
           }
         },
+
         {
           type: 'cpx-policy',
           templateOptions: {}
+        },
+
+        {
+          key: 'selectedPolicy',
+          type: 'radio',
+          templateOptions: {
+            label: 'What policy would you like to apply for?',
+            options: [{value:'standard', label:'Apply for CPX Standard'}, {value:'llwc', label:'Apply for CPX LLWC'}],
+            onSelect: function(){
+              completeStep('policy');
+            }
+          }
+        }
+
+      ]
+    }
+
+
+
+
+
+    function getApplyFields(){
+      return [
+
+        {
+          type: 'html',
+          templateOptions: {
+            label: `<h3>CPX is for you!</h3>
+            <p>We're glad to know you are eligible and want to apply for:</p>
+            <p>{{model.selectedPolicy}}</p>
+            `
+          }
+        },
+        {
+          type: 'html',
+          templateOptions: {
+            label: `
+            This process should take approximately 10 minutes and you will be required to provide the following information:
+
+* Your ACC number
+* Your Company BIC and CU numbers history
+* Your accountant details
+
+You can opt for ACC to contact your accountant to obtain this information.
+
+You can save the application process anytime.
+            `
+          }
+        },
+        {
+          type: 'button',
+          templateOptions: {
+            label: 'Apply now',
+            type: 'submit'
+          }
+        }
+      ]
+    }
+
+    function getDetailsFields(){
+      return [
+
+        {
+          type: 'label',
+          templateOptions: {
+            label: `What's your ACC number?`
+          }
+        },
+        {
+          key: 'accNumber',
+          type: 'input',
+          templateOptions: {}
+        },
+        {
+          type: 'button',
+          templateOptions: {
+            label: `I don't know my ACC number`
+          }
         }
       ]
     }

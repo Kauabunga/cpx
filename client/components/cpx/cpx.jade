@@ -1,32 +1,10 @@
 
 div.fade-in(ng-class='{"fade-in-active": loaded}')
 
-  //TODO define this with ng-repeat over steps
-
-  div
-    cpx-step(name='welcome', hide-back='true',
-    title='Welcome to <b>Cover Plus Extra</b>',
-    model='model', fields='welcomeFields')
-
-
-  div
-    cpx-step(name='elegibility' ng-if='isElegibilityDisplayed()',
-    title='Elegibility',
-    model='model', fields='elegibilityFields',
-    ng-class='{"is-active": isElegibilityActive() }')
-
-
-  div
-    cpx-step(name='calculation' ng-if='isCalculationDisplayed()',
-    title='Calculation',
-    model='model', fields='calculationFields',
-    ng-class='{"is-active": isCalculationActive() }')
-
-  div
-    cpx-step(name='policy' ng-if='isPolicyDisplayed()',
-    title='Policy',
-    model='model', fields='policyFields',
-    ng-class='{"is-active": isPolicyActive() }')
-
+  div(ng-repeat='step in cpxForm track by $index')
+    cpx-step(name='{{::step.name}}', hide-back='false', ng-if='step.isDisplayed()',
+    step='step', title='{{::step.title}}',
+    model='model', fields='step.fields',
+    ng-class='{"is-active": step.isActive() }')
 
 

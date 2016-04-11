@@ -1,18 +1,15 @@
 
 
-
-
-
 .calculation.cp-calculation
   h3 Cover Plus
   .amount
     div.label Amount
     div.value {{currencyFormat(model.earnings * 0.8)}}
-  .cost(ng-show='cpxCalculation')
+  .cost(ng-show='cpCalculation')
     div.label Levy Cost
     div.value {{cpCalculation}}
 
-  md-progress-circular(ng-show='! cpxCalculation' md-mode='indeterminate')
+  md-progress-circular(ng-show='! cpCalculation' md-mode='indeterminate')
 
 .calculation.cpx-calculation
   h3 Cover Plus Extra
@@ -26,32 +23,4 @@
     div.value {{cpxCalculation}}
   md-progress-circular(ng-show='! cpxCalculation' md-mode='indeterminate')
 
-
-
-//div
-  .calculation-row(flex layout='row')
-    .calculation-column(flex='33' layout='column')
-      span &nbsp;
-    .calculation-column.border-top(flex='33' layout='column')
-      label Cover Plus
-    .calculation-column.border-top(flex='33' layout='column')
-      label Cover Plus Extra
-
-
-  .calculation-row(flex layout='row')
-    .calculation-column.border-left(flex='33' layout='column')
-      label Cover Amount
-    .calculation-column(flex='33' layout='column')
-      label {{currencyFormat(model.earnings * 0.8)}}
-    .calculation-column(flex='33' layout='column')
-      label {{currencyFormat(model.cover)}}
-
-  .calculation-row(flex layout='row')
-    .calculation-column.border-left(flex='33' layout='column')
-      label Levy Cost
-    .calculation-column(flex='33' layout='column')
-      label {{cpCalculation}}
-      md-progress-circular(ng-show='! cpCalculation' md-mode='indeterminate')
-    .calculation-column(flex='33' layout='column')
-      label {{cpxCalculation}}
 

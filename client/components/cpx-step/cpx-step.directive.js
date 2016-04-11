@@ -11,6 +11,7 @@ angular.module('cpxApp')
         title: '@',
         model: '=',
         fields: '=',
+        step: '=',
         hideBack: '@'
       },
       link: function (scope, element, attrs) {
@@ -43,14 +44,10 @@ angular.module('cpxApp')
         }
 
         function isStepComplete(){
-          if(! getStepService().isComplete){throw new Error(`Step does not have isComplete method : ${scope.name}`);}
-          return getStepService().isComplete();
+          if(scope.step && ! scope.step.isComplete){throw new Error(`Step does not have isComplete method : ${scope.name}`);}
+          return scope.step && scope.step.isComplete();
         }
 
-        function getStepService(){
-          if(!cpx[scope.name]){throw new Error(`Step does not have service : ${scope.name}`);}
-          return cpx[scope.name];
-        }
 
         function getModel(name){
           //return scope.model[name] ? scope.model[name] : scope.model[name] = {};
