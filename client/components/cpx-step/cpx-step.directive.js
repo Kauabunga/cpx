@@ -12,7 +12,7 @@ angular.module('cpxApp')
         model: '=',
         fields: '=',
         step: '=',
-        hideBack: '@'
+        hideBack: '='
       },
       link: function (scope, element, attrs) {
 
@@ -21,10 +21,12 @@ angular.module('cpxApp')
         return init();
 
         function init(){
+          $log.debug(scope.hideBack);
           scope.undo = cpx.uncompleteStep;
           scope.stepBack = cpx.stepBack.bind(scope.name);
           scope.getModel = getModel;
           scope.submit = submit;
+          scope.scrollToStep = cpx.scrollToStep;
 
 
           //TODO ensure the container is there

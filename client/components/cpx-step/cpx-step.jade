@@ -5,7 +5,7 @@
 .step-container-outer(id='{{"step-" + name}}')
 
   .step-container-title(ng-if='title', sticky, offset='48', disabled-sticky='name === "welcome"')
-    h1(ng-bind-html='::title')
+    h1(ng-bind-html='::title', tabindex='-1' ng-click='scrollToStep(name)')
 
     md-button.step-back-arrow.md-icon-button(ng-if='! hideBack', ng-click='stepBack(name)')
       md-icon(md-font-set="material-icons") keyboard_arrow_up

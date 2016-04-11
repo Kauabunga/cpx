@@ -503,7 +503,12 @@ angular.module('cpxApp')
           type: 'radio',
           templateOptions: {
             label: 'What policy would you like to apply for?',
-            options: [{value:'standard', label:'Apply for CPX Standard'}, {value:'llwc', label:'Apply for CPX LLWC'}],
+            options: [{value:'standard', label: function($scope){
+              return `Apply for CPX Standard ${$scope.model.cpxCalculation}`
+            }}, {value:'llwc', label: function($scope){
+              return `Apply for CPX LLWC ${$scope.model.cpxLlwcCalculation}`
+              }}
+            ],
             onSelect: function(){
               completeStep('policy');
             }
@@ -525,23 +530,31 @@ angular.module('cpxApp')
           templateOptions: {
             label: `<h3>CPX is for you!</h3>
             <p>We're glad to know you are eligible and want to apply for:</p>
-            <p>{{model.selectedPolicy}}</p>
+
             `
+          }
+        },
+        {
+          type: 'cpx-apply',
+          templateOptions:{
+            standardTitle: 'Standard',
+            llwcTitle: 'Lower Level of Weekly Compensation'
           }
         },
         {
           type: 'html',
           templateOptions: {
             label: `
-            This process should take approximately 10 minutes and you will be required to provide the following information:
+            <p>This process should take approximately 10 minutes where we
+            will need the following information:</p>
+<ul>
+<li>Your ACC number</li>
+<li>Your Company BIC and CU numbers history</li>
+<li>Your accountant details</li>
+</ul>
+<p>You can opt for ACC to contact your accountant to obtain this information.</p>
 
-* Your ACC number
-* Your Company BIC and CU numbers history
-* Your accountant details
-
-You can opt for ACC to contact your accountant to obtain this information.
-
-You can save the application process anytime.
+<p>You can save the application process anytime.</p>
             `
           }
         },

@@ -1,26 +1,30 @@
 
 
-.calculation.cp-calculation
-  h3 Cover Plus
-  .amount
-    div.label Amount
-    div.value {{currencyFormat(model.earnings * 0.8)}}
-  .cost(ng-show='cpCalculation')
-    div.label Levy Cost
-    div.value {{cpCalculation}}
+.calculation-container
 
-  md-progress-circular(ng-show='! cpCalculation' md-mode='indeterminate')
+  .calculation.cp-calculation
+    div
+      h3 Cover Plus
 
-.calculation.cpx-calculation
-  h3 Cover Plus Extra
+    .amount
+      div.label Amount
+      div.value {{currencyFormat(model.earnings * 0.8)}}
+    .cost(ng-show='model.cpCalculation')
+      div.label Levy Cost
+      div.value {{model.cpCalculation}}
+    md-progress-circular(ng-show='! model.cpCalculation' md-mode='indeterminate')
 
-  .amount
-    div.label Amount
-    div.value {{currencyFormat(model.cover)}}
+  .calculation.cpx-calculation
+    div
+      h3 Cover Plus Extra
 
-  .cost(ng-show='cpxCalculation')
-    div.label Levy Cost
-    div.value {{cpxCalculation}}
-  md-progress-circular(ng-show='! cpxCalculation' md-mode='indeterminate')
+    .amount
+      div.label Amount
+      div.value {{currencyFormat(model.cover)}}
+
+    .cost(ng-show='model.cpxCalculation && model.cpCalculation')
+      div.label Levy Cost
+      div.value {{model.cpxCalculation}}
+    md-progress-circular(ng-show='! model.cpxCalculation || ! model.cpCalculation' md-mode='indeterminate')
 
 

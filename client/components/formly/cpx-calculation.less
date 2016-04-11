@@ -4,17 +4,38 @@
 .formly-field-cpx-calculation {
 
   padding: 50px 0;
-
   max-width: 100%;
   @media(min-width: @screen-xs-min){
 //    width: 440px;
+  }
+
+  md-progress-circular {
+    position: absolute;
+    display: inline-block;
+  }
+  md-progress-circular.md-default-theme .md-inner .md-left .md-half-circle, md-progress-circular .md-inner .md-left .md-half-circle {
+    border-left-color: @deep-blue;
+  }
+  md-progress-circular.md-default-theme .md-inner .md-right .md-half-circle, md-progress-circular .md-inner .md-right .md-half-circle {
+    border-right-color: @deep-blue;
+  }
+
+  .calculation-container {
+
+    display: flex;
+    flex-direction: column;
+    @media(min-width: @screen-xs-min){
+      flex-direction: row;
+    }
   }
 
   .calculation {
     margin-right: 24px;
     min-width: 160px;
     height: 160px;
-    display: inline-block;
+
+
+
     border: 1px solid @dark-grey;
 
     padding: 10px 20px 20px;

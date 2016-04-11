@@ -68,15 +68,15 @@ function cpxCalculationController($scope, $log, cpx, levy, Util){
     if(params){
 
       if($scope.currentCuCalculation !== params.cuCode){
-        $scope.cpCalculation = undefined;
-        $scope.cpxCalculation = undefined;
+        $scope.model.cpCalculation = undefined;
+        $scope.model.cpxCalculation = undefined;
       }
       else {
         if($scope.currentCpCalculationEarnings !== params.earnings){
-          $scope.cpCalculation = undefined;
+          $scope.model.cpCalculation = undefined;
         }
         if($scope.currentCpxCalculationCover !== params.cover){
-          $scope.cpxCalculation = undefined;
+          $scope.model.cpxCalculation = undefined;
         }
       }
 
@@ -85,10 +85,13 @@ function cpxCalculationController($scope, $log, cpx, levy, Util){
         .then(calculation => {
           if(calculationCacheKey === getCalculationCacheKey()){
 
+            $log.debug('Calculation', calculation);
+
             $scope.currentCuCalculation = params.cuCode;
 
-            $scope.cpCalculation = calculation.totalWithoutGST.cpCurrency;
-            $scope.cpxCalculation = calculation.totalWithoutGST.cpxCurrency;
+            $scope.model.cpCalculation = calculation.totalWithGST.cpCurrency;
+            $scope.model.cpxCalculation = calculation.totalWithGST.cpxCurrency;
+            $scope.model.cpxLlwcCalculation = calculation.totalWithGST.cpxLlwcCurrency;
 
             $scope.currentCpCalculationEarnings = params.earnings;
             $scope.currentCpxCalculationCover = params.cover;
@@ -97,8 +100,8 @@ function cpxCalculationController($scope, $log, cpx, levy, Util){
     }
     else {
       cpx.uncompleteStep('calculation');
-      $scope.cpCalculation = undefined;
-      $scope.cpxCalculation = undefined;
+      $scope.model.cpCalculation = undefined;
+      $scope.model.cpxCalculation = undefined;
       $scope.currentCuCalculation = undefined;
     }
 

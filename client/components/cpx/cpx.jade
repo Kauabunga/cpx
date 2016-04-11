@@ -2,7 +2,7 @@
 div.fade-in(ng-class='{"fade-in-active": loaded}')
 
   div(ng-repeat='step in cpxForm track by $index')
-    cpx-step(name='{{::step.name}}', hide-back='false', ng-if='step.isDisplayed()',
+    cpx-step(name='{{::step.name}}', hide-back='$first', ng-if='step.isDisplayed()',
     step='step', title='{{::step.title}}',
     model='model', fields='step.fields',
     ng-class='{"is-active": step.isActive() }')

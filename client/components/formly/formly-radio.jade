@@ -11,7 +11,7 @@ div.formly-radio-container(class='{{::to.class}}')
     md-button.grey-button(ng-click='(model[options.key] = radio.value) && to.onSelect()', ng-class='{"is-active": model[options.key] === radio.value}'
     ng-repeat='radio in ::to.options track by $index')
       input(type="radio" ng-model='model[options.key]' value="{{::radio.value}}")
-      | {{::radio.label}}
+      | {{getRadioLabel(radio.label)}}
 
 
   div
