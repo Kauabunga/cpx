@@ -1,6 +1,8 @@
 'use strict';
 
 
+let initTime = Date.now();
+
 
 angular.module('cpxApp')
   .directive('cpxStep', function ($timeout, cpx, smoothScroll, $log) {
@@ -28,14 +30,16 @@ angular.module('cpxApp')
           scope.submit = submit;
           scope.scrollToStep = cpx.scrollToStep;
 
-          //Has to be a nicer way to do this
-          $timeout(() => window.scrollTo(0,0),200);
-          $timeout(() => window.scrollTo(0,0),300);
-          $timeout(() => window.scrollTo(0,0),400);
+
+          if(Date.now() - initTime <= 500){
+            //Has to be a nicer way to do this
+            $timeout(() => window.scrollTo(0,0),200);
+            $timeout(() => window.scrollTo(0,0),300);
+          }
 
           //TODO ensure the container is there
           //Add a timeout to the scroll so the user can register their click
-          $timeout(scrollIfNotComplete, 500);
+          $timeout(scrollIfNotComplete, 400);
         }
 
         function scrollIfNotComplete(){
