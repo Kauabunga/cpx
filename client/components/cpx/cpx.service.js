@@ -269,7 +269,14 @@ angular.module('cpxApp')
 
         {
           type: 'group',
-          hideExpression: 'model.soleTrader === "sole" && ( model.selfEmployed !== "no" || model.hoursThreshold !== "no" || model.earnThreshold !== "no" )',
+          //hideExpression: '((model.soleTrader !== "partnership" || model.soleTrader !== "shareholder") && model.selfEmployed !== "yes") || ( model.selfEmployed !== "no" || model.hoursThreshold !== "no" || model.earnThreshold !== "no" )',
+          hideExpression: '(model.selfEmployed !== "yes" && model.hoursThreshold === "yes" ) || ' +
+          '(model.selfEmployed !== "yes" && model.earnThreshold === "yes" ) || ' +
+          '(model.selfEmployed === "yes" && model.soleTrader === "sole") || ' +
+          '! model.selfEmployed || ' +
+          '(model.selfEmployed === "yes" && ! model.soleTrader ) || ' +
+          '(model.selfEmployed === "no" && ! model.hoursThreshold ) || ' +
+          '(model.selfEmployed === "no" && model.hoursThreshold === "no" && ! model.earnThreshold)',
           templateOptions: {
             fields: [
               {
@@ -310,7 +317,7 @@ angular.module('cpxApp')
 
         {
           type: 'group',
-          hideExpression: 'model.soleTrader !== "sole" || ( model.selfEmployed !== "yes" && model.hoursThreshold !== "yes" && model.earnThreshold !== "yes" )',
+          hideExpression: '(model.selfEmployed === "yes" && model.soleTrader !== "sole") || ( model.selfEmployed !== "yes" && model.hoursThreshold !== "yes" && model.earnThreshold !== "yes" )',
           templateOptions: {
             fields: [
               {
