@@ -69,7 +69,7 @@ function cpxBicCategoryController($scope, $log, cpx, levy, Util, bic, $q, $timeo
   }
 
   function isClassActive(classId){
-    return $scope.model[$scope.to.businessKey].classId === classId;
+    return $scope.model[$scope.to.businessKey] && $scope.model[$scope.to.businessKey].classId === classId;
   }
 
   function getCurrentLength(){

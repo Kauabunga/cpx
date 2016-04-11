@@ -7,7 +7,7 @@ angular.module('cpxApp')
 
     $stateProvider
       .state('cpx', {
-        url: '/cpx',
+        url: '/',
         templateUrl: 'app/cpx/cpx.html',
         controller: 'CpxCtrl'
         //abstract: true

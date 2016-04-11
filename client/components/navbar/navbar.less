@@ -1,0 +1,20 @@
+
+@navbar-height: 96px;
+@navbar-z-index: 999999999;
+
+.navbar {
+  height: @navbar-height;
+  position: fixed;
+  width: 100%;
+
+  z-index: @navbar-z-index;
+
+  .navbar-top {
+    height: @navbar-height / 2;
+    background-color: @dark-blue;
+  }
+  .navbar-bottom {
+    height: @navbar-height / 2;
+    background-color: @light-grey;
+  }
+}

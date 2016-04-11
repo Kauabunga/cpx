@@ -16,7 +16,8 @@ angular.module('cpxApp', [
   'formly',
   'angulartics',
   'angulartics.google.analytics',
-  'smoothScroll'
+  'smoothScroll',
+  'sticky'
 ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider.otherwise('/');

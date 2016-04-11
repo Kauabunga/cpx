@@ -4,8 +4,8 @@
 
 .step-container-outer(id='{{"step-" + name}}')
 
-  .step-container-title
-    h1 {{title}}
+  .step-container-title(ng-if='title', sticky, offset='96', disabled-sticky='name === "welcome"')
+    h1(ng-bind-html='::title')
 
   .step-container-inner
 

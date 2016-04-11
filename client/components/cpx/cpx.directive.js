@@ -5,10 +5,11 @@ angular.module('cpxApp')
     return {
       templateUrl: 'components/cpx/cpx.html',
       restrict: 'E',
+      replace: true,
       link: function (scope, element, attrs) {
 
         return init();
-        
+
         function init(){
           scope.model = cpx.getCurrentModel();
 
