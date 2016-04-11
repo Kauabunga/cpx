@@ -20,8 +20,10 @@ angular.module('cpxApp', [
   'sticky',
   'nvd3'
 ])
-  .config(function($urlRouterProvider, $locationProvider) {
+  .config(function($urlRouterProvider, $locationProvider, $anchorScrollProvider) {
     $urlRouterProvider.otherwise('/');
+
+    $anchorScrollProvider.disableAutoScrolling();
 
     $locationProvider.html5Mode(true);
   });
