@@ -420,50 +420,50 @@ angular.module('cpxApp')
             fields: [
               {
                 type: 'label',
-                hideExpression: 'model.earnings >= 100000',
+                hideExpression: 'model.earnings >= 120070',
                 templateOptions: {
                   label: 'How much do you want to be covered for?'
                 }
               },
               {
                 key: 'cover',
-                hideExpression: 'model.earnings >= 100000',
+                hideExpression: 'model.earnings >= 120070',
                 type: 'slider',
                 templateOptions: {
                   step: 500,
                   tabindex: -1
                 },
                 expressionProperties: {
-                  'templateOptions.min': 'model.earnings > 100000 ? 100000 : model.earnings',
-                  'templateOptions.max': '100000'
+                  'templateOptions.min': 'model.earnings > 120070 ? 120070 : model.earnings',
+                  'templateOptions.max': '120070'
                 }
               },
               {
                 key: 'cover',
                 type: 'input',
-                hideExpression: 'model.earnings >= 100000',
+                hideExpression: 'model.earnings >= 120070',
                 templateOptions: {
                   type: 'number',
                   placeholder: '$00,000',
                   step: 500
                 },
                 expressionProperties: {
-                  'templateOptions.min': 'model.earnings > 100000 ? 100000 : model.earnings',
-                  'templateOptions.max': '100000'
+                  'templateOptions.min': 'model.earnings > 120070 ? 120070 : model.earnings',
+                  'templateOptions.max': '120070'
                 }
               },
               {
                 type: 'label',
-                hideExpression: 'model.earnings <= 100000',
+                hideExpression: 'model.earnings <= 120070',
                 templateOptions: {
-                  label: 'Because you earn more than the maximum amount your coverage will be $100,000'
+                  label: 'Because you earn more than the maximum amount your coverage will be $120,070'
                 }
               },
               {
                 type: 'label',
-                hideExpression: 'model.earnings !== 100000',
+                hideExpression: 'model.earnings !== 120070',
                 templateOptions: {
-                  label: 'Because you earn the maximum amount your coverage will be $100,000'
+                  label: 'Because you earn the maximum amount your coverage will be $120,070'
                 }
               }
             ]
@@ -473,7 +473,7 @@ angular.module('cpxApp')
         {
           key: 'calculation',
           type: 'cpx-calculation',
-          hideExpression: '(! model.business || ! model.earnings || (! model.cover && model.earnings <= 100000 ))',
+          hideExpression: '(! model.business || ! model.earnings || (! model.cover && model.earnings <= 120070 ))',
           templateOptions: {
             //TODO define input params e.g. model.business, model.earnings, model.cover
             //TODO Define content within component

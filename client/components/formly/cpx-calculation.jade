@@ -8,7 +8,7 @@
 
     .amount
       div.label Amount
-      div.value {{currencyFormat(model.earnings * 0.8)}}
+      div.value {{currencyFormat(mathMin(model.earnings, 120070) * 0.8)}}
     .cost(ng-show='model.cpCalculation')
       div.label Levy Cost
       div.value {{model.cpCalculation}}

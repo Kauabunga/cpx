@@ -13,7 +13,7 @@ angular.module('cpxApp')
 
 function cpxCalculationController($scope, $log, cpx, levy, Util){
 
-  const MAXIMUM_COVER = 100000;
+  const MAXIMUM_COVER = 120070;
 
   return init();
 
@@ -22,6 +22,7 @@ function cpxCalculationController($scope, $log, cpx, levy, Util){
     $scope.$watch(calculationWatcher, calculation);
     $scope.$watch('model.earnings', maxEarningsWatcher);
     $scope.currencyFormat = Util.currencyFormat;
+    $scope.mathMin = Math.min;
   }
 
   function getCalculationCacheKey() {
