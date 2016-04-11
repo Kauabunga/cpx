@@ -243,40 +243,39 @@ angular.module('cpxApp')
         {
           key: 'hoursThreshold',
           type: 'radio',
-          hideExpression: 'model.selfEmployed !== "no"',
+          hideExpression: 'model.selfEmployed !== "yes" || ! model.soleTrader || model.soleTrader !== "sole"',
           templateOptions: {
             label: 'Do you work over 30 hours per week?',
             options: [{value:'yes', label:'Yes'}, {value:'no', label:'No'}],
             class: 'horizontal'
           },
           expressionProperties: {
-            'templateOptions.required': 'model.selfEmployed === "no"'
+            'templateOptions.required': 'model.selfEmployed === "yes" && model.soleTrader === "sole"'
           }
         },
         {
           key: 'earnThreshold',
           type: 'radio',
-          hideExpression: 'model.selfEmployed !== "no" || model.hoursThreshold !== "no"',
+          hideExpression: 'model.selfEmployed !== "yes" || ! model.soleTrader || model.soleTrader !== "sole" || model.hoursThreshold !== "no"',
           templateOptions: {
             label: 'Do you earn more than $590 per week or $30,680 per year?',
             options: [{value:'yes', label:'Yes'}, {value:'no', label:'No'}],
             class: 'horizontal'
           },
           expressionProperties: {
-            'templateOptions.required': 'model.selfEmployed === "no" && model.hoursThreshold === "no"'
+            'templateOptions.required': 'model.selfEmployed === "yes" && model.soleTrader === "sole" && model.hoursThreshold === "no"'
           }
         },
 
         {
           type: 'group',
-          //hideExpression: '((model.soleTrader !== "partnership" || model.soleTrader !== "shareholder") && model.selfEmployed !== "yes") || ( model.selfEmployed !== "no" || model.hoursThreshold !== "no" || model.earnThreshold !== "no" )',
-          hideExpression: '(model.selfEmployed !== "yes" && model.hoursThreshold === "yes" ) || ' +
-          '(model.selfEmployed !== "yes" && model.earnThreshold === "yes" ) || ' +
-          '(model.selfEmployed === "yes" && model.soleTrader === "sole") || ' +
-          '! model.selfEmployed || ' +
-          '(model.selfEmployed === "yes" && ! model.soleTrader ) || ' +
-          '(model.selfEmployed === "no" && ! model.hoursThreshold ) || ' +
-          '(model.selfEmployed === "no" && model.hoursThreshold === "no" && ! model.earnThreshold)',
+          hideExpression: '! model.selfEmployed || ' +
+          '(model.selfEmployed === "yes" && ! model.soleTrader) || ' +
+          '(model.selfEmployed === "yes" && (model.soleTrader !== "partnership" && model.soleTrader !== "shareholder") && ! model.hoursThreshold) || ' +
+          '(model.selfEmployed === "yes" && model.soleTrader === "sole" && ! model.hoursThreshold ) || ' +
+          '(model.selfEmployed === "yes" && model.soleTrader === "sole" && model.hoursThreshold === "yes" ) || ' +
+          '(model.selfEmployed === "yes" && model.soleTrader === "sole" && model.hoursThreshold === "no" && ! model.earnThreshold ) || ' +
+          '(model.selfEmployed === "yes" && model.soleTrader === "sole" && model.hoursThreshold === "no" && model.earnThreshold !== "no")',
           templateOptions: {
             fields: [
               {
@@ -317,7 +316,11 @@ angular.module('cpxApp')
 
         {
           type: 'group',
-          hideExpression: '(model.selfEmployed === "yes" && model.soleTrader !== "sole") || ( model.selfEmployed !== "yes" && model.hoursThreshold !== "yes" && model.earnThreshold !== "yes" )',
+          hideExpression: ' ! model.selfEmployed || ' +
+          'model.selfEmployed === "no" || ' +
+          '(model.selfEmployed === "yes" && model.soleTrader !== "sole") || ' +
+          '(model.selfEmployed === "yes" && model.soleTrader === "sole" && model.hoursThreshold !== "yes" && ! model.earnThreshold) || ' +
+          '(model.selfEmployed === "yes" && model.soleTrader === "sole" && model.hoursThreshold === "no" && model.earnThreshold !== "yes")',
           templateOptions: {
             fields: [
               {
@@ -616,7 +619,8 @@ angular.module('cpxApp')
                 key: 'accNumber',
                 type: 'input',
                 templateOptions: {
-                  pattern: /^([a-zA-Z][a-zA-Z]\d{7}|[a-zA-Z]\d{8})$/
+                  pattern: /^([a-zA-Z][a-zA-Z]\d{7}|[a-zA-Z]\d{8})$/,
+                  patternValidationMessage: `That ACC number doesn't look quite right`
                 }
               },
             ]
@@ -660,7 +664,8 @@ angular.module('cpxApp')
                 key: 'irdNumber',
                 type: 'input',
                 templateOptions: {
-
+                  pattern: /^(\d{8}|\d{9})$/,
+                  patternValidationMessage: `That IRD number doesn't look quite right`
                 }
               },
               {
