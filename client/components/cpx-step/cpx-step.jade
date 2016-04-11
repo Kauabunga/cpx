@@ -7,10 +7,12 @@
   .step-container-title(ng-if='title', sticky, offset='96', disabled-sticky='name === "welcome"')
     h1(ng-bind-html='::title')
 
+    md-button.step-back-arrow.md-icon-button(ng-if='! hideBack', ng-click='stepBack(name)')
+      md-icon(md-font-set="material-icons") keyboard_arrow_up
+
+
   .step-container-inner
 
-    //md-button.step-back-arrow.md-icon-button(ng-if='! hideBack', ng-click='stepBack(name)')
-      md-icon(md-font-set="material-icons") keyboard_arrow_up
 
 
     form(name='form' ng-submit='submit(form)', novalidate)

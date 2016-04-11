@@ -304,16 +304,16 @@ angular.module('cpxApp')
                   itemTemplate: 'desc'
                 }
               },
-              {
-                type: 'button',
-                hideExpression: 'model.showCategories',
-                templateOptions: {
-                  label: 'I can\'t find my industry',
-                  click: function($event, model, form){
-                    return model.showCategories = true;
-                  }
-                }
-              },
+              //{
+              //  type: 'button',
+              //  hideExpression: 'model.showCategories',
+              //  templateOptions: {
+              //    label: 'I can\'t find my industry',
+              //    click: function($event, model, form){
+              //      return model.showCategories = true;
+              //    }
+              //  }
+              //},
               {
                 type: 'button',
                 hideExpression: '! model.showCategories',

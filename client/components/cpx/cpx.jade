@@ -10,21 +10,21 @@ div.fade-in(ng-class='{"fade-in-active": loaded}')
 
 
   div
-    cpx-step(name='elegibility' ng-if='isElegibilityDisplayed()', hide-back='true',
-    title='Your Elegibility',
+    cpx-step(name='elegibility' ng-if='isElegibilityDisplayed()',
+    title='Elegibility',
     model='model', fields='elegibilityFields',
     ng-class='{"is-active": isElegibilityActive() }')
 
 
   div
     cpx-step(name='calculation' ng-if='isCalculationDisplayed()',
-    title='Your Calculation',
+    title='Calculation',
     model='model', fields='calculationFields',
     ng-class='{"is-active": isCalculationActive() }')
 
   div
     cpx-step(name='policy' ng-if='isPolicyDisplayed()',
-    title='Your Policy',
+    title='Policy',
     model='model', fields='policyFields',
     ng-class='{"is-active": isPolicyActive() }')
 
