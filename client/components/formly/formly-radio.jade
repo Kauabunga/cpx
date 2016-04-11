@@ -1,13 +1,20 @@
 
 
 div.formly-radio-container(class='{{::to.class}}')
-  label(ng-if='::to.label')
-    strong {{::to.label}}
-  md-radio-group(ng-model='model[options.key]', ng-required='to.required')
+
+  label(ng-if='::to.label') {{::to.label}}
+
+  //md-radio-group(ng-model='model[options.key]', ng-required='to.required')
     md-radio-button(ng-repeat='radio in ::to.options track by $index' value='{{::radio.value}}') {{::radio.label}}
 
+  div
+    md-button.grey-button(ng-click='model[options.key] = radio.value', ng-class='{"is-active": model[options.key] === radio.value}'
+    ng-repeat='radio in ::to.options track by $index')
+      input(type="radio" ng-model='model[options.key]' value="{{::radio.value}}")
+      | {{::radio.label}}
 
 
-  //TODO pull our into error formly component http://angular-formly.com/#/example/advanced/validation-on-form-submit
-  ng-messages(for='form[options.name].$error' ng-if='form.$submitted || options.formControl.$touched' role="alert")
-    ng-message(when='required') Please select one of the options
+  div
+    //TODO pull our into error formly component http://angular-formly.com/#/example/advanced/validation-on-form-submit
+    ng-messages(for='form[options.name].$error' ng-if='form.$submitted || options.formControl.$touched' role="alert")
+      ng-message(when='required') Please select one of the options

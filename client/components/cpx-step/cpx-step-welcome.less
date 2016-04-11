@@ -1,0 +1,46 @@
+
+
+#step-welcome {
+  .step-container-title {
+    background: @green-yellow;
+
+    &:before {
+      content: '';
+      width: 100%;
+      background-color: @light-grey;
+      height: 48px;
+      position:relative;
+      display:block;
+    }
+
+    h1 {
+      &:extend(.content-layout);
+      margin-top: 80px;
+      margin-bottom: 20px;
+      color: white;
+    }
+  }
+
+  p {
+    font-size: 1.2em;
+  }
+
+  .step-container-inner {
+    padding: 20px 0 20px;
+  }
+
+  overflow-y: visible;
+
+  &:after {
+    position: absolute;
+    display: block;
+    margin-top: 90px;
+    content: '';
+    width: 100%;
+    height: 40px;
+    background-color: @light-green-yellow;
+  }
+}
+
+
+

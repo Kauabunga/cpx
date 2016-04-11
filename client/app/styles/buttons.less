@@ -11,11 +11,24 @@ button.md-button {
     border-radius: 0;
   }
 
-  border: 1px solid #999;
+  border: 1px solid @button-grey;
   padding: 0 24px;
   margin: 12px 0;
-}
+  color: @green-yellow;
+  font-weight: 700;
 
+
+
+  &.grey-button {
+    color: #fff;
+    background-color: @button-grey;
+    border-width: 0;
+    &.is-active {
+      background-color: @deep-blue;
+    }
+  }
+
+}
 
 
 button.md-button.md-icon-button {

@@ -15,7 +15,11 @@ class NavbarController {
 
   //end-non-standard
 
-  constructor() {
+  constructor(cpx) {
+
+    this.reset = () => {
+      cpx.resetCurrentForm();
+    }
 
   }
 }

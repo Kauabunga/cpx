@@ -11,11 +11,14 @@ angular.module('cpxApp')
 });
 
 
-function cpxElegibilityController($scope, $log, cpx, levy, $timeout){
+function cpxElegibilityController($scope, $log, cpx, levy, $timeout, $sessionStorage){
+
+
 
   return init();
 
   function init(){
+
     $log.debug(`cpx-elegibility $scope`, $scope);
     $scope.$watch('model', elegibility, true);
     $scope.$watch('form.$invalid', elegibility);
@@ -26,7 +29,9 @@ function cpxElegibilityController($scope, $log, cpx, levy, $timeout){
 
     if($scope.form.$invalid || isNotElegibile($scope.model)){
       cpx.uncompleteStep('elegibility');
-      $timeout(() => {cpx.scrollToStep('elegibility');});
+
+      //TODO ensure this doesn't attempt to scroll on load
+      //$timeout(() => {cpx.scrollToStep('elegibility');});
     }
   }
 

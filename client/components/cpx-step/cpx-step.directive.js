@@ -25,14 +25,21 @@ angular.module('cpxApp')
           scope.getModel = getModel;
           scope.submit = submit;
 
+
+          //TODO ensure the container is there
           //Add a timeout to the scroll so the user can register their click
           $timeout(scrollIfNotComplete, 150);
         }
 
         function scrollIfNotComplete(){
-          if( ! isStepComplete()){
+          if( ! isStepComplete() && ! isFirstStep()) {
+            $log.debug(`Scrolling to incomplete step ${scope.name}`);
             smoothScroll(element[0]);
           }
+        }
+
+        function isFirstStep(){
+          return scope.name === 'welcome';
         }
 
         function isStepComplete(){
@@ -46,8 +53,8 @@ angular.module('cpxApp')
         }
 
         function getModel(name){
-          return scope.model[name] ? scope.model[name] : scope.model[name] = {};
-
+          //return scope.model[name] ? scope.model[name] : scope.model[name] = {};
+          return scope.model;
         }
 
         function submit(form) {

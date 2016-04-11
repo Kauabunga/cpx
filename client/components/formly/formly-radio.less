@@ -1,20 +1,17 @@
 
-@radio-field-height: 90px;
+@radio-field-height: 130px;
 
 
 .formly-radio-container {
   label {
     display: inline-block;
-    margin-bottom: 16px;
   }
-
-  &.horizontal {
-    md-radio-group {
-      display: flex;
-    }
-    md-radio-button {
-      margin: 0 10px !important;
-    }
+  button {
+    margin-right: 16px;
+    background-color: @button-grey;
+  }
+  input {
+    display: none;
   }
 }
 

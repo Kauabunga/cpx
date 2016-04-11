@@ -4,7 +4,7 @@
 
 .step-container-outer(id='{{"step-" + name}}')
 
-  .step-container-title(ng-if='title', sticky, offset='96', disabled-sticky='name === "welcome"')
+  .step-container-title(ng-if='title', sticky, offset='48', disabled-sticky='name === "welcome"')
     h1(ng-bind-html='::title')
 
     md-button.step-back-arrow.md-icon-button(ng-if='! hideBack', ng-click='stepBack(name)')

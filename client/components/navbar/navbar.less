@@ -1,5 +1,5 @@
 
-@navbar-height: 96px;
+@navbar-height: 48px;
 @navbar-z-index: 999999999;
 
 .navbar {
@@ -10,11 +10,20 @@
   z-index: @navbar-z-index;
 
   .navbar-top {
-    height: @navbar-height / 2;
+    height: @navbar-height;
     background-color: @dark-blue;
   }
-  .navbar-bottom {
-    height: @navbar-height / 2;
-    background-color: @light-grey;
+}
+
+
+
+
+button.md-button.reset-button {
+  position: absolute;
+  opacity: 0.05;
+  transition: all 0.5s ease;
+  margin: 5px;
+  &:hover {
+    opacity: 1;
   }
 }

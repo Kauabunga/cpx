@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cpxApp')
-  .service('cpx', function ($log, $sessionStorage, smoothScroll, bic) {
+  .service('cpx', function ($log, $sessionStorage, smoothScroll, bic, $timeout) {
 
     const CPX_SESSION_STORAGE_KEY = '_cpx';
 
@@ -68,11 +68,14 @@ angular.module('cpxApp')
     function completeStep(stepName){
       getCurrentModel()[stepName] = getCurrentModel()[stepName] || {};
 
-      $log.debug(`Completing step ${stepName}`);
       let stepModel = getCurrentModel()[stepName];
-      if(stepModel.complete){
+      $log.debug(`Completing step ${stepName}`, stepModel);
+
+      if(stepModel.complete) {
         //We have already completed this step - scroll to the next section
-        return scrollToStep(getNextStep(stepName));
+        return $timeout(() => {
+          scrollToStep(getNextStep(stepName));
+        }, 100);
       }
       else {
         return stepModel.complete = true;
@@ -88,7 +91,7 @@ angular.module('cpxApp')
           getCurrentModel()[step] = getCurrentModel()[step] || {};
           getCurrentModel()[step].complete = false;
         }
-      })
+      });
     }
 
     function getNextStep(stepName){
@@ -110,7 +113,7 @@ angular.module('cpxApp')
 
     function isComplete(namespace){
       return () => {
-        return getCurrentModel() && getCurrentModel()[namespace] && getCurrentModel()[namespace].complete;
+        return getCurrentModel() && getCurrentModel()[namespace] && getCurrentModel()[namespace].complete === true;
       }
     }
 
@@ -453,6 +456,10 @@ angular.module('cpxApp')
             <p><b>Lower Level of Weekly Compensation (LLWC)</b> policy allows you to pay lower ACC levies, but in the event of an injury, you'll receive a progressively decreasing weekly compensation.</p>
             `
           }
+        },
+        {
+          type: 'cpx-policy',
+          templateOptions: {}
         }
       ]
     }

@@ -13,7 +13,8 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
-      <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+      <link rel='stylesheet' href='bower_components/angular-material/angular-material.css' />
+      <link rel='stylesheet' href='bower_components/nvd3/build/nv.d3.css' />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -23,6 +24,12 @@
     <!-- endbuild -->
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+
+    <style>
+      * {font-family: 'PT Sans', sans-serif;}
+    </style>
 
   </head>
   <body ng-app="cpxApp">
@@ -69,6 +76,9 @@
       <script src="bower_components/numeral/numeral.js"></script>
       <script src="bower_components/matchmedia/matchMedia.js"></script>
       <script src="bower_components/ngSticky/lib/sticky.js"></script>
+      <script src="bower_components/d3/d3.js"></script>
+      <script src="bower_components/nvd3/build/nv.d3.js"></script>
+      <script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js(.tmp) app/app.js -->
@@ -85,10 +95,10 @@
       <script src="components/cpx-step/cpx-step.directive.js"></script>
       <script src="components/cpx/cpx.directive.js"></script>
       <script src="components/cpx/cpx.service.js"></script>
-      <script src="components/footer/footer.directive.js"></script>
       <script src="components/formly/cpx-bic-category.config.js"></script>
       <script src="components/formly/cpx-calculation.config.js"></script>
       <script src="components/formly/cpx-elegibility.config.js"></script>
+      <script src="components/formly/cpx-policy.config.js"></script>
       <script src="components/formly/formly-autocomplete.config.js"></script>
       <script src="app/cpx/cpx.controller.js"></script>
       <script src="components/formly/formly-group.config.js"></script>
