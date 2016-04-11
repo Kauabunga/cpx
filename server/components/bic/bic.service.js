@@ -43,6 +43,12 @@ export function search(query){
       return _(index.search(expandedQuery)).map(result => {
         return bicStore[result.ref];
       }).value();
+    })
+    .then(bics => {
+      return _(bics).map(bic => {
+        return _.omit(bic, 'refs', 'keywords', 'bicrefs', 'definitionPlainText', 'anzsic', 'divisionName', 'divisionId', 'industryId',
+        'industryName', 'classId', 'className', 'keywordsFlattened', 'code');
+      }).value();
     });
 }
 
@@ -189,7 +195,8 @@ export function index(){
                           return _.merge({}, bic, _.find(classesFormatted, _.matchesProperty('id', bic.classId)));
                         })
                         .map(bic => {
-                          return _.omit(bic, 'id', 'name', 'anzsicId', 'cuId', 'definition', 'important', 'lastUpdateDate', 'lastUpdateUserId');
+                          return _.omit(bic, 'id', 'name', 'anzsicId', 'cuId', 'definition', 'important',
+                            'lastUpdateDate', 'lastUpdateUserId');
                         })
                         .map(bic => {
                           bic.cu = bic.cu.code;

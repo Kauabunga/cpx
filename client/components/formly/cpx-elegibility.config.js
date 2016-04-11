@@ -37,9 +37,8 @@ function cpxElegibilityController($scope, $log, cpx, levy, $timeout, $sessionSto
 
   //TODO pass in from formly model definition
   function isNotElegibile(model){
-    return model.selfEmployed === 'no' &&
-        model.soleTrader === 'no' &&
+    return ( model.selfEmployed === 'no' &&
         model.hoursThreshold === 'no' &&
-        model.earnThreshold === 'no';
+        model.earnThreshold === 'no' ) || (model.soleTrader !== 'sole');
   }
 }

@@ -13,6 +13,10 @@ angular.module('cpxApp')
     this.resetCurrentForm = resetCurrentForm;
     this.scrollToStep = scrollToStep;
     this.getCpxForm = getCpxForm;
+    this.exportCpxFormBase64 = exportCpxFormBase64;
+    this.importCpxFormBase64 = importCpxFormBase64;
+    window.exportCpxFormBase64 = exportCpxFormBase64;
+    window.importCpxFormBase64 = importCpxFormBase64;
 
     $log.debug('Init model', getCurrentModel());
 
@@ -85,6 +89,13 @@ angular.module('cpxApp')
         $sessionStorage[CPX_SESSION_STORAGE_KEY] = {};
     }
 
+    function exportCpxFormBase64(){
+      return btoa(JSON.stringify(getCurrentModel()));
+    }
+
+    function importCpxFormBase64(base64){
+      return JSON.parse(atob(base64));
+    }
 
     function isComplete(namespace){
       return () => {
@@ -220,9 +231,21 @@ angular.module('cpxApp')
         {
           key: 'soleTrader',
           type: 'radio',
+          hideExpression: 'model.selfEmployed !== "yes"',
+          templateOptions: {
+            label: 'How are you self employed?',
+            options: [{value:'sole', label:'Sole Trader'}, {value:'partnership', label:'Partnership'}, {value:'shareholder', label:'Shareholder'}]
+          },
+          expressionProperties: {
+            'templateOptions.required': 'model.selfEmployed !== "yes"'
+          }
+        },
+        {
+          key: 'hoursThreshold',
+          type: 'radio',
           hideExpression: 'model.selfEmployed !== "no"',
           templateOptions: {
-            label: 'Are you a Sole Trader?',
+            label: 'Do you work over 30 hours per week?',
             options: [{value:'yes', label:'Yes'}, {value:'no', label:'No'}],
             class: 'horizontal'
           },
@@ -231,35 +254,22 @@ angular.module('cpxApp')
           }
         },
         {
-          key: 'hoursThreshold',
-          type: 'radio',
-          hideExpression: 'model.soleTrader !== "no" || model.selfEmployed !== "no"',
-          templateOptions: {
-            label: 'Do you work over 30 hours per week?',
-            options: [{value:'yes', label:'Yes'}, {value:'no', label:'No'}],
-            class: 'horizontal'
-          },
-          expressionProperties: {
-            'templateOptions.required': 'model.soleTrader === "no" && model.selfEmployed === "no"'
-          }
-        },
-        {
           key: 'earnThreshold',
           type: 'radio',
-          hideExpression: 'model.soleTrader !== "no" || model.selfEmployed !== "no" || model.hoursThreshold !== "no"',
+          hideExpression: 'model.selfEmployed !== "no" || model.hoursThreshold !== "no"',
           templateOptions: {
-            label: 'Do you earn more than $XXX per week or $XX,XXX per year?',
+            label: 'Do you earn more than $590 per week or $30,680 per year?',
             options: [{value:'yes', label:'Yes'}, {value:'no', label:'No'}],
             class: 'horizontal'
           },
           expressionProperties: {
-            'templateOptions.required': 'model.soleTrader === "no" && model.selfEmployed === "no" && model.hoursThreshold === "no"'
+            'templateOptions.required': 'model.selfEmployed === "no" && model.hoursThreshold === "no"'
           }
         },
 
         {
           type: 'group',
-          hideExpression: 'model.soleTrader !== "no" || model.selfEmployed !== "no" || model.hoursThreshold !== "no" || model.earnThreshold !== "no"',
+          hideExpression: 'model.soleTrader === "sole" && ( model.selfEmployed !== "no" || model.hoursThreshold !== "no" || model.earnThreshold !== "no" )',
           templateOptions: {
             fields: [
               {
@@ -271,7 +281,7 @@ angular.module('cpxApp')
               {
                 type: 'paragraph',
                 templateOptions: {
-                  label: 'Currently, CPX is a product available to Self Employed people that have worked over 30 hours per week or earn more than $XXX per week.'
+                  label: 'Currently, CPX is a product available to Self Employed people that have worked over 30 hours per week or earn more than $590 per week.'
                 }
               },
               {
@@ -300,7 +310,7 @@ angular.module('cpxApp')
 
         {
           type: 'group',
-          hideExpression: 'model.soleTrader !== "yes" && model.selfEmployed !== "yes" && model.hoursThreshold !== "yes" && model.earnThreshold !== "yes"',
+          hideExpression: 'model.soleTrader !== "sole" || ( model.selfEmployed !== "yes" && model.hoursThreshold !== "yes" && model.earnThreshold !== "yes" )',
           templateOptions: {
             fields: [
               {
@@ -406,7 +416,7 @@ angular.module('cpxApp')
                   type: 'number',
                   placeholder: '$00,000',
                   step: 500,
-                  min: 28000,
+                  min: 30680,
                   max: 9999999
                 }
               }
@@ -593,7 +603,9 @@ angular.module('cpxApp')
         {
           key: 'accNumber',
           type: 'input',
-          templateOptions: {}
+          templateOptions: {
+            pattern: /^([a-zA-Z][a-zA-Z]\d{7}|[a-zA-Z]\d{8})$/
+          }
         },
         {
           type: 'button',

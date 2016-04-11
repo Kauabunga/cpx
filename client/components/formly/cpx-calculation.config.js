@@ -14,6 +14,8 @@ angular.module('cpxApp')
 function cpxCalculationController($scope, $log, cpx, levy, Util){
 
   const MAXIMUM_COVER = 120070;
+  const MINIMUM_EARNINGS = 30680;
+  const MINIMUM_COVER = 24544;
 
   return init();
 
