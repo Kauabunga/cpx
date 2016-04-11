@@ -602,22 +602,94 @@ angular.module('cpxApp')
       return [
 
         {
-          type: 'label',
+          type: 'group',
+          hideExpression: 'model.unknownAccNumber',
           templateOptions: {
-            label: `What's your ACC number?`
+            fields: [
+              {
+                type: 'label',
+                templateOptions: {
+                  label: `What's your ACC number?`
+                }
+              },
+              {
+                key: 'accNumber',
+                type: 'input',
+                templateOptions: {
+                  pattern: /^([a-zA-Z][a-zA-Z]\d{7}|[a-zA-Z]\d{8})$/
+                }
+              },
+            ]
           }
         },
-        {
-          key: 'accNumber',
-          type: 'input',
-          templateOptions: {
-            pattern: /^([a-zA-Z][a-zA-Z]\d{7}|[a-zA-Z]\d{8})$/
-          }
-        },
+
         {
           type: 'button',
+          hideExpression: 'model.unknownAccNumber || model.accNumber.length === 9',
           templateOptions: {
-            label: `I don't know my ACC number`
+            label: `I don't know my ACC number`,
+            click: function($event, model, form){
+              return model.unknownAccNumber = true;
+            }
+          }
+        },
+
+        {
+          type: 'button',
+          hideExpression: '! model.unknownAccNumber',
+          templateOptions: {
+            label: `I've found my ACC number`,
+            click: function($event, model, form){
+              return model.unknownAccNumber = false;
+            }
+          }
+        },
+        {
+          type: 'group',
+          hideExpression: '! model.unknownAccNumber && ! model.accNumber',
+          templateOptions: {
+            fields: [
+
+              {
+                type: 'label',
+                templateOptions: {
+                  label: `What's your IRD number?`
+                }
+              },
+              {
+                key: 'irdNumber',
+                type: 'input',
+                templateOptions: {
+
+                }
+              },
+              {
+                type: 'label',
+                templateOptions: {
+                  label: `What's your first name?`
+                }
+              },
+              {
+                key: 'firstName',
+                type: 'input',
+                templateOptions: {
+
+                }
+              },
+              {
+                type: 'label',
+                templateOptions: {
+                  label: `What's your last name?`
+                }
+              },
+              {
+                key: 'lastName',
+                type: 'input',
+                templateOptions: {
+
+                }
+              },
+            ]
           }
         }
       ]
