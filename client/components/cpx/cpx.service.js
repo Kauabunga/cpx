@@ -218,11 +218,11 @@ angular.module('cpxApp')
           }
         },
         {
-          key: 'hoursThreshold',
+          key: 'soleTrader',
           type: 'radio',
           hideExpression: 'model.selfEmployed !== "no"',
           templateOptions: {
-            label: 'Do you work over 30 hours per week?',
+            label: 'Are you a Sole Trader?',
             options: [{value:'yes', label:'Yes'}, {value:'no', label:'No'}],
             class: 'horizontal'
           },
@@ -231,22 +231,35 @@ angular.module('cpxApp')
           }
         },
         {
+          key: 'hoursThreshold',
+          type: 'radio',
+          hideExpression: 'model.soleTrader !== "no" || model.selfEmployed !== "no"',
+          templateOptions: {
+            label: 'Do you work over 30 hours per week?',
+            options: [{value:'yes', label:'Yes'}, {value:'no', label:'No'}],
+            class: 'horizontal'
+          },
+          expressionProperties: {
+            'templateOptions.required': 'model.soleTrader === "no" && model.selfEmployed === "no"'
+          }
+        },
+        {
           key: 'earnThreshold',
           type: 'radio',
-          hideExpression: 'model.selfEmployed !== "no" || model.hoursThreshold !== "no"',
+          hideExpression: 'model.soleTrader !== "no" || model.selfEmployed !== "no" || model.hoursThreshold !== "no"',
           templateOptions: {
             label: 'Do you earn more than $XXX per week or $XX,XXX per year?',
             options: [{value:'yes', label:'Yes'}, {value:'no', label:'No'}],
             class: 'horizontal'
           },
           expressionProperties: {
-            'templateOptions.required': 'model.selfEmployed === "no" && model.hoursThreshold === "no"'
+            'templateOptions.required': 'model.soleTrader === "no" && model.selfEmployed === "no" && model.hoursThreshold === "no"'
           }
         },
 
         {
           type: 'group',
-          hideExpression: 'model.selfEmployed !== "no" || model.hoursThreshold !== "no" || model.earnThreshold !== "no"',
+          hideExpression: 'model.soleTrader !== "no" || model.selfEmployed !== "no" || model.hoursThreshold !== "no" || model.earnThreshold !== "no"',
           templateOptions: {
             fields: [
               {
@@ -287,7 +300,7 @@ angular.module('cpxApp')
 
         {
           type: 'group',
-          hideExpression: 'model.selfEmployed !== "yes" && model.hoursThreshold !== "yes" && model.earnThreshold !== "yes"',
+          hideExpression: 'model.soleTrader !== "yes" && model.selfEmployed !== "yes" && model.hoursThreshold !== "yes" && model.earnThreshold !== "yes"',
           templateOptions: {
             fields: [
               {
