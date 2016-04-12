@@ -49,15 +49,15 @@ function cpxPolicyController($scope, $log, cpx, levy, Util, bic, $q, $timeout){
 
   function getLLWCValues(){
     let values = [];
-    for(let i = 0; i < 10; i++){
-      values.push({x: i, y: (($scope.model.cover * (Math.pow(0.8, i))) / WEEKS_PER_YEAR ).toFixed(0)})
+    for(let i = 1; i <= 10; i++){
+      values.push({x: i, y: (($scope.model.cover * (Math.pow(0.8, i - 1))) / WEEKS_PER_YEAR ).toFixed(0)})
     }
     return values;
   }
 
   function getCpxValues(){
     let values = [];
-    for(let i = 0; i < 10; i++){
+    for(let i = 1; i <= 10; i++){
       values.push({x: i, y: ($scope.model.cover / WEEKS_PER_YEAR).toFixed(0)})
     }
     return values;
@@ -70,20 +70,26 @@ function cpxPolicyController($scope, $log, cpx, levy, Util, bic, $q, $timeout){
         height: 400,
         margin: {
           top: 20,
-          right: 20,
+          right: 40,
           bottom: 40,
           left: 55
         },
         x: function(d){ return d.x; },
         y: function(d){ return Math.max(d.y, MINIMUM_WEEKLY_PAYMENTS); },
         useInteractiveGuideline: true,
-        //forceX: 10,
+        pointActive: function (d) { return true; },
+        forceX: [0, 10],
         forceY: [0, 2000],
         interactiveLayer: {
           showGuideLine: false,
+
           tooltip: {
-            keyFormatter: function (d, i) {
+            classes: 'cpx-policy-graph-tooltip',
+            headerFormatter: function (d, i) {
               return 'Week ' + d;
+            },
+            valueFormatter: function (d,i) {
+              return Util.currencyFormat(d);
             }
           }
         },

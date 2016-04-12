@@ -13,20 +13,39 @@
       display:block;
     }
 
+
+    .title-content {
+      &:extend(.content-layout);
+      padding: 0;
+    }
+
+    md-icon {
+      height: 120px;
+      width: auto;
+      margin-left: -100px;
+      top: 40px;
+      position: relative;
+    }
+
     h1 {
       &:extend(.content-layout);
-      margin-top: 80px;
+//      margin-top: 80px;
       margin-bottom: 20px;
       color: white;
+      font-size: 2.4em;
     }
   }
 
-  p {
+  p, button, ol, ul {
     font-size: 1.2em;
   }
 
   .step-container-inner {
     padding: 20px 0 20px;
+
+    .cpx-welcome-container {
+      max-width: 600px;
+    }
   }
 
   overflow-y: visible;

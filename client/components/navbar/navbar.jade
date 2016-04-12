@@ -2,6 +2,14 @@
 .navbar(ng-controller="NavbarController")
   .navbar-top
     md-button.reset-button(ng-click='nav.reset()') Reset
+    .navbar-top-inner
+
+      .acc-logo
+        md-icon(md-svg-src='assets/svg/logo.svg')
+
+
+      md-button.help-button.icon-button()
+        md-icon(md-svg-src='assets/svg/help.svg')
 
 
 

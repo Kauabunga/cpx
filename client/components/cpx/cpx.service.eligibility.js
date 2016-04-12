@@ -161,7 +161,7 @@ angular.module('cpxApp')
               {
                 type: 'html',
                 templateOptions: {
-                  label: '<h3>Great! You are Eligibile for CPX.</h3>'
+                  label: '<h2 class="deep-blue">Great! You are Eligibile for CPX.</h2>'
                 }
               },
               {

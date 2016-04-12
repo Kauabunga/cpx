@@ -28,8 +28,27 @@
     <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
 
     <style>
-      * {font-family: 'PT Sans', sans-serif;}
+      @font-face {
+        font-family: 'Dolly-roman';
+        src: url('assets/fonts/DollyRom.otf') format('opentype'),
+        url("assets/fonts/DollyRom.eot"),
+        url("assets/fonts/DollyRom.woff") format("woff"),
+        url("assets/fonts/DollyRom.ttf") format("truetype");
+        font-weight: normal;
+      }
+
+      p, div, h5, h6, span, label, a, button {font-family: 'PT Sans', sans-serif;}
+
+
+      h1, h2, h3, h4 {
+        font-family:'Dolly-roman','Cambria';
+        font-weight: 500;
+      }
+
+
     </style>
+
+
 
   </head>
   <body ng-app="cpxApp">

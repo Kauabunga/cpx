@@ -16,6 +16,7 @@ angular.module('cpxApp')
         model: '=',
         fields: '=',
         step: '=',
+        icon: '=',
         hideBack: '='
       },
       link: function (scope, element, attrs) {
