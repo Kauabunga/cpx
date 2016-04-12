@@ -115,7 +115,7 @@ angular.module('cpxApp')
             fields: [
               {
                 type: 'group',
-                hideExpression: 'model.soleTrader === "partnership" || model.soleTrader === "shareholder"',
+                hideExpression: 'model.selfEmployed === "yes" && (model.soleTrader === "partnership" || model.soleTrader === "shareholder")',
                 templateOptions: {
                   fields: [
                     {
@@ -155,17 +155,17 @@ angular.module('cpxApp')
               },
               {
                 type: 'group',
-                hideExpression: 'model.soleTrader !== "partnership" && model.soleTrader !== "shareholder"',
+                hideExpression: 'model.selfEmployed === "no" || (model.soleTrader !== "partnership" && model.soleTrader !== "shareholder")',
                 templateOptions: {
                   fields: [
                     {
                       type: 'html',
                       templateOptions: {
                         label: `
-                  <h1>The CPX application is still available for you.</h1>
-                  <h2>The CPX online application service is an alpha version available for self-employed Sole Traders</h2>
-                  <p>You can still apply for CPX by downloading and completing the ACC application form (.pdf)</p>
-                  <a href="http://www.acc.co.nz/PRD_EXT_CSMP/groups/external_levies/documents/form/prd_ctrb089183.pdf" target="_blank">Download ACC application form .(pdf)</a>
+                  <h1>CPX is still available for you.</h1>
+                  <h2>This service is an alpha version available for self-employed Sole Traders.</h2>
+                  <p>You can still apply for CPX by downloading and completing the ACC application form.</p>
+                  <a href="http://www.acc.co.nz/PRD_EXT_CSMP/groups/external_levies/documents/form/prd_ctrb089183.pdf" target="_blank">Download ACC application form (pdf)</a>
                   `
                       }
                     }
