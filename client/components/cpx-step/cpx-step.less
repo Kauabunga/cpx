@@ -37,12 +37,34 @@ cpx-step {
   border-bottom: 4px solid @green-yellow;
 
 
-  h1 {
+  .title-content {
     &:extend(.content-layout);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  h1 {
+    margin: 0;
     color: @title-grey;
     font-weight: 500;
     &:focus {
       outline: none;
+    }
+  }
+  button {
+    margin: 0;
+  }
+
+  .step-save {
+    button {
+      padding-left: 16px;
+    }
+    md-icon {
+      color: @green-yellow;
+      position: relative;
+      top: -1px;
+      margin-right: 12px;
     }
   }
 }

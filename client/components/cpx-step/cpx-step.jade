@@ -14,7 +14,17 @@
     .title-content
       md-icon(ng-if='icon' md-svg-src="{{icon}}")
 
-    h1(ng-bind-html='::title', tabindex='-1' ng-click='scrollToStep(name)')
+      h1.title(ng-bind-html='::title', tabindex='-1' ng-click='scrollToStep(name)')
+
+      .step-content(ng-if='::progress')
+        span.progress {{::progress}}
+
+      .step-save(ng-if=':: ! first')
+
+        md-button()
+          md-icon(md-font-set="material-icons") link
+          | Save for later
+
 
     md-button.step-back-arrow.md-icon-button(ng-if='! hideBack', ng-click='stepBack(name)')
       md-icon(md-font-set="material-icons") keyboard_arrow_up
