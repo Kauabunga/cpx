@@ -11,21 +11,47 @@
       height: 48px;
       position:relative;
       display:block;
+
     }
 
 
     .title-content {
       &:extend(.content-layout);
       padding: 0;
+      md-icon {
+        height: 120px;
+        width: auto;
+        margin-left: -100px;
+        top: 40px;
+        position: relative;
+      }
     }
 
-    md-icon {
-      height: 120px;
-      width: auto;
-      margin-left: -100px;
-      top: 40px;
+    .back-content {
+      opacity: 0.4;
+      max-width: 750px;
+      margin: 0 auto;
+      height: 0;
       position: relative;
+      top: -33px;
+      transition: opacity 0.2s ease;
+      &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+      }
+      span {
+        border-bottom: 1px solid @font-light-grey;
+        font-size: 0.8em;
+      }
+      md-icon {
+        width: 20px;
+        height: 20px;
+      }
+      .material-icons {
+        font-size: 20px;
+      }
     }
+
 
     h1 {
       &:extend(.content-layout);
@@ -33,6 +59,13 @@
       margin-bottom: 20px;
       color: white;
       font-size: 2.4em;
+    }
+  }
+
+  ul, ol {
+    color: @font-lightest-grey;
+    span {
+      color: @font-grey;
     }
   }
 

@@ -6,6 +6,11 @@
 
   .step-container-title(ng-if='title', sticky, offset='48', disabled-sticky='name === "welcome"')
 
+    //TODO should be associated with welcome screen rather than cpx step
+    .back-content(ng-if='::first')
+      md-icon(md-font-set="material-icons") keyboard_arrow_left
+      span Back to Business Cover
+
     .title-content
       md-icon(ng-if='icon' md-svg-src="{{icon}}")
 

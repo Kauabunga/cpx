@@ -143,7 +143,7 @@ angular.module('cpxApp')
       return cpxFormCache ? cpxFormCache : cpxFormCache = [
         {
           name: 'welcome',
-          title: 'Welcome to <b>Cover Plus Extra</b>',
+          title: 'Welcome to the <b>Cover&nbsp;Plus&nbsp;Extra</b> service',
           icon: '/assets/svg/visual.svg',
           fields: cpxwelcome.getWelcomeFields(),
           isDisplayed: () => { return true; },

@@ -17,7 +17,8 @@ angular.module('cpxApp')
         fields: '=',
         step: '=',
         icon: '=',
-        hideBack: '='
+        hideBack: '=',
+        first: '='
       },
       link: function (scope, element, attrs) {
 
