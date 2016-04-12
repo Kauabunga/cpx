@@ -79,6 +79,14 @@ function cpxPolicyController($scope, $log, cpx, levy, Util, bic, $q, $timeout){
         useInteractiveGuideline: true,
         //forceX: 10,
         forceY: [0, 2000],
+        interactiveLayer: {
+          showGuideLine: false,
+          tooltip: {
+            keyFormatter: function (d, i) {
+              return 'Week ' + d;
+            }
+          }
+        },
         xAxis: {
           axisLabel: 'Week',
           axisLabelDistance: 0
