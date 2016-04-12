@@ -114,40 +114,68 @@ angular.module('cpxApp')
           templateOptions: {
             fields: [
               {
-                type: 'title',
+                type: 'group',
+                hideExpression: 'model.soleTrader === "partnership" || model.soleTrader === "shareholder"',
                 templateOptions: {
-                  label: 'Check out these other options.'
+                  fields: [
+                    {
+                      type: 'title',
+                      templateOptions: {
+                        label: 'Check out these other options.'
+                      }
+                    },
+                    {
+                      type: 'paragraph',
+                      templateOptions: {
+                        label: 'Currently, CPX is a product available to Self Employed people that have worked over 30 hours per week or earn more than $590 per week.'
+                      }
+                    },
+                    {
+                      type: 'paragraph',
+                      templateOptions: {
+                        label: 'You might be interested in having a look at these other options:'
+                      }
+                    },
+                    {
+                      type: 'link',
+                      templateOptions: {
+                        label: 'Cover Plus',
+                        href: 'https://www.google.co.nz/search?q=ACC%20Cover%20Plus'
+                      }
+                    },
+                    {
+                      type: 'link',
+                      templateOptions: {
+                        label: 'Private Insurance',
+                        href: 'https://www.google.co.nz/search?q=Private%20Insurance%20New%20Zealand'
+                      }
+                    }
+                  ]
                 }
               },
               {
-                type: 'paragraph',
+                type: 'group',
+                hideExpression: 'model.soleTrader !== "partnership" && model.soleTrader !== "shareholder"',
                 templateOptions: {
-                  label: 'Currently, CPX is a product available to Self Employed people that have worked over 30 hours per week or earn more than $590 per week.'
-                }
-              },
-              {
-                type: 'paragraph',
-                templateOptions: {
-                  label: 'You might be interested in having a look at these other options:'
-                }
-              },
-              {
-                type: 'link',
-                templateOptions: {
-                  label: 'Cover Plus',
-                  href: 'https://www.google.co.nz/search?q=ACC%20Cover%20Plus'
-                }
-              },
-              {
-                type: 'link',
-                templateOptions: {
-                  label: 'Private Insurance',
-                  href: 'https://www.google.co.nz/search?q=Private%20Insurance%20New%20Zealand'
+                  fields: [
+                    {
+                      type: 'html',
+                      templateOptions: {
+                        label: `
+                  <h1>The CPX application is still available for you.</h1>
+                  <h2>The CPX online application service is an alpha version available for self-employed Sole Traders</h2>
+                  <p>You can still apply for CPX by downloading and completing the ACC application form (.pdf)</p>
+                  <a href="http://www.acc.co.nz/PRD_EXT_CSMP/groups/external_levies/documents/form/prd_ctrb089183.pdf" target="_blank">Download ACC application form .(pdf)</a>
+                  `
+                      }
+                    }
+                  ]
                 }
               }
             ]
           }
         },
+
 
         {
           type: 'group',
