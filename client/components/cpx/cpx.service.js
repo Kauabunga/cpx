@@ -33,7 +33,9 @@ angular.module('cpxApp')
       _(getFlow()).forEach(step => {
         return $sessionStorage[CPX_SESSION_STORAGE_KEY][step] = {};
       });
-      return $sessionStorage[CPX_SESSION_STORAGE_KEY] = {};
+      $sessionStorage[CPX_SESSION_STORAGE_KEY] = {};
+
+      window.location.reload();
     }
 
     function completeStep(stepName){
@@ -83,9 +85,14 @@ angular.module('cpxApp')
     }
 
     function getCurrentModel () {
-      return $sessionStorage[CPX_SESSION_STORAGE_KEY] ?
+      let model = $sessionStorage[CPX_SESSION_STORAGE_KEY] ?
         $sessionStorage[CPX_SESSION_STORAGE_KEY] :
         $sessionStorage[CPX_SESSION_STORAGE_KEY] = {};
+
+      //model.isLoaded = false;
+      //$timeout(() => {model.isLoaded = true}, 500);
+
+      return model;
     }
 
     function exportCpxFormBase64(){

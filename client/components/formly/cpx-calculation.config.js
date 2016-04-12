@@ -44,7 +44,7 @@ function cpxCalculationController($scope, $log, cpx, levy, Util){
   }
 
   function calculationWatcher() {
-    $log.debug(`calculationWatcher`, $scope.model);
+    //$log.debug(`calculationWatcher`, $scope.model);
 
     if(! $scope.model.business || ! $scope.model.business.cu ||
       ! $scope.model.earnings || ! $scope.model.cover){ return undefined; }

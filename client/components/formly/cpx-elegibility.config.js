@@ -27,7 +27,9 @@ function cpxElegibilityController($scope, $log, cpx, levy, $timeout, $sessionSto
   function elegibility(){
     $log.debug(`cpx-elegibility`, $scope.model, $scope.form);
 
-    if($scope.form.$invalid || isNotElegibile($scope.model)){
+    let eligibility = isNotElegibile($scope.model);
+
+    if($scope.form.$invalid || eligibility){
       cpx.uncompleteStep('elegibility');
 
       //TODO ensure this doesn't attempt to scroll on load
@@ -35,9 +37,8 @@ function cpxElegibilityController($scope, $log, cpx, levy, $timeout, $sessionSto
     }
   }
 
-  //TODO pass in from formly model definition
   function isNotElegibile(model){
-    return ( model.selfEmployed === 'no' &&
+    let result = ( model.selfEmployed === 'no' &&
         model.soleTrader === 'sole' &&
         model.hoursThreshold === 'no' &&
         model.earnThreshold === 'no' ) ||
@@ -47,5 +48,7 @@ function cpxElegibilityController($scope, $log, cpx, levy, $timeout, $sessionSto
         (model.soleTrader !== 'sole') ||
 
         (model.selfEmployed === 'no');
+
+    return result;
   }
 }

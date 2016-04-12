@@ -12,7 +12,7 @@ angular.module('cpxApp')
           key: 'selfEmployed',
           type: 'radio',
           templateOptions: {
-            label: 'Are you Self Employed?',
+            label: 'Are you self-employed?',
             options: [{value:'yes', label:'Yes'}, {value:'no', label:'No'}],
             onSelect: ($event, radio, model, form) => {
               model.selfEmployedHelp = false;
@@ -23,7 +23,7 @@ angular.module('cpxApp')
         {
           type: 'link',
           templateOptions: {
-            label: 'How do I know if I am self employed or not?',
+            label: 'How do I know if I am self-employed or not?',
             onClick: function($event, model, form){
               $event.preventDefault();
               model.selfEmployedHelp = ! model.selfEmployedHelp;
@@ -39,32 +39,39 @@ angular.module('cpxApp')
         },
 
         {
-          key: 'soleTrader',
-          type: 'radio',
+          type: 'group',
           hideExpression: 'model.selfEmployed !== "yes"',
           templateOptions: {
-            label: 'How are you self employed?',
-            options: [{value:'sole', label:'Sole Trader'}, {value:'partnership', label:'Partnership'}, {value:'shareholder', label:'Shareholder'}],
-          },
-          expressionProperties: {
-            'templateOptions.required': 'model.selfEmployed !== "yes"'
-          }
-        },
-        {
-          type: 'link',
-          templateOptions: {
-            label: 'What’s the difference between a Sole Trader, Partnership, and Shareholder?',
-            onClick: function($event, model, form){
-              $event.preventDefault();
-              model.soleTraderHelp = ! model.soleTraderHelp;
-            }
-          }
-        },
-        {
-          type: 'paragraph',
-          hideExpression: '! model.soleTraderHelp',
-          templateOptions: {
-            label: `You are Sole Trader if you are the only owner of a business, you are in a Partnership if you own a business with other person and you are a Share Holder if you own shares in a close company that employs you.`
+            fields: [
+              {
+                key: 'soleTrader',
+                type: 'radio',
+                templateOptions: {
+                  label: 'How are you self-employed?',
+                  options: [{value:'sole', label:'Sole Trader'}, {value:'partnership', label:'Partnership'}, {value:'shareholder', label:'Shareholder'}],
+                },
+                expressionProperties: {
+                  'templateOptions.required': 'model.selfEmployed !== "yes"'
+                }
+              },
+              {
+                type: 'link',
+                templateOptions: {
+                  label: 'What’s the difference between a Sole Trader, Partnership, and Shareholder?',
+                  onClick: function($event, model, form){
+                    $event.preventDefault();
+                    model.soleTraderHelp = ! model.soleTraderHelp;
+                  }
+                }
+              },
+              {
+                type: 'paragraph',
+                hideExpression: '! model.soleTraderHelp',
+                templateOptions: {
+                  label: `You are Sole Trader if you are the only owner of a business, you are in a Partnership if you own a business with other person and you are a Share Holder if you own shares in a close company that employs you.`
+                }
+              }
+            ]
           }
         },
 
@@ -161,7 +168,7 @@ angular.module('cpxApp')
                 type: 'button',
                 templateOptions: {
                   type: 'submit',
-                  label: 'Calculate your coverage now.'
+                  label: 'Calculate your cover.'
                 }
               }
 
