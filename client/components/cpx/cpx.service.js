@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cpxApp')
-  .service('cpx', function ($log, $sessionStorage, smoothScroll, bic, $timeout,
+  .service('cpx', function ($log, $sessionStorage, scroll, bic, $timeout,
                             cpxwelcome, cpxeligibility, cpxcalculation, cpxpolicy, cpxapply, cpxdetails) {
 
     const CPX_SESSION_STORAGE_KEY = '_cpx';
@@ -22,7 +22,7 @@ angular.module('cpxApp')
     this.flow = getFlow();
 
     function scrollToStep(stepName){
-      return smoothScroll(document.getElementById(`step-${stepName}`));
+      return scroll.scrollTo(document.getElementById(`step-${stepName}`));
     }
 
     function stepBack(currentStepName){

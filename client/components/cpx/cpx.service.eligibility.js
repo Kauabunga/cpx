@@ -149,6 +149,9 @@ angular.module('cpxApp')
                         label: 'Private Insurance',
                         href: 'https://www.google.co.nz/search?q=Private%20Insurance%20New%20Zealand'
                       }
+                    },
+                    {
+                      type: 'autoscroll'
                     }
                   ]
                 }
@@ -168,6 +171,9 @@ angular.module('cpxApp')
                   <a href="http://www.acc.co.nz/PRD_EXT_CSMP/groups/external_levies/documents/form/prd_ctrb089183.pdf" target="_blank">Download ACC application form (pdf)</a>
                   `
                       }
+                    },
+                    {
+                      type: 'autoscroll'
                     }
                   ]
                 }
@@ -198,8 +204,10 @@ angular.module('cpxApp')
                   type: 'submit',
                   label: 'Calculate your cover.'
                 }
+              },
+              {
+                type: 'autoscroll'
               }
-
             ]
           }
         },

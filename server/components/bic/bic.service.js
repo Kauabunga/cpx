@@ -30,7 +30,7 @@ export function search(query){
       let expandedQuery = _(tokens).map(token => {
         let matches = fuzzy.get(token);
         return _((matches || []).concat([1, token]))
-          .map(match => { console.log(match); return match[0] >= 0.75 ? match[1] : undefined; })
+          .map(match => { console.log(match); return match[0] >= 0.75 ? match[1] : token; })
           .filter()
           .uniq()
           .value()
@@ -38,9 +38,10 @@ export function search(query){
 
       }).value().join(' ');
 
-      console.log('Bic search query', query, expandedQuery);
+      console.log(`Bic search query >>${query}<<`);
+      console.log(`Bic expanded search query >>${expandedQuery.trim()}<<`);
 
-      return _(index.search(expandedQuery)).map(result => {
+      return _(index.search(expandedQuery.trim())).map(result => {
         return bicStore[result.ref];
       }).value();
     })
