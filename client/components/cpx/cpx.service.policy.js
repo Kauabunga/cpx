@@ -5,7 +5,6 @@ angular.module('cpxApp')
 
     this.getPolicyFields = getPolicyFields;
 
-
     function getPolicyFields(){
       return [
         {
@@ -36,8 +35,9 @@ angular.module('cpxApp')
               return `Apply for CPX LLWC ${$scope.model.cpxLlwcCalculation}`
             }}
             ],
-            onSelect: function(){
-              completeStep('policy');
+            onSelect: function($event, radio, model, form){
+              model.policy = model.policy || {};
+              model.policy.complete = true;
             }
           }
         }
