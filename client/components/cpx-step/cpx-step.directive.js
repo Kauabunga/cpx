@@ -18,7 +18,8 @@ angular.module('cpxApp')
         step: '=',
         icon: '=',
         hideBack: '=',
-        first: '='
+        first: '=',
+        active: '='
       },
       link: function (scope, element, attrs) {
 
@@ -32,12 +33,23 @@ angular.module('cpxApp')
           scope.submit = submit;
           scope.scrollToStep = cpx.scrollToStep;
 
+          scope.isActive = scope.step.isActive;
+
 
           if(Date.now() - initTime <= 500){
             //Has to be a nicer way to do this
             $timeout(() => window.scrollTo(0,0),200);
             $timeout(() => window.scrollTo(0,0),300);
           }
+
+          scope.$watch(scope.step.isActive, isActive => {
+            if(isActive){
+              element.css('min-height', `${document.body.clientHeight}px`)
+            }
+            else {
+              element.css('min-height', '');
+            }
+          });
 
           //TODO ensure the container is there
           //Add a timeout to the scroll so the user can register their click

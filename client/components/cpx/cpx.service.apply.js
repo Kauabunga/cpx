@@ -12,7 +12,7 @@ angular.module('cpxApp')
         {
           type: 'html',
           templateOptions: {
-            label: `<h3>CPX is for you!</h3>
+            label: `<h2>CPX is for you!</h2>
             <p>We're glad to know you are eligible and want to apply for:</p>
 
             `

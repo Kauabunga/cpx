@@ -4,7 +4,7 @@
 
 
 md-autocomplete(md-selected-item='model[options.key]', md-search-text='searchText', md-autoselect='true'
-md-items='item in to.search(searchText)', md-min-length='1', md-delay='150' md-match-case-insensitive='true',
+md-items='item in to.search(searchText)', md-min-length='2', md-delay='200' md-match-case-insensitive='true',
 md-item-text='item[to.itemText]', placeholder='{{::to.placeholder}}')
   md-item-template
     span(md-highlight-text='searchText', md-highlight-flags='^i') {{item[to.itemTemplate]}}

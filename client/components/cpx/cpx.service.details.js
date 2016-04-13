@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('cpxApp')
-  .service('cpxdetails', function () {
+  .service('cpxdetails', function (addresslookup, businessnames) {
 
     this.getDetailsFields = getDetailsFields;
 
@@ -126,7 +126,158 @@ angular.module('cpxApp')
               }
             ]
           }
+        },
+
+
+
+
+        {
+          type: 'group',
+          hideExpression: '((model.irdNumber.length !== 8 && model.irdNumber.length !== 9) && (model.accNumber.length !== 9))',
+          templateOptions: {
+            fields: [
+              {
+                type: 'label',
+                templateOptions: {
+                  label: `What's your phone number?`
+                }
+              },
+              {
+                key: 'phoneNumber',
+                type: 'input',
+                templateOptions: {
+                  type: 'tel'
+                }
+              },
+              {
+                type: 'label',
+                templateOptions: {
+                  label: `What's your email?`
+                }
+              },
+              {
+                key: 'email',
+                type: 'input',
+                templateOptions: {
+                  type: 'email'
+                }
+              },
+              {
+                type: 'label',
+                templateOptions: {
+                  label: `What's your address?`
+                }
+              },
+              {
+                key: 'address',
+                type: 'autocomplete',
+                templateOptions: {
+                  placeholder: '',
+                  search: query => {
+                    return addresslookup.searchAddress(query, true);
+                  },
+                  itemText: 'description',
+                  itemTemplate: 'description'
+                }
+              }
+            ]
+          }
+        },
+
+
+        {
+          type: 'group',
+          hideExpression: '((model.irdNumber.length !== 8 && model.irdNumber.length !== 9) && (model.accNumber.length !== 9))',
+          templateOptions: {
+            fields: [
+              {
+                type: 'label',
+                templateOptions: {
+                  label: `What's your accountant name?`
+                }
+              },
+              {
+                key: 'accountantName',
+                type: 'input',
+                templateOptions: {
+
+                }
+              },
+              {
+                type: 'label',
+                templateOptions: {
+                  label: `What's your accountant's company?`
+                }
+              },
+              {
+                key: 'accountantCompany',
+                type: 'autocomplete',
+                templateOptions: {
+                  placeholder: '',
+                  search: businessnames.search,
+                  itemText: 'name',
+                  itemTemplate: 'name'
+                }
+              },
+              {
+                type: 'label',
+                templateOptions: {
+                  label: `What's your accountant's phone number?`
+                }
+              },
+              {
+                key: 'accountantPhone',
+                type: 'input',
+                templateOptions: {
+                  type: 'tel'
+                }
+              },
+              {
+                type: 'label',
+                templateOptions: {
+                  label: `What's your accountant's email?`
+                }
+              },
+              {
+                key: 'accountantEmail',
+                type: 'input',
+                templateOptions: {
+                  type: 'email'
+                }
+              }
+            ]
+          }
+        },
+
+
+
+
+        {
+          type: 'group',
+          hideExpression: '((model.irdNumber.length !== 8 && model.irdNumber.length !== 9) && (model.accNumber.length !== 9))',
+          templateOptions: {
+            fields: [
+              {
+                type: 'label',
+                templateOptions: {
+                  label: `What's your business trading name?`
+                }
+              },
+              {
+                key: 'businessTradingName',
+                type: 'autocomplete',
+                templateOptions: {
+                  placeholder: '',
+                  search: businessnames.search,
+                  itemText: 'name',
+                  itemTemplate: 'name'
+                }
+              }
+            ]
+          }
         }
+
+
       ]
     }
 

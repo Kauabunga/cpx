@@ -150,9 +150,9 @@ angular.module('cpxApp')
                         href: 'https://www.google.co.nz/search?q=Private%20Insurance%20New%20Zealand'
                       }
                     },
-                    {
-                      type: 'autoscroll'
-                    }
+                    //{
+                    //  type: 'autoscroll'
+                    //}
                   ]
                 }
               },
@@ -172,9 +172,9 @@ angular.module('cpxApp')
                   `
                       }
                     },
-                    {
-                      type: 'autoscroll'
-                    }
+                    //{
+                    //  type: 'autoscroll'
+                    //}
                   ]
                 }
               }
@@ -205,9 +205,9 @@ angular.module('cpxApp')
                   label: 'Calculate your cover.'
                 }
               },
-              {
-                type: 'autoscroll'
-              }
+              //{
+              //  type: 'autoscroll'
+              //}
             ]
           }
         },

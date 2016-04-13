@@ -22,9 +22,18 @@ button.md-button {
   &.grey-button {
     color: #fff;
     background-color: @button-grey;
-    border-width: 0;
+//    border-width: 0;
+    border: 4px solid transparent;
+    transition: all 0.2s ease;
+
     &.is-active {
       background-color: @deep-blue;
+      &:hover {
+        background-color: @light-blue;
+      }
+      &:focus {
+        border: 4px solid @green-yellow;
+      }
     }
   }
 

@@ -74,6 +74,17 @@ cpx-step {
   margin: 0 auto 80px;
 }
 
+
+//clean up sticky left overs
+cpx-step:not(.is-active) {
+  .step-container-outer {
+    > div:not(.step-container-title):not(.step-container-inner) {
+      display: none;
+    }
+  }
+}
+
+
 .step-container-outer {
   padding-top: @navbar-height;
   position: relative;

@@ -4,7 +4,8 @@
 
 .step-container-outer(id='{{"step-" + name}}')
 
-  .step-container-title(ng-if='title', sticky, offset='48', disabled-sticky='name === "welcome"')
+
+  .step-container-title(sticky, offset='48', disabled-sticky='name === "welcome" || ! step.isActive()')
 
     //TODO should be associated with welcome screen rather than cpx step
     .back-content(ng-if='::first')
@@ -21,16 +22,16 @@
 
       .step-save(ng-if=':: ! first')
 
-        md-button()
+        md-button(tabindex='-1')
           md-icon(md-font-set="material-icons") link
           | Save for later
 
 
-    md-button.step-back-arrow.md-icon-button(ng-if='! hideBack', ng-click='stepBack(name)')
+    md-button.step-back-arrow.md-icon-button(ng-if='! hideBack', tabindex='-1' ng-click='stepBack(name)')
       md-icon(md-font-set="material-icons") keyboard_arrow_up
 
 
-  .step-container-inner
+  .step-container-inner()
 
     form(name='form' ng-submit='submit(form)', novalidate)
 
