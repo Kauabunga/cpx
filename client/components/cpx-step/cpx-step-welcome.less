@@ -2,6 +2,7 @@
 
 #step-welcome {
   .step-container-title {
+
     background: @green-yellow;
 
     &:before {
@@ -11,13 +12,15 @@
       height: 48px;
       position:relative;
       display:block;
-
     }
 
 
     .title-content {
       &:extend(.content-layout);
-      padding: 0;
+      padding: 0 10px;
+      @media(min-width: 800px){
+        padding: 0;
+      }
       md-icon {
         height: 120px;
         width: auto;
